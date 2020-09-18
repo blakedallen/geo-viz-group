@@ -16,6 +16,7 @@ repository for the w209 geo visualization group
 ### D3 examples
 - <a href="https://bl.ocks.org/d3noob/8498ab07f1beb8da0509cd8640452291" target="_blank">D3 map with zoom & cities</a>
 - <a href="https://bl.ocks.org/mbostock/eec4a6cda2f573574a11" target="_blank">Map with Zoom</a>
+- <a href="https://observablehq.com/@holistudio/3d-topographical-maps-with-nyc-open-data-d3" target="_blank">D3 Topographical Map</a>
 
 
 ### Datasets
