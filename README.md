@@ -18,7 +18,7 @@ repository for the w209 geo visualization group
 - <a href="https://bl.ocks.org/mbostock/eec4a6cda2f573574a11" target="_blank">Map with Zoom</a>
 - <a href="https://observablehq.com/@holistudio/3d-topographical-maps-with-nyc-open-data-d3" target="_blank">D3 Topographical Map</a>
 - <a href="https://medium.com/@mbostock/command-line-cartography-part-1-897aa8f8ca2c" target="_blank">Mike Bostock D3 Geovisualization</a>
-
+- <a href="https://bl.ocks.org/mbostock/899711" target="_blank">D3 with google maps</a>
 
 ## Datasets
 - <a href="https://grasswiki.osgeo.org/wiki/Global_datasets">ASTER topography (GDEM V1)</a>
