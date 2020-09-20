@@ -35,3 +35,16 @@ GDEM global 30m elevation calculated from stereo-pair images collected by the Te
 Assignment due date: 12 noon PST, day of week 6 live session
 - Mid-term presentations (week 10) <a href="https://docs.google.com/document/d/1JH12s66qWvlcT95csSOUfMATAi4sLh1AMm0PvGoBQ14/edit"> Midterm Project Presentation </a>
 - Final Project (week 14) <a href="https://docs.google.com/document/d/1mfZql-dMiPlm2TcQo7FjINxhgPs5oemLax_jwVVuEdM/edit">Final Project requirements</a>
+
+## Notes
+
+Sea level rise, c02 emissions, population density, animal habitats:
+
+- Hawaii, datasets, treasure trove of data,
+
+Convert emissions into a fun idea with different units:
+
+- number of car miles
+- number of plane flights
+- number of big macs
+
