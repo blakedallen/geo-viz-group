@@ -29,3 +29,9 @@ GDEM global 30m elevation calculated from stereo-pair images collected by the Te
 ## Tools
 
 - <a href="https://github.com/topojson/topojson"> TopoJSON </a>
+
+## Timeline
+- Proposal (week 6) <a href="https://docs.google.com/document/d/10rP1iFHnThOM2GnFhwmVtH-aOnCcJ7k33F7EMaubb8Y/edit"> assignment </a>
+Assignment due date: 12 noon PST, day of week 6 live session
+- Mid-term presentations (week 10) <a href="https://docs.google.com/document/d/1JH12s66qWvlcT95csSOUfMATAi4sLh1AMm0PvGoBQ14/edit"> Midterm Project Presentation </a>
+- Final Project (week 14) <a href="https://docs.google.com/document/d/1mfZql-dMiPlm2TcQo7FjINxhgPs5oemLax_jwVVuEdM/edit">Final Project requirements</a>
