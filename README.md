@@ -38,8 +38,13 @@ Assignment due date: 12 noon PST, day of week 6 live session
 
 ## Notes
 
-Sea level rise, c02 emissions, population density, animal habitats:
+Data points of Interest:
+- Sea level rise, 
+- CO2 emissions
+- population density
+- animal habitats:
 
+Localize to specific locations rather than the whole globe
 - Hawaii, datasets, treasure trove of data,
 
 Convert emissions into a fun idea with different units:
@@ -48,3 +53,5 @@ Convert emissions into a fun idea with different units:
 - number of plane flights
 - number of big macs
 
+ml - predict sea level rise
+if we have time to bring in a model as well. 
