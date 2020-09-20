@@ -36,22 +36,19 @@ Assignment due date: 12 noon PST, day of week 6 live session
 - Mid-term presentations (week 10) <a href="https://docs.google.com/document/d/1JH12s66qWvlcT95csSOUfMATAi4sLh1AMm0PvGoBQ14/edit"> Midterm Project Presentation </a>
 - Final Project (week 14) <a href="https://docs.google.com/document/d/1mfZql-dMiPlm2TcQo7FjINxhgPs5oemLax_jwVVuEdM/edit">Final Project requirements</a>
 
-## Notes
-
-Data points of Interest:
+## Data points of Interest:
 - Sea level rise, 
 - CO2 emissions
 - population density
 - animal habitats:
 
-Localize to specific locations rather than the whole globe
+## Localize to specific locations rather than the whole globe
 - Hawaii, datasets, treasure trove of data,
 
-Convert emissions into a fun idea with different units:
-
+## Convert emissions into a fun idea with different units:
 - number of car miles
 - number of plane flights
 - number of big macs
 
-ml - predict sea level rise
+## ml - predict sea level rise
 if we have time to bring in a model as well. 
