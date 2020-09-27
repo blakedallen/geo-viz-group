@@ -6,24 +6,78 @@
 
 <meta charset=”utf-8″>
 
-<title>Embedded Analytics with Tableau Online</title>
+<title>Geo Viz Group</title>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.13.0/d3.min.js" integrity="sha512-RJJ1NNC88QhN7dwpCY8rm/6OxI+YdQP48DrLGe/eSAd+n+s1PXwQkkpzzAgoJe4cZFW2GALQoxox61gSY2yQfg==" crossorigin="anonymous"></script>
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" >
+
+<link rel="stylesheet" href="style.css">
+
+<style >
+
+.cblock {
+    max-width:600px;
+}
+.spacer {
+    width: 100%;
+    height: 50px;
+
+}
+</style>
 
 </head>
 
 <body>
 
-    <script type='text/javascript' src='https://us-west-2b.online.tableau.com/javascripts/api/viz_v1.js'></script>
-    <div class='tableauPlaceholder' style='width: 1280px; height: 556px;'>
-        <object class='tableauViz' width='1280' height='556' style='display:none;'>
-            <param name='host_url' value='https%3A%2F%2Fus-west-2b.online.tableau.com%2F' /> 
-            <param name='embed_code_version' value='3' /> 
-            <param name='site_root' value='&#47;t&#47;geospatialproject' />
-            <param name='name' value='Book1&#47;Sheet1' /><param name='tabs' value='no' /
-            ><param name='toolbar' value='yes' />
-            <param name='showAppBanner' value='false' />
-        </object>
-    </div>
+    <div class="container">
+        <div class="h-100 align-items-center cblock">
+
+        <h1> Project Title</h1>
+        <h3> Prepared by: Yang Jing, Victor Wang, Tsung-chin Han and Blake Allen</h3>
+        <p> Welcome to the geo-viz-group final project for w209 fall 2020 </p>
+        <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
+
+        <div class="spacer"></div>
+
+        <h2> Chart 1 </h2>
+        <h3> Prepared by {YOUR NAME}</h3>
+        <div id="chart1"></div> 
+        <p> Chart 1 writeup goes here </p>
+        <div class="spacer"></div>
+
+        <h2> Chart 2 </h2>
+        <h3> Prepared by {YOUR NAME}</h3>
+        <div id="chart2"></div> 
+        <p> Chart 2 writeup goes here </p>
+        <div class="spacer"></div>
+
+
+        <h2> Chart 3 </h2>
+        <h3> Prepared by {YOUR NAME}</h3>
+        <div id="chart3"></div> 
+        <p> Chart 3 writeup goes here </p>
+        <div class="spacer"></div>
+
+
+        <h2> Chart 4 </h2>
+        <h3> Prepared by {YOUR NAME}</h3>
+        <div id="chart4"></div> 
+        <p> Chart 4 writeup goes here </p>
+        <div class="spacer"></div>
+     </div>
+</div>
+
 
 </body>
+
+
+
+<script src="js/chart1.js"></script>
+<script src="js/chart2.js"></script>
+<script src="js/chart3.js"></script>
+<script src="js/chart4.js"></script>
+
+
 
 </html>

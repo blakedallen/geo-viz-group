@@ -1,6 +1,13 @@
 # geo-viz-group 🌍📈📉🌡🌞💊📊
 repository for the w209 geo visualization group
 
+## Running Local Server
+
+```bash
+./run_server.sh
+```
+
+The website should be live (with reload) at <a href="http://127.0.0.1:5500/">http://127.0.0.1:5500/</a>
 
 ## Ideas
 
@@ -62,4 +69,10 @@ Assignment due date: 12 noon PST, day of week 6 live session
 - number of big macs
 
 ## ml - predict sea level rise
-if we have time to bring in a model as well. 
+if we have time to bring in a model as well.
+
+## Sources
+
+- <a href="https://www.climate.gov/news-features/understanding-climate/climate-change-global-sea-level#:~:text=Global%20mean%20sea%20level%20has,two%20and%20a%20half%20decades."> Climate Change: Global Sea Level </a>
+
+
