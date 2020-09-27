@@ -7,6 +7,10 @@ repository for the w209 geo visualization group
 - World sea level rise tracker
   - show different levels at certain warming scenarios
   - google map like interface to explore areas
+  - show population density
+  - animal species
+  - real estate value
+  
 - Covid timeseries analysis and infection rate
   - can see hotspots globally for infection
   - possible to decode various geographic areas that are affected
@@ -19,6 +23,7 @@ repository for the w209 geo visualization group
 - <a href="https://observablehq.com/@holistudio/3d-topographical-maps-with-nyc-open-data-d3" target="_blank">D3 Topographical Map</a>
 - <a href="https://medium.com/@mbostock/command-line-cartography-part-1-897aa8f8ca2c" target="_blank">Mike Bostock D3 Geovisualization</a>
 - <a href="https://bl.ocks.org/mbostock/899711" target="_blank">D3 with google maps</a>
+- <a href = https://www.forbes.com/sites/jimdobson/2019/10/30/shocking-new-maps-show-how-sea-level-rise-will-destroy-coastal-cities-by-2050/#1732fd9e456c"> </a>
 
 ## Datasets
 - <a href="https://grasswiki.osgeo.org/wiki/Global_datasets">ASTER topography (GDEM V1)</a>
@@ -30,6 +35,8 @@ GDEM global 30m elevation calculated from stereo-pair images collected by the Te
 
 ## Tools
 
+- D3
+- Tableau
 - <a href="https://github.com/topojson/topojson"> TopoJSON </a>
 
 ## Timeline
