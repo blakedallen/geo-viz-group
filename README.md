@@ -9,6 +9,20 @@ repository for the w209 geo visualization group
 
 The website should be live (with reload) at <a href="http://127.0.0.1:5500/">http://127.0.0.1:5500/</a>
 
+Alternative run with python
+
+```
+python3 -m http.server 
+```
+
+## Visualizations
+
+1. Blake (seattle)
+2. Victor (hawaii)
+3. Tsung-chin (new york)
+4. Yang (tableau overview)
+
+
 ## Ideas
 
 - World sea level rise tracker
