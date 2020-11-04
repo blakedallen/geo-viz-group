@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Display a map</title>
+<meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
+<script src="https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.js"></script>
+<link href="https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.css" rel="stylesheet" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<style>
+	body { margin: 0; padding: 0; }
+	#map { position: absolute; top: 0; bottom: 0; width: 100%; }
+</style>
+</head>
+<body>
+  
+<style>
+.map-overlay {
+font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+position: absolute;
+width: 25%;
+top: 0;
+left: 0;
+padding: 10px;
+}
+ 
+.map-overlay .map-overlay-inner {
+background-color: #fff;
+box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+border-radius: 3px;
+padding: 10px;
+margin-bottom: 10px;
+}
+ 
+.map-overlay h2 {
+line-height: 24px;
+display: block;
+margin: 0 0 10px;
+}
+ 
+.map-overlay .legend .bar {
+height: 10px;
+width: 100%;
+background: linear-gradient(to right, #0000CD, #fca107);
+}
+  
+.map-overlay input {
+background-color: transparent;
+display: inline-block;
+width: 100%;
+position: relative;
+margin: 0;
+cursor: ew-resize;
+}
+
+.eleInfo {
+  font-family: sans-serif;
+  margin-top: 5px;
+  margin-left: 5px;
+  padding: 5px;
+  width: 200px;
+  border: 2px solid black;
+  font-size: 20px;
+  color: #222;
+  background-color: #fff;
+}
+</style>  
+<!-- background: linear-gradient(to right, #fca107, #7f3121); -->  
+<div id="map"></div>
+  
+<div class="map-overlay top">
+<div class="map-overlay-inner">
+<h2>Water Levels</h2>
+<label id="month"></label>
+<input id="slider" type="range" min="0" max="11" step="1" value="0" />
+</div>
+<div class="map-overlay-inner">
+<div id="legend" class="legend">
+<div class="bar"></div>
+<div>Sea Rise (ft)</div>
+<div class="eleInfo">
+  <div>Longitude: <span id='lng'></span></div>
+  <div>Latitude: <span id='lat'></span></div>
+  <div>Elevation: <span id='ele'></span></div>
+</div>
+</div>
+</div>
+</div>    
+  
+<script>
+	// TO MAKE THE MAP APPEAR YOU MUST
+	// ADD YOUR ACCESS TOKEN FROM
+	// https://account.mapbox.com
+	mapboxgl.accessToken = 'pk.eyJ1IjoiZXNjYWRhd2ciLCJhIjoiY2tmdmdrZGhkMTYzZDJ6czMyNWo0eWZmNCJ9.XAG-cdhWcLN2IEFAP6bCbg';
+var map = new mapboxgl.Map({
+container: 'map', // container id
+//style: 'mapbox://styles/mapbox/streets-v11', // style URL
+style: 'mapbox://styles/mapbox/satellite-streets-v11',
+center: [-156.33, 20.799], // starting position [lng, lat]
+zoom: 9 // starting zoom
+});
+
+var feet = 0;    
+  
+var waterData = [
+[
+[
+[-156.45, 20.650],
+[-156.45, 20.799],
+[-156.33, 20.799]
+]
+],
+[
+[
+[-156.55, 20.650],
+[-156.45, 20.799],
+[-156.33, 20.799]
+]
+],
+[
+[
+[-156.45, 20.650],
+[-156.55, 20.799],
+[-156.33, 20.799]
+]
+],
+[
+[
+[-156.45, 20.650],
+[-156.45, 20.799],
+[-156.53, 20.799]
+]
+],
+[
+[
+[-156.45, 20.650],
+[-156.45, 20.899],
+[-156.33, 20.799]
+]
+],
+[
+[
+[-156.45, 20.650],
+[-156.45, 20.799],
+[-156.33, 20.899]
+]
+],
+[
+[
+[-156.45, 20.650],
+[-156.45, 20.799],
+[-156.33, 20.799]
+]
+],
+[
+[
+[-156.45, 20.650],
+[-156.45, 20.799],
+[-156.33, 20.799]
+]
+],
+[
+[
+[-156.45, 20.650],
+[-156.45, 20.799],
+[-156.33, 20.799]
+]
+],
+[
+[
+[-156.45, 20.650],
+[-156.45, 20.799],
+[-156.33, 20.799]
+]
+],  
+[
+[
+[-156.45, 20.650],
+[-156.45, 20.799],
+[-156.33, 20.799]
+]
+]
+];
+
+
+  
+map.on('load', function () {
+  
+  for (var i = 0; i < waterData.length; i++){
+    const idg = "w"+i.toString();
+    map.addSource(idg, {
+      'type': 'geojson',
+      'data': {
+      'type': 'Feature',
+      'geometry': {
+      'type': 'Polygon',
+      'coordinates': waterData[i]
+      }
+      }
+      });
+    map.addLayer({
+      'id': idg,
+      'type': 'fill',
+      'source': idg,
+      'layout': {
+        "visibility":"none"
+      },
+      'paint': {
+      'fill-color': '#0000CD',
+      'fill-opacity': 0.4
+        
+      }
+      });
+    
+  }
+  
+  let prev_idg = "w0";
+  //set our initial layer as visible
+  map.setLayoutProperty(prev_idg, 'visibility', 'visible');
+
+  document
+  .getElementById('slider')
+  .addEventListener('input', function (e) {
+  feet = parseInt(e.target.value, 10);
+  //get previous layer
+  map.setLayoutProperty(prev_idg, 'visibility', 'none');
+  let idg = "w"+feet.toString();
+  
+  map.setLayoutProperty(idg, 'visibility', 'visible');
+  prev_idg = idg;
+  
+
+
+
+  });  
+  
+});
+
+var marker = new mapboxgl.Marker({
+  'color': '#314ccd'
+});
+  
+
+function getElevation() {
+  // make API request
+  var query = 'https://api.mapbox.com/v4/mapbox.mapbox-terrain-v2/tilequery/' + lng + ',' + lat + '.json?layers=contour&limit=50&access_token=' + mapboxgl.accessToken;
+  $.ajax({
+    method: 'GET',
+    url: query,
+  }).done(function(data) {
+    // Display the longitude and latitude values
+    lngDisplay.textContent = lng.toFixed(2);
+    latDisplay.textContent = lat.toFixed(2);
+    // Get all the returned features
+    var allFeatures = data.features;
+    // Create an empty array to add elevation data to
+    var elevations = [];
+    // For each returned feature, add elevation data to the elevations array
+    for (i = 0; i < allFeatures.length; i++) {
+      elevations.push(allFeatures[i].properties.ele);
+    }
+    // In the elevations array, find the largest value
+    var highestElevation = Math.max(...elevations);
+    // Display the largest elevation value
+    eleDisplay.textContent = highestElevation + ' meters';
+  });
+}
+
+// Create variables for the latitude and longitude
+var lng;
+var lat;
+
+map.on('click', function(e) {
+  // When the map is clicked, set the lng and lat variables equal to the lng and lat properties in the returned lngLat object
+  lng = e.lngLat.lng;
+  lat = e.lngLat.lat;
+  //ele = e.lngLat.ele;
+  getElevation();
+  marker.setLngLat(e.lngLat).addTo(map);
+
+});
+var lngDisplay = document.getElementById('lng');
+var latDisplay = document.getElementById('lat');
+var eleDisplay = document.getElementById('ele');
+  
+  
+</script>
+ 
+</body>
+</html>
