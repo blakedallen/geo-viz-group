@@ -114,7 +114,7 @@ coordinates = [
 //47.65 --> 47.66
 
 //stretch our image
-var t_lng = 0.032; //stretches left and right
+var t_lng = 0.0335; //stretches left and right
 var t_lat = 0.032; //stretches up and down
 
 //translate top_left
@@ -167,38 +167,92 @@ coordinates[1][1] -= move_down;
 coordinates[2][1] -= move_down;
 coordinates[3][1] -= move_down;
   
+
+//generate our dataset
+//TODO: load our dataset from json
+masks = [];
+for (var i = 0; i < 200; i += 10){
+  var istr = i.toString();
+  var d = {
+    source:"source_"+istr,
+    id:"image_"+istr,
+    url:"/masks/seattle_"+istr+".png",
+    coordinates: coordinates,
+  }
+  masks.push(d);
+}
+
+console.log(masks);
+
 map.on('load', function () {
   
-  map.addSource("image_0", {
-  "type": "image",
-  "url": "/masks/seattle_0.png",
-  "coordinates": coordinates,
-  });
-  
-  map.addLayer({
-  "id": "overlay_0",
-  "source": "image_0",
-  "type": "raster",
-  "paint": {
-  "raster-opacity": 0.5
+  //add each of our masks
+  for (var i = 0; i < masks.length; i++){
+    var d = masks[i];
+    
+    //add images
+    map.addSource(d["source"], {
+    "type": "image",
+    "url": d["url"],
+    "coordinates": d["coordinates"],
+    });
+    
+    map.addLayer({
+    "id": d["id"],
+    "source": d["source"],
+    "type": "raster",
+    "layout":{
+      "visibility":"none",
+    },
+    "paint": {
+      "raster-opacity": 0.5
+      }
+    });
   }
-  });
 
-  let prev_idg = "w0";
+
+
+  var first_mask_id = masks[0]["id"];  
+
+  let prev_idg = first_mask_id;
   //set our initial layer as visible
-  //map.setLayoutProperty(prev_idg, 'visibility', 'visible');
+  map.setLayoutProperty(prev_idg, 'visibility', 'visible');
 
-  // document
-  // .getElementById('slider')
-  // .addEventListener('input', function (e) {
-  // feet = parseInt(e.target.value, 10);
-  // //get previous layer
-  // map.setLayoutProperty(prev_idg, 'visibility', 'none');
-  // let idg = "w"+feet.toString();
+  document
+    .getElementById('slider')
+    .addEventListener('input', function (e) {
+      var meters = parseInt(e.target.value, 10);
+      meters *= 10; //scale meters by our increment value 
+      map.setLayoutProperty(prev_idg, 'visibility', 'none');
+      let idg = "image_"+meters.toString();
+      console.log(idg);
+      map.setLayoutProperty(idg, 'visibility', 'visible');
+      prev_idg = idg;
+    });
   
-  // map.setLayoutProperty(idg, 'visibility', 'visible');
-  // prev_idg = idg;
-  
+ 
+
+  // contours to map
+  map.addSource('contours', {
+    type: 'vector',
+    url: 'mapbox://mapbox.mapbox-terrain-v2'
+  });
+  map.addLayer({
+    'id': 'contours',
+    'type': 'line',
+    'source': 'contours',
+    'source-layer': 'contour',
+    'layout': {
+    // make layer visible by default
+      'visibility': 'visible',
+      'line-join': 'round',
+      'line-cap': 'round'
+    },
+    'paint': {
+      'line-color': '#877b59',
+      'line-width': 1
+    }
+  });
 
 
 
