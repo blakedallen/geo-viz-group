@@ -97,145 +97,113 @@ var map = new mapboxgl.Map({
 container: 'map', // container id
 //style: 'mapbox://styles/mapbox/streets-v11', // style URL
 style: 'mapbox://styles/mapbox/satellite-streets-v11',
-center: [-156.33, 20.799], // starting position [lng, lat]
+center: [-122.44, 47.51], // starting position [lng, lat]
 zoom: 9 // starting zoom
 });
 
-var feet = 0;    
-  
-var waterData = [
-[
-[
-[-156.45, 20.650],
-[-156.45, 20.799],
-[-156.33, 20.799]
-]
-],
-[
-[
-[-156.55, 20.650],
-[-156.45, 20.799],
-[-156.33, 20.799]
-]
-],
-[
-[
-[-156.45, 20.650],
-[-156.55, 20.799],
-[-156.33, 20.799]
-]
-],
-[
-[
-[-156.45, 20.650],
-[-156.45, 20.799],
-[-156.53, 20.799]
-]
-],
-[
-[
-[-156.45, 20.650],
-[-156.45, 20.899],
-[-156.33, 20.799]
-]
-],
-[
-[
-[-156.45, 20.650],
-[-156.45, 20.799],
-[-156.33, 20.899]
-]
-],
-[
-[
-[-156.45, 20.650],
-[-156.45, 20.799],
-[-156.33, 20.799]
-]
-],
-[
-[
-[-156.45, 20.650],
-[-156.45, 20.799],
-[-156.33, 20.799]
-]
-],
-[
-[
-[-156.45, 20.650],
-[-156.45, 20.799],
-[-156.33, 20.799]
-]
-],
-[
-[
-[-156.45, 20.650],
-[-156.45, 20.799],
-[-156.33, 20.799]
-]
-],  
-[
-[
-[-156.45, 20.650],
-[-156.45, 20.799],
-[-156.33, 20.799]
-]
-]
+//actual gps coordinates used from elevation
+//-122.44 47.51 -122.24 47.71
+coordinates = [
+  [-122.44, 47.71],
+  [-122.24, 47.71],
+  [-122.24, 47.51],
+  [-122.44, 47.51],
 ];
 
+//-122.41 --> -122.44
+//47.65 --> 47.66
 
+//stretch our image
+var t_lng = 0.032; //stretches left and right
+var t_lat = 0.032; //stretches up and down
+
+//translate top_left
+coordinates[0][0] -= t_lng;
+coordinates[0][1] += t_lat;
+
+//translate top right
+coordinates[1][0] += t_lng;
+coordinates[1][1] += t_lat;
+
+//translate bottom right 
+coordinates[2][0] += t_lng;
+coordinates[2][1] -= t_lat;
+
+//translate bottom left
+coordinates[3][0] -= t_lng;
+coordinates[3][1] -= t_lat;
+
+//scale our image coordinates
+var s_lng = 1.0;
+var s_lat = 1.0;
+
+//scale top left
+coordinates[0][0] *= s_lng;
+coordinates[0][1] *= s_lat;
+
+//scale top right
+coordinates[1][0] *= s_lng;
+coordinates[1][1] *= s_lat;
+
+//scale bottom right
+coordinates[2][0] *= s_lng;
+coordinates[2][1] *= s_lat;
+
+//scale bottom left
+coordinates[3][0] *= s_lng;
+coordinates[3][1] *= s_lat;
+
+//move left
+var move_left = 0.004;
+coordinates[0][0] -= move_left;
+coordinates[1][0] -= move_left;
+coordinates[2][0] -= move_left;
+coordinates[3][0] -= move_left;
+
+//move down
+var move_down = 0.0001;
+coordinates[0][1] -= move_down;
+coordinates[1][1] -= move_down;
+coordinates[2][1] -= move_down;
+coordinates[3][1] -= move_down;
   
 map.on('load', function () {
   
-  for (var i = 0; i < waterData.length; i++){
-    const idg = "w"+i.toString();
-    map.addSource(idg, {
-      'type': 'geojson',
-      'data': {
-      'type': 'Feature',
-      'geometry': {
-      'type': 'Polygon',
-      'coordinates': waterData[i]
-      }
-      }
-      });
-    map.addLayer({
-      'id': idg,
-      'type': 'fill',
-      'source': idg,
-      'layout': {
-        "visibility":"none"
-      },
-      'paint': {
-      'fill-color': '#0000CD',
-      'fill-opacity': 0.4
-        
-      }
-      });
-    
-  }
+  map.addSource("image_0", {
+  "type": "image",
+  "url": "/masks/seattle_0.png",
+  "coordinates": coordinates,
+  });
   
+  map.addLayer({
+  "id": "overlay_0",
+  "source": "image_0",
+  "type": "raster",
+  "paint": {
+  "raster-opacity": 0.5
+  }
+  });
+
   let prev_idg = "w0";
   //set our initial layer as visible
-  map.setLayoutProperty(prev_idg, 'visibility', 'visible');
+  //map.setLayoutProperty(prev_idg, 'visibility', 'visible');
 
-  document
-  .getElementById('slider')
-  .addEventListener('input', function (e) {
-  feet = parseInt(e.target.value, 10);
-  //get previous layer
-  map.setLayoutProperty(prev_idg, 'visibility', 'none');
-  let idg = "w"+feet.toString();
+  // document
+  // .getElementById('slider')
+  // .addEventListener('input', function (e) {
+  // feet = parseInt(e.target.value, 10);
+  // //get previous layer
+  // map.setLayoutProperty(prev_idg, 'visibility', 'none');
+  // let idg = "w"+feet.toString();
   
-  map.setLayoutProperty(idg, 'visibility', 'visible');
-  prev_idg = idg;
+  // map.setLayoutProperty(idg, 'visibility', 'visible');
+  // prev_idg = idg;
   
 
 
 
-  });  
+});  
   
-});
 
 var marker = new mapboxgl.Marker({
   'color': '#314ccd'

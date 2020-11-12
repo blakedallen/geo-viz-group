@@ -1,6 +1,7 @@
-
+masks/
+*.png
 *.DS_Store
-
+e
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
