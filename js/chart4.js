@@ -1,44 +1,98 @@
 var t = "CO2 Emission Slider";
 var svg_width = 600;
 var svg_height = 600;
-var co2Ctry = ["China", "US", "Europe"]
-var gCo2Picker = d3.select("#chart4")
-    .append("svg")
-    .attr("width", svg_width)
-    .attr("height", svg_height)
-    .attr("fill", "black")
-    .style("background-color","#daeddf")
-    .style("border","1px dashed #888888")
-    .append('g')
-    .attr('transform', 'translate(30,30)');
 
-    var slider = d3
-          .sliderHorizontal()
-          .min(0)
-          .max(30)
-          .step(1)
-          .width(300)
-          .ticks(0)
-          .default(15)
-          .displayValue(true)
-          .fill("blue")
-          .handle(
-            d3
-              .symbol()
-              .type(d3.symbolCircle)
-              .size(200)()
-          )
-          .on('onchange', val => {
-            console.log(val)})
-     
-        gCo2Picker
-          .append('g')
-          .attr('transform', 'translate(20,30)')
-          .call(slider);
-      
-gCo2Picker.append("text")
-    .text(t)
-    .attr("y")
-    .attr("x",20);
+var slider1 = document.getElementById("slider1");
+var slider2 = document.getElementById("slider2");
+var slider3 = document.getElementById("slider3");
+var slider4 = document.getElementById("slider4");
+var slider5 = document.getElementById("slider5");
+var slider6 = document.getElementById("slider6");
+var slider7 = document.getElementById("slider7");
+var val = document.getElementById("CO2");
+var slr = document.getElementById("SLR");
+var cum_change = 0
+val.innerHTML = 0
+slr.innerHTML = 0
+var base_line_sl = 21.36 
+var base_line_ppm = 408.52
+var num_yrs = 2100 - 2018
 
-    
+slider1.oninput = function() {
+  val.innerHTML = this.value - 10.1;
+}
+
+slider3.oninput = function() {
+  val.innerHTML = this.value - 5.6;
+}
+
+slider4.oninput = function() {
+  val.innerHTML = this.value - 5.4;
+ }
+
+
+slider5.oninput = function() {
+  val.innerHTML = this.value - 2.66;
+ }
+
+
+slider6.oninput = function() {
+  val.innerHTML =this.value - 1.7;
+ 
+}
+
+slider7.oninput = function() {
+  val.innerHTML = this.value - 1.2;
+ 
+}
+
+slider2.oninput = function() {
+  val.innerHTML = this.value - 9.9;
+ 
+}
+function resetFunction() {
+  document.getElementById("sliderForm").reset();
+  val.innerHTML = 0;
+  cum_change = 0;
+  slr.innerHTML = 0;
+}
+
+slider1.onchange = function() {
+  cum_change += Number(val.innerHTML);
+}
+
+
+slider2.onchange = function() {
+  cum_change += Number(val.innerHTML);
+}
+
+slider3.onchange = function() {
+  cum_change += Number(val.innerHTML);
+}
+
+slider4.onchange = function() {
+  cum_change += Number(val.innerHTML);
+}
+
+slider5.onchange = function() {
+  cum_change += Number(val.innerHTML);
+}
+
+slider6.onchange = function() {
+  cum_change += Number(val.innerHTML);
+
+}
+
+slider7.onchange = function() {
+  cum_change += Number(val.innerHTML);
+
+}
+
+function gen_slr() {
+  if (26.65+6.48*window.cum_change <0){
+    slr.innerHTML =  Math.round(0.001*1.016**window.num_yrs)}
+  else {slr.innerHTML = Math.round((-36.17+(26.65+6.48*window.cum_change+window.base_line_ppm)*0.14-window.base_line_sl)/100*1.016**window.num_yrs)
+  }
+  }
+
+  

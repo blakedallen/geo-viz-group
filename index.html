@@ -9,7 +9,6 @@
 <title>Geo Viz Group</title>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.13.0/d3.min.js" integrity="sha512-RJJ1NNC88QhN7dwpCY8rm/6OxI+YdQP48DrLGe/eSAd+n+s1PXwQkkpzzAgoJe4cZFW2GALQoxox61gSY2yQfg==" crossorigin="anonymous"></script>
-<script src="https://unpkg.com/d3-simple-slider"></script>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" >
 
 <link rel="stylesheet" href="style.css">
@@ -53,21 +52,37 @@
         <div class="spacer"></div>
 
 
-        <h2> North California Coast </h2>
-        <h3> Potential Flooding up to 10 ft</h3>
-        <!-- <div id="chart3"></div>  -->
-        <div class='tableauPlaceholder' id='viz1604859417960' style='position: relative'><noscript><a href='#'><img alt=' ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;SL&#47;SLR_16035793627920&#47;California&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='site_root' value='' /><param name='name' value='SLR_16035793627920&#47;California' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;SL&#47;SLR_16035793627920&#47;California&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='language' value='en' /><param name='filter' value='publish=yes' /></object></div>                <script type='text/javascript'>                    var divElement = document.getElementById('viz1604859417960');                    var vizElement = divElement.getElementsByTagName('object')[0];                    vizElement.style.width='1016px';vizElement.style.height='991px';                    var scriptElement = document.createElement('script');                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    vizElement.parentNode.insertBefore(scriptElement, vizElement);                </script>
-        <!-- <p> Chart 3 writeup goes here </p> -->
+        <h2> Chart 3 </h2>
+        <h3> Prepared by {YOUR NAME}</h3>
+        <div id="chart3"></div> 
+        <p> Chart 3 writeup goes here </p>
         <div class="spacer"></div>
 
 
-        <h2> CO2 Emission Acceleration </h2>
-        <h3> CO2 Emission in Tonnes</h3>
-        <!-- <div id="chart4"></div>  -->
-        <div class='tableauPlaceholder' id='viz1604766438948' style='position: relative'><noscript><a href='#'><img alt=' ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;CO&#47;CO2_Emissions_16047116388670&#47;Story1&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='site_root' value='' /><param name='name' value='CO2_Emissions_16047116388670&#47;Story1' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;CO&#47;CO2_Emissions_16047116388670&#47;Story1&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='language' value='en' /><param name='filter' value='publish=yes' /></object></div>                <script type='text/javascript'>                    var divElement = document.getElementById('viz1604766438948');                    var vizElement = divElement.getElementsByTagName('object')[0];                    vizElement.style.width='1016px';vizElement.style.height='991px';                    var scriptElement = document.createElement('script');                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    vizElement.parentNode.insertBefore(scriptElement, vizElement);                </script>
-        <div class="spacer"></div>
-
-        <div id="chart4"></div> 
+        <h2> CO2 Emissions by Country </h2>
+        <h3> Prepared by Yang Jing </h3>
+        <div id="sliderdiv">
+            <form id="sliderForm">
+                <label for slider 1> China </label>
+                <input class="slider" id="slider1" type="range" min="0" max="20" step="1" value="10.1"/>
+                <label for slider 3> Europe </label>
+                <input class="slider" id="slider3" type="range" min="0" max="20" step="1" value="5.6"/>
+                <label for slider 4> United States </label>
+                <input class="slider" id="slider4" type="range" min="0" max="20" step="1" value="5.4"/>
+                <label for slider 5> India </label>
+                <input class="slider" id="slider5" type="range" min="0" max="20" step="1" value="2.66"/>
+                <label for slider 6> Russia </label>
+                <input class="slider" id="slider6" type="range" min="0" max="20" step="1" value="1.7"/>
+                <label for slider 7> Japan </label>
+                <input class="slider" id="slider7" type="range" min="0" max="20" step="1" value="1.2"/>
+                <label for slider 2> Rest of the World </label>
+                <input class="slider" id="slider2" type="range" min="0" max="20" step="1" value="9.9"/>
+                <input type="button" onclick="resetFunction()" value="Reset">
+                <input type="button" onclick="gen_slr()" value="Update SLR"> 
+                <output class="output" id="CO2"></output>
+                <output class="output" id="SLR"></output>
+            </form>
+        </div>
         <div class="spacer"></div>
      </div>
 </div>
