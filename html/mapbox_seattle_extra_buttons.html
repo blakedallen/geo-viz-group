@@ -113,7 +113,7 @@ cursor: ew-resize;
         <div id="chart3"></div>
         <h2>Sea Rise - <span id="numMeters">0</span> Meters</h2>
         <!-- see how to update d3 via slider here: https://bl.ocks.org/tomshanley/3c49d036610853d380e3fcaf8d3f0b89 -->
-        <input id="slider" type="range" min="0" max="80" step="1" value="0" 
+        <input id="slider" type="range" min="0" max="20" step="1" value="0" 
           style="
             width:100%;
           "
@@ -124,6 +124,14 @@ cursor: ew-resize;
           id="hideButton"
           onclick="myFunction()"
         >Expand + </button>
+
+         <h2>Year - <span id="numMeters">0</span> years</h2>
+        <!-- see how to update d3 via slider here: https://bl.ocks.org/tomshanley/3c49d036610853d380e3fcaf8d3f0b89 -->
+        <input id="slider" type="range" min="0" max="20" step="1" value="0" 
+          style="
+            width:100%;
+          "
+        />
 
         <button >Widget 1</button>
         <button >Widget 2</button>
@@ -258,7 +266,7 @@ coordinates[3][1] -= move_down;
 //generate our dataset
 //TODO: load our dataset from json
 masks = [];
-for (var i = 0; i < 80; i += 1){
+for (var i = 0; i < 200; i += 10){
   var istr = i.toString();
   var d = {
     source:"source_"+istr,
@@ -312,11 +320,12 @@ map.on('load', function () {
     .addEventListener('input', function (e) {
       var meters = parseInt(e.target.value, 10);
       var numMeters = document.getElementById("numMeters");
-      numMeters.textContent = meters;
+      numMeters.textContent = meters * 10;
 
       map.setLayoutProperty(prev_idg, 'visibility', 'none');
       if (meters > 0){
         meters -= 1; 
+        meters *= 10; //scale meters by our increment value 10x
         let idg = "image_"+meters.toString();
         console.log(idg);
         map.setLayoutProperty(idg, 'visibility', 'visible');
