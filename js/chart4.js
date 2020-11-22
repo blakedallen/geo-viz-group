@@ -89,10 +89,9 @@ slider7.onchange = function() {
 }
 
 function gen_slr() {
-  if (26.65+6.48*window.cum_change <0){
-    slr.innerHTML =  Math.round(0.001*1.016**window.num_yrs)}
-  else {slr.innerHTML = Math.round((-36.17+(26.65+6.48*window.cum_change+window.base_line_ppm)*0.14-window.base_line_sl)/100*1.016**window.num_yrs)
+  if (14.327+5.97*cum_change <0){
+    slr.innerHTML =  Math.round(0.001*(1.016**num_yrs))}
+  else {slr.innerHTML = Math.round(((-34.518+(14.327+5.97*cum_change+base_line_ppm)*0.135-base_line_sl)/100)*(1.016**num_yrs))
   }
   }
 
-  
