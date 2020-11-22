@@ -1,5 +1,8 @@
 from livereload import Server, shell
+import json
 from flask import Flask
+from flask import request
+from flask import Response
 from flask import render_template
 
 app = Flask(__name__, template_folder='.')
@@ -7,6 +10,11 @@ app = Flask(__name__, template_folder='.')
 @app.route('/')
 def hello_world():
     return render_template('index.html')
+
+@app.route("/predict", methods=["POST"]):
+def predict():
+	content = request.get_json()
+	return json.dumps(content)
 
 @app.route('/<path:u_path>')
 def catch_all(u_path):
