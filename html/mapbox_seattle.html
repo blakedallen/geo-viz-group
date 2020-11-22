@@ -111,7 +111,7 @@ cursor: ew-resize;
         <div id="chart1"></div>
         <div id="chart2"></div>
         <div id="chart3"></div>
-        <h2>Sea Rise - <span id="numMeters">0</span> Meters</h2>
+        <h2>Sea Rise: <span id="numMeters">0</span> Meters | <span id="numFeet">0</span> Feet</h2>
         <!-- see how to update d3 via slider here: https://bl.ocks.org/tomshanley/3c49d036610853d380e3fcaf8d3f0b89 -->
         <input id="slider" type="range" min="0" max="80" step="1" value="0" 
           style="
@@ -313,6 +313,9 @@ map.on('load', function () {
       var meters = parseInt(e.target.value, 10);
       var numMeters = document.getElementById("numMeters");
       numMeters.textContent = meters;
+      var numFeet = document.getElementById("numFeet");
+      var feet = meters * 3.281;
+      numFeet.textContent = feet.toFixed(1);
 
       map.setLayoutProperty(prev_idg, 'visibility', 'none');
       if (meters > 0){
