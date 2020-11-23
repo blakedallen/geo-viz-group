@@ -13,6 +13,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Goldman&display=swap" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="/style.css">
+
+
 </head>
 <body>
 
@@ -27,19 +29,16 @@
           id="hideButton"
           onclick="expandPanel()"
         >Expand + </button>
+
+        <br></br>
         <button onclick="displayWidget(1)">Widget 1</button>
         <button onclick="displayWidget(2)">Widget 2</button>
         <button onclick="displayWidget(3)">Widget 3</button>
         <button onclick="displayWidget(4)">Widget 4</button>
 
-        <div class="eleInfo">
-          <div>Longitude: <span id='lng'></span></div>
-          <div>Latitude: <span id='lat'></span></div>
-          <div>Elevation: <span id='ele'></span></div>
-        </div>
         <div id="legend" class="legend">
           <div class="bar"></div>
-          <div>Sea Rise (meters)</div>
+          
           <div id="chart1">chart 1</div>
           <div id="chart2">chart 2</div>
           <div id="chart3">chart 3</div>
@@ -49,6 +48,7 @@
   
 </div> 
   
+
 <script>
 
 //expand or hide control panel widgets
@@ -102,13 +102,10 @@ displayWidget = function(x){
     // code block
     break;
   }
-}
+};
 
 
-
-	// TO MAKE THE MAP APPEAR YOU MUST
-	// ADD YOUR ACCESS TOKEN FROM
-	// https://account.mapbox.com
+//MAPBOX SETUP
 	mapboxgl.accessToken = 'pk.eyJ1IjoiZXNjYWRhd2ciLCJhIjoiY2tmdmdrZGhkMTYzZDJ6czMyNWo0eWZmNCJ9.XAG-cdhWcLN2IEFAP6bCbg';
 var map = new mapboxgl.Map({
 container: 'map', // container id
@@ -119,18 +116,14 @@ zoom: 13, // starting zoom
 pitch: 60
 });
 
-//actual gps coordinates used from elevation
-//-122.44 47.51 -122.24 47.71
 
+//SETUP MASKS VIA COORDINATES
 coordinates = [
   [-122.44, 47.71], //top_left
   [-122.24, 47.71], //top_right
   [-122.24, 47.51], //bottom_right
   [-122.44, 47.51], //bottom_left
 ];
-
-//-122.41 --> -122.44
-//47.65 --> 47.66
 
 //stretch our image
 var t_lng = 0.0335; //stretches left and right
@@ -151,26 +144,6 @@ coordinates[2][1] -= t_lat;
 //translate bottom left
 coordinates[3][0] -= t_lng;
 coordinates[3][1] -= t_lat;
-
-//scale our image coordinates
-var s_lng = 1.0;
-var s_lat = 1.0;
-
-//scale top left
-coordinates[0][0] *= s_lng;
-coordinates[0][1] *= s_lat;
-
-//scale top right
-coordinates[1][0] *= s_lng;
-coordinates[1][1] *= s_lat;
-
-//scale bottom right
-coordinates[2][0] *= s_lng;
-coordinates[2][1] *= s_lat;
-
-//scale bottom left
-coordinates[3][0] *= s_lng;
-coordinates[3][1] *= s_lat;
 
 //move left
 var move_left = 0.004;
@@ -201,8 +174,6 @@ for (var i = 0; i < 80; i += 1){
   masks.push(d);
 }
 
-console.log(masks);
-
 map.on('load', function () {
   
   //add each of our masks
@@ -230,7 +201,6 @@ map.on('load', function () {
   }
 
 
-
   var first_mask_id = masks[0]["id"];  
 
   let prev_idg = first_mask_id;
@@ -246,7 +216,7 @@ map.on('load', function () {
       var numMeters = document.getElementById("numMeters");
       numMeters.textContent = meters;
       var numFeet = document.getElementById("numFeet");
-      var feet = meters * 3.281;
+      var feet = meters * 3.281; //approximate conversion from 
       numFeet.textContent = feet.toFixed(1);
 
       map.setLayoutProperty(prev_idg, 'visibility', 'none');
@@ -284,260 +254,8 @@ map.on('load', function () {
     }
   });
 
-
-
 });  
   
-
-var marker = new mapboxgl.Marker({
-  'color': '#314ccd'
-});
-  
-
-function getElevation() {
-  // make API request
-  var query = 'https://api.mapbox.com/v4/mapbox.mapbox-terrain-v2/tilequery/' + lng + ',' + lat + '.json?layers=contour&limit=50&access_token=' + mapboxgl.accessToken;
-  $.ajax({
-    method: 'GET',
-    url: query,
-  }).done(function(data) {
-    // Display the longitude and latitude values
-    lngDisplay.textContent = lng.toFixed(2);
-    latDisplay.textContent = lat.toFixed(2);
-    // Get all the returned features
-    var allFeatures = data.features;
-    // Create an empty array to add elevation data to
-    var elevations = [];
-    // For each returned feature, add elevation data to the elevations array
-    for (i = 0; i < allFeatures.length; i++) {
-      elevations.push(allFeatures[i].properties.ele);
-    }
-    // In the elevations array, find the largest value
-    var highestElevation = Math.max(...elevations);
-    // Display the largest elevation value
-    eleDisplay.textContent = highestElevation + ' meters';
-  });
-}
-
-// Create variables for the latitude and longitude
-var lng;
-var lat;
-
-map.on('click', function(e) {
-  // When the map is clicked, set the lng and lat variables equal to the lng and lat properties in the returned lngLat object
-  lng = e.lngLat.lng;
-  lat = e.lngLat.lat;
-  //ele = e.lngLat.ele;
-  getElevation();
-  marker.setLngLat(e.lngLat).addTo(map);
-
-});
-var lngDisplay = document.getElementById('lng');
-var latDisplay = document.getElementById('lat');
-var eleDisplay = document.getElementById('ele');
-
-
-//Begin D3
-var margin = {top: 60, right: 60, bottom: 50, left: 50},
-    width = 600 - margin.left - margin.right,
-    height = 400 - margin.top - margin.bottom;
-
-// append the svg object to the body of the page
-var svg = d3.select("#geoviz")
-  .append("svg")
-    .attr("width", width + margin.left + margin.right)
-    .attr("height", height + margin.top + margin.bottom)
-  .append("g")
-    .attr("transform",
-          "translate(" + margin.left + "," + margin.top + ")");
-
-// Parse the Data
-d3.csv("/data/simulated.csv", 
-  function(data) {
-  //////////
-  // GENERAL //
-  //////////
-
-  // List of groups = header of the csv files
-  var keys = data.columns.slice(1)
-
-  // color palette
-  var color = d3.scaleOrdinal()
-    .domain(keys)
-    .range(d3.schemeSet2);
-
-  //stack the data?
-  var stackedData = d3.stack()
-    .keys(keys)
-    (data)
-
-
-
-  //////////
-  // AXIS //
-  //////////
-
-  // Add X axis
-  var x = d3.scaleLinear()
-    .domain(d3.extent(data, function(d) { return d.year; }))
-    .range([ 0, width ]);
-  var xAxis = svg.append("g")
-    .attr("transform", "translate(0," + height + ")")
-    .attr("class", "axisWhite")
-    .call(d3.axisBottom(x).ticks(10))
-
-  // Add X axis label:
-  svg.append("text")
-      .attr("text-anchor", "end")
-      .attr("x", width)
-      .attr("y", height+40 )
-      .style("fill", "white")
-      .text("Time (year)");
-
-  // Add Y axis label:
-  svg.append("text")
-      .attr("text-anchor", "end")
-      .attr("x", 0)
-      .attr("y", -20 )
-      .text("Pollution Level")
-      .style("fill", "white")
-      .attr("text-anchor", "start")
-
-  // Add Y axis
-  var max_pollution = 200000; //todo calculate 
-  var y = d3.scaleLinear()
-    .domain([0, max_pollution])
-    .range([ height, 0 ]);
-  svg.append("g")
-    .attr("class", "axisWhite")
-    .call(d3.axisLeft(y).ticks(10))
-
-
-
-  //////////
-  // BRUSHING AND CHART //
-  //////////
-
-  // Add a clipPath: everything out of this area won't be drawn.
-  var clip = svg.append("defs").append("svg:clipPath")
-      .attr("id", "clip")
-      .append("svg:rect")
-      .attr("width", width )
-      .attr("height", height )
-      .attr("x", 0)
-      .attr("y", 0);
-
-  // Add brushing
-  var brush = d3.brushX()                 // Add the brush feature using the d3.brush function
-      .extent( [ [0,0], [width,height] ] ) // initialise the brush area: start at 0,0 and finishes at width,height: it means I select the whole graph area
-      .on("end", updateChart) // Each time the brush selection changes, trigger the 'updateChart' function
-
-  // Create the scatter variable: where both the circles and the brush take place
-  var areaChart = svg.append('g')
-    .attr("clip-path", "url(#clip)")
-
-  // Area generator
-  var area = d3.area()
-    .x(function(d) { return x(d.data.year); })
-    .y0(function(d) { return y(d[0]); })
-    .y1(function(d) { return y(d[1]); })
-
-  // Show the areas
-  areaChart
-    .selectAll("mylayers")
-    .data(stackedData)
-    .enter()
-    .append("path")
-      .attr("class", function(d) { return "myArea " + d.key })
-      .style("fill", function(d) { return color(d.key); })
-      .attr("d", area)
-
-  // Add the brushing
-  areaChart
-    .append("g")
-      .attr("class", "brush")
-      .call(brush);
-
-  var idleTimeout
-  function idled() { idleTimeout = null; }
-
-  // A function that update the chart for given boundaries
-  function updateChart() {
-
-    extent = d3.event.selection
-
-    // If no selection, back to initial coordinate. Otherwise, update X axis domain
-    if(!extent){
-      if (!idleTimeout) return idleTimeout = setTimeout(idled, 350); // This allows to wait a little bit
-      x.domain(d3.extent(data, function(d) { return d.year; }))
-    }else{
-      x.domain([ x.invert(extent[0]), x.invert(extent[1]) ])
-      areaChart.select(".brush").call(brush.move, null) // This remove the grey brush area as soon as the selection has been done
-    }
-
-    // Update axis and area position
-    xAxis.transition().duration(1000).call(d3.axisBottom(x).ticks(5))
-    areaChart
-      .selectAll("path")
-      .transition().duration(1000)
-      .attr("d", area)
-    }
-
-
-
-    //////////
-    // HIGHLIGHT GROUP //
-    //////////
-
-    // What to do when one group is hovered
-    var highlight = function(d){
-      
-      // reduce opacity of all groups
-      d3.selectAll(".myArea").style("opacity", .1)
-      // expect the one that is hovered
-      d3.select("."+d).style("opacity", 1)
-    }
-
-    // And when it is not hovered anymore
-    var noHighlight = function(d){
-      d3.selectAll(".myArea").style("opacity", 1)
-    }
-
-
-
-    //////////
-    // LEGEND //
-    //////////
-
-    // Add one dot in the legend for each name.
-    var size = 20
-    svg.selectAll("myrect")
-      .data(keys)
-      .enter()
-      .append("rect")
-        .attr("x", 400)
-        .attr("y", function(d,i){ return 10 + i*(size+5)}) // 100 is where the first dot appears. 25 is the distance between dots
-        .attr("width", size)
-        .attr("height", size)
-        .style("fill", function(d){ return color(d)})
-        .on("mouseover", highlight)
-        .on("mouseleave", noHighlight)
-
-    // Add one dot in the legend for each name.
-    svg.selectAll("mylabels")
-      .data(keys)
-      .enter()
-      .append("text")
-        .attr("x", 400 + size*1.2)
-        .attr("y", function(d,i){ return 10 + i*(size+5) + (size/2)}) // 100 is where the first dot appears. 25 is the distance between dots
-        .style("fill", function(d){ return color(d)})
-        .text(function(d){ return d})
-        .attr("text-anchor", "left")
-        .style("alignment-baseline", "middle")
-        .on("mouseover", highlight)
-        .on("mouseleave", noHighlight)
-
-})
 
   
 </script>
