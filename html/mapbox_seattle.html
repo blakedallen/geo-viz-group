@@ -12,7 +12,6 @@
 
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Goldman&display=swap" rel="stylesheet">
-
 <link rel="stylesheet" type="text/css" href="/style.css">
 </head>
 <body>
@@ -21,37 +20,19 @@
 <div id="map" class="map"></div>
 
 <div id="control_panel" class="control_panel" >
-        <div id="chart1"></div>
-        <div id="chart2"></div>
-        <div id="chart3"></div>
+        
         <h2>Sea Rise: <span id="numMeters">0</span> Meters | <span id="numFeet">0</span> Feet</h2>
-        <!-- see how to update d3 via slider here: https://bl.ocks.org/tomshanley/3c49d036610853d380e3fcaf8d3f0b89 -->
-        <input id="slider" type="range" min="0" max="80" step="1" value="0" 
-          style="
-            width:100%;
-          "
-        />
-
-
+        <input id="slider" class="seaSlider" type="range" min="0" max="80" step="1" value="0" />
         <button
           id="hideButton"
-          onclick="myFunction()"
+          onclick="expandPanel()"
         >Expand + </button>
+        <button onclick="displayWidget(1)">Widget 1</button>
+        <button onclick="displayWidget(2)">Widget 2</button>
+        <button onclick="displayWidget(3)">Widget 3</button>
+        <button onclick="displayWidget(4)">Widget 4</button>
 
-        <button >Widget 1</button>
-        <button >Widget 2</button>
-        <button >Widget 3</button>
-        <button >Widget 4</button>
-
-        <div class="eleInfo"
-          style="
-            border: none;
-            text-align:left;
-            background-color: rgba(0,0,0,0);
-            
-          "
-
-        >
+        <div class="eleInfo">
           <div>Longitude: <span id='lng'></span></div>
           <div>Latitude: <span id='lat'></span></div>
           <div>Elevation: <span id='ele'></span></div>
@@ -59,15 +40,20 @@
         <div id="legend" class="legend">
           <div class="bar"></div>
           <div>Sea Rise (meters)</div>
-          <div id="geoviz"></div>
+          <div id="chart1">chart 1</div>
+          <div id="chart2">chart 2</div>
+          <div id="chart3">chart 3</div>
+          <div id="chart4">chart 4</div>
         </div>
     </div>
   
 </div> 
   
 <script>
+
+//expand or hide control panel widgets
 var hidden = true;
-myFunction = function() {
+expandPanel = function() {
     var div = document.getElementById("control_panel");
     var button = document.getElementById("hideButton");
     if (hidden === false){
@@ -79,11 +65,44 @@ myFunction = function() {
       div.style.height = "620px";
       button.innerText = "Hide -"
     }
-    
-    if(div) {
-        
-    }
 };
+
+//initially set all charts as invisible (except 1)
+var c1 = document.getElementById("chart1");
+var c2 = document.getElementById("chart2");
+var c3 = document.getElementById("chart3");
+var c4 = document.getElementById("chart4");
+
+c2.style.display = "none";
+c3.style.display = "none";
+c4.style.display = "none";
+
+//display / switch which widget is visible
+displayWidget = function(x){
+  
+  c1.style.display = "none";
+  c2.style.display = "none";
+  c3.style.display = "none";
+  c4.style.display = "none";
+
+  switch(x) {
+  case 1:
+    c1.style.display = "block";
+    break;
+  case 2:
+    c2.style.display = "block";
+    break;
+  case 3:
+    c3.style.display = "block";
+    break;
+  case 4:
+    c4.style.display = "block";
+    break;
+  default:
+    // code block
+    break;
+  }
+}
 
 
 

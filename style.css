@@ -61,10 +61,11 @@ cursor: ew-resize;
   margin-left: 5px;
   padding: 5px;
   width: 200px;
-  border: 2px solid black;
+  border: none;
   font-size: 20px;
   color: #222;
-  background-color: #fff;
+  background-color: rgba(0,0,0,0);
+   text-align:left;
 }
 
 .control_panel {
@@ -81,7 +82,7 @@ cursor: ew-resize;
   overflow: hidden;
 }
 
-.main_slider {
+.seaSlider {
    width:100%;
 }
 
