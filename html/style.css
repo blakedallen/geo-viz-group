@@ -66,3 +66,22 @@ cursor: ew-resize;
   color: #222;
   background-color: #fff;
 }
+
+.control_panel {
+  width: 630px;
+  height:110px;
+  font-family: 'Goldman', cursive;
+  background-color: rgba(68, 68, 68, 0.79);
+  color:#fefefe;
+  padding:10px;
+  text-align:left;
+  top:0;
+  right:0;
+  position:absolute;
+  overflow: hidden;
+}
+
+.main_slider {
+   width:100%;
+
+}
