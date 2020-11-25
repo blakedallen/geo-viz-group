@@ -1,4 +1,3 @@
 
-#assumes python3 is installed
-python3 -m pip install -r requirements.txt
-python3 local_server.py
+export FLASK_APP=local_server.py
+python3 -m flask run
