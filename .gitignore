@@ -1,4 +1,4 @@
-
+*.swp
 masks/
 *.png
 *.DS_Store

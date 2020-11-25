@@ -11,17 +11,17 @@ app = Flask(__name__,
         static_url_path="")
 
 
-
-
 @app.route('/')
 def hello_world():
     return render_template('seattle.html')
 
 @app.route("/predict", methods=["POST"])
 def predict():
-    content = request.get_json()
-
-    return json.dumps(content)
+    p = request.get_json()
+    years = p["years"]
+    gt = p["gt"]
+    res = gen_slr(years, gt)
+    return json.dumps({"sea_level":res})
 
 if __name__ == "__main__":
     app.run(debug=True)
