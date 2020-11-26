@@ -6,6 +6,8 @@ from flask import render_template
 
 from model import gen_slr
 
+
+
 app = Flask(__name__, 
         static_folder="", 
         static_url_path="")
@@ -23,8 +25,9 @@ def predict():
     res = gen_slr(years, gt)
     
     #Note: max sea level rise set here
-    if res > 80:
-        res = 80
+    #https://www.usgs.gov/faqs/how-would-sea-level-change-if-all-glaciers-melted?qt-news_science_products=0#qt-news_science_products
+    if res > 70:
+        res = 70
 
     return json.dumps({"sea_level":res})
 
