@@ -2,9 +2,12 @@
 <html>
 <head>
 <meta charset="utf-8" />
-<title>Display a map</title>
-<script src="https://d3js.org/d3.v4.js"></script>
-<script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+<title>Sea Level Rise</title>
+
+
+<script src="https://d3js.org/d3.v6.min.js"  charset="utf-8"></script>
+<script src="https://unpkg.com/d3-simple-slider"></script>
+
 <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
 <script src="https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.js"></script>
 <link href="https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.css" rel="stylesheet" />
@@ -13,7 +16,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Goldman&display=swap" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="/style.css">
-
+<link rel="stylesheet" type="text/css" href="slider.css">
 
 </head>
 <body>
@@ -40,9 +43,58 @@
           <div class="bar"></div>
           
           <div id="chart1">chart 1</div>
-          <div id="chart2">chart 2</div>
-          <div id="chart3">chart 3</div>
-          <div id="chart4">chart 4</div>
+          <div id="chart2">chart 2
+              <!-- escavic -->
+            <div class="wrapper">
+    <h1>Total CO2 Emissions(Tons): <span id="COO2text">0</span></h1>
+    <h2>🚗 Cars Per Year(M): <span id="slider1textmin">0</span> = 🏭 CO2 (Tons): <span id="slider1textemission">0</span></h2>
+    <div id="slider1" class="slider"></div>
+    <h2>✈️ Airplane Mi Per Year(M): <span id="slider2textmin">0</span> = 🏭 CO2 (Tons): <span id="slider2textemission">0</span></h2>
+    <div id="slider2" class="slider"></div>
+    <h2>🍔 Burgers Per Year(M): <span id="slider3textmin">0</span> = 🏭 CO2 (Tons): <span id="slider3textemission">0</span></h2>
+    <div id="slider3" class="slider"></div>
+    <h2>🌲 Trees Planted Per Year(K): <span id="slider4textmin">0</span> = 🏭 CO2 (Tons): <span id="slider4textemission">0</span></h2>  
+    <div id="slider4" class="slider"></div>
+    <h2>☀️ Solar Panels Installed Per Year(K): <span id="slider5textmin">0</span> = 🏭 CO2 (Tons): <span id="slider5textemission">0</span></h2>  
+    <div id="slider5" class="slider"></div>
+
+          </div>
+          <div id="chart3">chart 3
+<div id="slider">
+            <h1>Pollutions by Industry Sector</h1>
+            <p>If that industry is gone..</p>
+        </div>
+        <div id="pie"></div>
+
+          </div>
+
+          <div id="chart4">chart 4
+<h2> CO2 Emissions by Country </h2>
+        <h3> Prepared by Yang Jing </h3>
+        <div id="sliderdiv">
+            <form id="sliderForm">
+                <label for slider 1> China </label>
+                <input class="slider" id="slider1" type="range" min="0" max="20" step="1" value="10.1"/>
+                <label for slider 3> Europe </label>
+                <input class="slider" id="slider3" type="range" min="0" max="20" step="1" value="5.6"/>
+                <label for slider 4> United States </label>
+                <input class="slider" id="slider4" type="range" min="0" max="20" step="1" value="5.4"/>
+                <label for slider 5> India </label>
+                <input class="slider" id="slider5" type="range" min="0" max="20" step="1" value="2.66"/>
+                <label for slider 6> Russia </label>
+                <input class="slider" id="slider6" type="range" min="0" max="20" step="1" value="1.7"/>
+                <label for slider 7> Japan </label>
+                <input class="slider" id="slider7" type="range" min="0" max="20" step="1" value="1.2"/>
+                <label for slider 2> Rest of the World </label>
+                <input class="slider" id="slider2" type="range" min="0" max="20" step="1" value="9.9"/>
+                <input type="button" onclick="resetFunction()" value="Reset">
+                <input type="button" onclick="gen_slr()" value="Update SLR"> 
+                <output class="output" id="CO2"></output>
+                <output class="output" id="SLR"></output>
+            </form>
+        </div>
+
+          </div>
         </div>
     </div>
   
@@ -221,7 +273,7 @@ map.on('load', function () {
       if (meters > 0){
         meters -= 1; 
         let idg = "image_"+meters.toString();
-        console.log(idg);
+        //console.log(idg);
         map.setLayoutProperty(idg, 'visibility', 'visible');
         prev_idg = idg;
       }
@@ -256,11 +308,13 @@ map.on('load', function () {
   
 </script>
 
+<script type="text/javascript" src="/js/chart1.js" ></script>
 
 <script type="text/javascript" src="/js/areachart.js"></script>
+<script type="text/javascript" src="/js/chart2.js" ></script>
 
-
-
+<script type="text/javascript" src="/js/chart3.js" ></script>
  
+<script type="text/javascript" src="/js/chart4.js" ></script>
 </body>
 </html>
