@@ -1,3 +1,40 @@
+//update sea level api request
+var update_sealevel = function(data, cb){
+    console.log(data);
+    const url = "/predict";
+    const params = {
+        "headers":{
+            "content-type":"application/json",
+        },
+        "body":JSON.stringify(data),
+        "method":"POST",
+    }
+    fetch(url, params)
+        .then(response => response.json())
+        .then(data =>{
+            cb(data);
+        });
+
+}
+
+var data = {
+    "years":2000,
+    "gt":10000,
+}
+
+//update sealevel here
+var cb = function(data){
+    console.log(data);
+    var s = document.getElementById("sea_level");
+    s.value = data["sea_level"];
+    var numMeters = document.getElementById("numMete    rs");
+    //numMeters.textContent = data["sea_level"];
+    //var numFeet = document.getElementById("numFeet");
+    //var feet = data["sea_level"] * 3.281;
+    //numFeet.textContent = feet.toFixed(1);
+}
+var res = update_sealevel(data, cb);
+
 //escavic
 //var axis = d3.svg.axis().orient("vertical").ticks(10)
 var axis = d3.svg.axis()
@@ -44,6 +81,9 @@ d3.select('#slider1')
             totalCOO2 = AirCOO2 + CarCOO2 + BurgerCOO2 + TreeCOO2 + SolarCOO2
             d3.select('#COO2text')
               .text(totalCOO2);
+                
+
+
           }));
 
 //d3.select('#slider1').append("text").text("🚗").attr('y', -500)
