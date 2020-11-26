@@ -1,6 +1,5 @@
 //update sea level api request
 var update_sealevel = function(data, cb){
-    console.log(data);
     const url = "/predict";
     const params = {
         "headers":{
@@ -23,17 +22,24 @@ var data = {
 }
 
 //update sealevel here
+var prev_idg = "image_0";
 var cb = function(data){
-    console.log(data);
+    //console.log(data);
+    var meters = data["sea_level"];
     var s = document.getElementById("sea_level");
-    s.value = data["sea_level"];
-    var numMeters = document.getElementById("numMete    rs");
-    //numMeters.textContent = data["sea_level"];
-    //var numFeet = document.getElementById("numFeet");
-    //var feet = data["sea_level"] * 3.281;
-    //numFeet.textContent = feet.toFixed(1);
+    s.value = meters;
+        map.setLayoutProperty(prev_idg, 'visibility', 'none');
+    let idg = "image_"+meters.toString();
+    map.setLayoutProperty(idg, 'visibility', 'visible');
+    prev_idg = idg;
+
+    var numMeters = document.getElementById("numMeters");
+    numMeters.textContent = meters.toString();
+    var numFeet = document.getElementById("numFeet");
+    var feet = data["sea_level"] * 3.281;
+    numFeet.textContent = feet.toFixed(1);
 }
-var res = update_sealevel(data, cb);
+
 
 //escavic
 //var axis = d3.svg.axis().orient("vertical").ticks(10)
@@ -81,8 +87,12 @@ d3.select('#slider1')
             totalCOO2 = AirCOO2 + CarCOO2 + BurgerCOO2 + TreeCOO2 + SolarCOO2
             d3.select('#COO2text')
               .text(totalCOO2);
-                
-
+            
+            var d = {
+                "years":1000,
+                "gt":totalCOO2,
+            }
+            update_sealevel(d,cb)
 
           }));
 
@@ -108,6 +118,11 @@ d3.select('#slider2')
             totalCOO2 = AirCOO2 + CarCOO2 + BurgerCOO2 + TreeCOO2 + SolarCOO2
             d3.select('#COO2text')
               .text(totalCOO2);
+            var d = {
+                "years":1000,
+                "gt":totalCOO2,
+            }
+            update_sealevel(d,cb)
           }));
 
 d3.select('#slider3')
@@ -128,6 +143,11 @@ d3.select('#slider3')
             totalCOO2 = AirCOO2 + CarCOO2 + BurgerCOO2 + TreeCOO2 + SolarCOO2
             d3.select('#COO2text')
               .text(totalCOO2);
+            var d = {
+                "years":1000,
+                "gt":totalCOO2,
+            }
+            update_sealevel(d,cb)
           }));
 
 d3.select('#slider4')
@@ -148,6 +168,11 @@ d3.select('#slider4')
             totalCOO2 = AirCOO2 + CarCOO2 + BurgerCOO2 + TreeCOO2 + SolarCOO2
             d3.select('#COO2text')
               .text(totalCOO2);
+            var d = {
+                "years":1000,
+                "gt":totalCOO2,
+            }
+            update_sealevel(d,cb)
           }));
 
 d3.select('#slider5')
@@ -168,4 +193,9 @@ d3.select('#slider5')
             totalCOO2 = AirCOO2 + CarCOO2 + BurgerCOO2 + TreeCOO2 + SolarCOO2
             d3.select('#COO2text')
               .text(totalCOO2);
+            var d = {
+                "years":1000,
+                "gt":totalCOO2,
+            }
+            update_sealevel(d,cb)
           }));

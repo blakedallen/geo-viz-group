@@ -33,13 +33,14 @@
         >Expand + </button>
 
         </br>
-
+        <h3> Years: <span id="yearsText">0</span></h3>
+        <input id="years" class="seaSlider" type="range" min="0" max="2000" step="1" value="0" />
         <div id="legend" class="legend">
           <div class="bar"></div>
       <div id="chart1">    
               <!-- escavic -->
-            <div class="wrapper">
-    <h1>Total CO2 Emissions(Tons): <span id="COO2text">0</span></h1>
+    <h2>Total CO2 Emissions(Tons): <span id="COO2text">0</span></h2>
+
     <h2>🚗 Cars Per Year(M): <span id="slider1textmin">0</span> = 🏭 CO2 (Tons): <span id="slider1textemission">0</span></h2>
     <div id="slider1" class="slider"></div>
     <h2>✈️ Airplane Mi Per Year(M): <span id="slider2textmin">0</span> = 🏭 CO2 (Tons): <span id="slider2textemission">0</span></h2>
@@ -51,7 +52,6 @@
     <h2>☀️ Solar Panels Installed Per Year(K): <span id="slider5textmin">0</span> = 🏭 CO2 (Tons): <span id="slider5textemission">0</span></h2>  
     <div id="slider5" class="slider"></div>
 
-    </div>
 
     <div id="chart2"></div>
     <div id="chart3"></div>
@@ -75,7 +75,7 @@ expandPanel = function() {
       button.innerText = "Expand +"
     } else{
       hidden = false;
-      div.style.height = "620px";
+      div.style.height = "650px";
       button.innerText = "Hide -"
     }
 };
@@ -216,7 +216,7 @@ map.on('load', function () {
 
   var first_mask_id = masks[0]["id"];  
 
-  let prev_idg = first_mask_id;
+  var prev_idg = first_mask_id;
   //set our initial layer as visible
   //map.setLayoutProperty(prev_idg, 'visibility', 'visible');
 
@@ -233,7 +233,7 @@ map.on('load', function () {
       map.setLayoutProperty(prev_idg, 'visibility', 'none');
       if (meters > 0){
         meters -= 1; 
-        let idg = "image_"+meters.toString();
+        var idg = "image_"+meters.toString();
         //console.log(idg);
         map.setLayoutProperty(idg, 'visibility', 'visible');
         prev_idg = idg;
@@ -241,7 +241,12 @@ map.on('load', function () {
       
     });
   
- 
+
+  document.getElementById("years")
+    .addEventListener("input", function(e){
+      var yearText = document.getElementById("yearsText");
+      yearText.textContent = e.target.value;
+     });
 
   // contours to map
   map.addSource('contours', {
