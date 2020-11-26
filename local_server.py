@@ -21,6 +21,11 @@ def predict():
     years = p["years"]
     gt = p["gt"]
     res = gen_slr(years, gt)
+    
+    #Note: max sea level rise set here
+    if res > 80:
+        res = 80
+
     return json.dumps({"sea_level":res})
 
 if __name__ == "__main__":
