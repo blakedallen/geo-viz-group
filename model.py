@@ -9,15 +9,11 @@ import matplotlib.pyplot as plt
 
 # Libraries for models 
 from sklearn.linear_model import LinearRegression
-get_ipython().run_line_magic('matplotlib', 'inline')
-
-df= pd.read_excel("../newgeogroup/slr_data.xlsx",sheet_name="data")
-df.head(3)
 
 def linear_model():
     '''This function generates a linear model to predict change in sea level rise in cm (global mean) given historical co2 emissions in gt'''
     # Read in training data 
-    df= pd.read_excel("../newgeogroup/slr_data.xlsx",sheet_name="data")
+    df= pd.read_excel("./slr_data.xlsx",sheet_name="data")
     #add a variable for change in sea level
     sl_chg =np.diff(df["sea_level (cm)"].to_numpy())
     #get the x variable without final year
@@ -95,6 +91,7 @@ def linear_model():
     print("R2 for annual co2 concentration change and annual co2 emission model: ", model3.score(dev_data3,dev_label3))
     return model1, model2, model3, pct_sl_chg
 
+#build our linear model
 model_chg, model_cum, model_gt, annual_sl_chg = linear_model()
 
 def gen_ppm(gt):

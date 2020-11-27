@@ -1,0 +1,25 @@
+w209 plan
+
+- showing each module
+create a div for each person
+<div id="yang"></div>
+then have those display none / display based on the button press
+
+- each module will reference the js from a separate file 
+(keeps everything modular and updateable)
+
+- each module should output a number of gigatons
+based on user interaction
+
+- the slider should output a number of years
+
+- run an ajax call to output
+
+- update based on the result from the model
+
+
+pull yangs from index.html
+
+pull victor's from codepen
+https://codepen.io/escavic/pen/JjKgjLo?editors=1011
+
