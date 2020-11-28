@@ -1,8 +1,53 @@
 //update sea level api request
 var update_sealevel = function(data, cb){
-    //get years from years slider
-    var y = document.getElementById("chart2years");
-    data["years"] = parseInt(y.value);
+    if(data.years === undefined){
+        //get years from years slider
+        var y = document.getElementById("chart2years");
+        data["years"] = parseInt(y.value);
+    }
+    //sensible defaults:
+   
+    var co2scale = d3.scaleLinear()
+        .domain([0,13008000000])
+        .range([0,40])
+    //100-250 : 1-10 
+    var scale1 = d3.scaleLinear()
+          .domain([100, 250])
+          .range([0, 5]);
+    //250 - 500 : 10-17
+    var scale2 = d3.scaleLinear()
+          .domain([250, 500])
+          .range([5, 10]);
+    //500 - 1000 : 18 - 35
+    var scale3 = d3.scaleLinear()
+          .domain([500, 1000])
+          .range([10, 20]);
+    //1000 - 2000 : 36 - 70
+    var scale4 = d3.scaleLinear()
+          .domain([1000, 2000])
+          .range([20, 30]);
+    if (data["years"] > 100 && data["years"] < 250){
+        var sr = scale1(data["years"]);
+        var c2 = co2scale(data["gt"]);
+        sr = Math.ceil(sr+c2);
+        return cb({sea_level:sr})
+    } else if (data["years"] > 250 && data["years"] < 500 ) {
+        var sr = scale2(data["years"]);
+        var c2 = co2scale(data["gt"]);
+        sr = Math.ceil(sr+c2);
+        return cb({sea_level:sr})
+    } else if (data["years"] > 500 && data["years"] < 1000) {
+        var sr = scale3(data["years"]);
+        var c2 = co2scale(data["gt"]);
+        sr = Math.ceil(sr+c2);
+        return cb({sea_level:sr})
+    } else if (data["years"] > 1000) {
+        var sr = scale4(data["years"]);
+        var c2 = co2scale(data["gt"]);
+        sr = Math.ceil(sr+c2);
+        return cb({sea_level:sr})
+    } else {
+
 
     const url = "/predict";
     const params = {
@@ -17,7 +62,7 @@ var update_sealevel = function(data, cb){
         .then(data =>{
             cb(data);
         });
-
+    }
 }
 
 var data = {
@@ -28,7 +73,7 @@ var data = {
 //update sealevel here
 var prev_idg2 = "image_0";
 var cb = function(data){
-    //console.log(data);
+    console.log(data);
     var meters = data["sea_level"];
     var s = document.getElementById("sea_level");
     s.value = meters;
@@ -36,7 +81,7 @@ var cb = function(data){
     let idg = "image_"+meters.toString();
     map.setLayoutProperty(idg, 'visibility', 'visible');
     prev_idg2 = idg;
-
+    
     var numMeters = document.getElementById("numMeters");
     numMeters.textContent = meters.toString();
     var numFeet = document.getElementById("numFeet");
@@ -75,8 +120,9 @@ document.getElementById("chart2years")
   .addEventListener("input", function(e){
     var yearText = document.getElementById("chart2yearsText");
       yearText.textContent = e.target.value;
+      console.log(e.target.value);
     //update sea level when years value is changed
-    update_sealevel({"gt":totalCOO2}, cb);
+    update_sealevel({"gt":totalCOO2,"years":e.target.value}, cb);
 });
 
 var slider1 = d3

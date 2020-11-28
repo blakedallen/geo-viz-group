@@ -33,13 +33,12 @@ var margin = {top: 10, right: 30, bottom: 30, left: 60},
     height = 600 - margin.top - margin.bottom;
 
 // append the svg object to the body of the page
-var svg = d3.select("#chart2")
+var svg = d3.select("#chart1")
   .append("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
   .append("g")
-    .attr("transform",
-          "translate(" + margin.left + "," + margin.top + ")");
+    .attr("transform","translate(" + margin.left + "," + margin.top + ")");
 
 var line = svg.append("path")
 
@@ -150,11 +149,11 @@ exponential:[
     },
     {
         "year":2050,
-        "height":25,
+        "height":8,
     },
     {
         "year":2200,
-        "height":125,
+        "height":70,
     }
 ]
 }
@@ -181,7 +180,7 @@ svg.append("g")
 
 // Add Y axis
 var y = d3.scaleLinear()
-  .domain([0, 125])
+  .domain([0, 70])
   .range([ height, 0 ]);
 
 svg.append("g")

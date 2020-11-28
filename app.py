@@ -26,8 +26,11 @@ def chart2():
 @application.route("/predict", methods=["POST"])
 def predict():
     p = request.get_json()
-    years = p["years"]
-    gt = p["gt"]
+    try:
+        years = int(p["years"])
+        gt = int(p["gt"])
+    except Execption as e:
+        return json.dumps({"sea_level":0})
     res = gen_slr(years, gt)
     
     #Note: max sea level rise set here

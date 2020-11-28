@@ -1,6 +1,6 @@
 
 //update sea level api request
-var update_sealevel = function(data, cb){
+var update_sealevel2 = function(data, cb){
     //get years from years slider
     var y = document.getElementById("chart4years");
     data["years"] = parseInt(y.value);
@@ -49,7 +49,7 @@ document.getElementById("chart4years")
     var yearText = document.getElementById("chart4yearsText");
       yearText.textContent = e.target.value;
     //update sea level when years value is changed
-    update_sealevel({"gt":cum_change}, cb4);
+    update_sealevel2({"gt":cum_change}, cb4);
 });
 
 
@@ -115,39 +115,39 @@ function resetFunction() {
 slider1.onchange = function() {
   cum_change += Number(val.innerHTML);
   console.log(cum_change);
-    update_sealevel({"gt":cum_change},cb4);
+    update_sealevel2({"gt":cum_change},cb4);
 }
 
 
 slider2.onchange = function() {
   cum_change += Number(val.innerHTML);
-    update_sealevel({"gt":cum_change},cb4);
+    update_sealevel2({"gt":cum_change},cb4);
 }
 
 slider3.onchange = function() {
   cum_change += Number(val.innerHTML);
-    update_sealevel({"gt":cum_change},cb4);
+    update_sealevel2({"gt":cum_change},cb4);
 }
 
 slider4.onchange = function() {
   cum_change += Number(val.innerHTML);
-    update_sealevel({"gt":cum_change},cb4);
+    update_sealevel2({"gt":cum_change},cb4);
 }
 
 slider5.onchange = function() {
   cum_change += Number(val.innerHTML);
-    update_sealevel({"gt":cum_change},cb4);
+    update_sealevel2({"gt":cum_change},cb4);
 }
 
 slider6.onchange = function() {
   cum_change += Number(val.innerHTML);
-    update_sealevel({"gt":cum_change},cb4);
+    update_sealevel2({"gt":cum_change},cb4);
 
 }
 
 slider7.onchange = function() {
   cum_change += Number(val.innerHTML);
-    update_sealevel({"gt":cum_change},cb4);
+    update_sealevel2({"gt":cum_change},cb4);
 
 }
 
