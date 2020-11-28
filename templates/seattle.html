@@ -38,12 +38,15 @@
         <button onclick="displayWidget(2)">Widget 2</button>
         <button onclick="displayWidget(3)">Widget 3</button>
         <button onclick="displayWidget(4)">Widget 4</button>
-
+        <div id="yearsContainer">
         <h3> Years: <span id="yearsText">0</span></h3>
         <input id="years" class="seaSlider" type="range" min="0" max="2000" step="1" value="0" />
+        </div>
         <div id="legend" class="legend">
           <div class="bar"></div>
           <div id="chart1">
+            <h2> NOAA projected Sea Level Rise by 2100</h2>
+            <h3> Carbon Emissions </h3>
             <select id="selectButton"></select>
           </div>
 
@@ -96,10 +99,14 @@ var c1 = document.getElementById("chart1");
 var c2 = document.getElementById("chart2");
 var c3 = document.getElementById("chart3");
 var c4 = document.getElementById("chart4");
-
+    
 c2.style.display = "none";
 c3.style.display = "none";
 c4.style.display = "none";
+
+//by default set years as invisible for chart 1
+var yearsContainer = document.getElementById("yearsContainer");
+yearsContainer.style.display = "none";
 
 //display / switch which widget is visible
 displayWidget = function(x){
@@ -108,10 +115,13 @@ displayWidget = function(x){
   c2.style.display = "none";
   c3.style.display = "none";
   c4.style.display = "none";
+  yearsContainer.style.display = "block";
 
   switch(x) {
   case 1:
     c1.style.display = "block";
+    //ignore years on first chart
+    yearsContainer.style.display = "none";
     break;
   case 2:
     c2.style.display = "block";
