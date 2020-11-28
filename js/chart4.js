@@ -3,7 +3,7 @@
 var update_sealevel = function(data, cb){
     //get years from years slider
     var y = document.getElementById("chart4years");
-    data["years"] = parseInt(y.value);
+    data["years"] = parseInt(y.value)-2018;
 
     const url = "/predict";
     const params = {
@@ -48,6 +48,7 @@ document.getElementById("chart4years")
   .addEventListener("input", function(e){
     var yearText = document.getElementById("chart4yearsText");
       yearText.textContent = e.target.value;
+      console.log(yearText)
     //update sea level when years value is changed
     update_sealevel({"gt":cum_change}, cb4);
 });
@@ -58,97 +59,79 @@ var t = "CO2 Emission Slider";
 var svg_width = 600;
 var svg_height = 600;
 
-var slider1 = document.getElementById("yslider1");
-var slider2 = document.getElementById("yslider2");
-var slider3 = document.getElementById("yslider3");
-var slider4 = document.getElementById("yslider4");
-var slider5 = document.getElementById("yslider5");
-var slider6 = document.getElementById("yslider6");
-var slider7 = document.getElementById("yslider7");
-var val = document.getElementById("CO2");
-var slr = document.getElementById("SLR");
-val.innerHTML = 0
-slr.innerHTML = 0
+var slider1 = document.getElementById("slider1");
+var slider2 = document.getElementById("slider2");
+var slider3 = document.getElementById("slider3");
+var slider4 = document.getElementById("slider4");
+var slider5 = document.getElementById("slider5");
+var slider6 = document.getElementById("slider6");
+var slider7 = document.getElementById("slider7");
 var base_line_sl = 21.36 
 var base_line_ppm = 408.52
 var num_yrs = 2100 - 2018
+var cum_change1 = 0
+var cum_change2 = 0
+var cum_change3 = 0
+var cum_change4 = 0
+var cum_change5 = 0
+var cum_change6 = 0
+var cum_change7 = 0
 
-slider1.oninput = function() {
-  val.innerHTML = this.value - 10.1;
-}
-
-slider3.oninput = function() {
-  val.innerHTML = this.value - 5.6;
-}
-
-slider4.oninput = function() {
-  val.innerHTML = this.value - 5.4;
- }
-
-
-slider5.oninput = function() {
-  val.innerHTML = this.value - 2.66;
- }
-
-
-slider6.oninput = function() {
-  val.innerHTML =this.value - 1.7;
- 
-}
-
-slider7.oninput = function() {
-  val.innerHTML = this.value - 1.2;
- 
-}
-
-slider2.oninput = function() {
-  val.innerHTML = this.value - 9.9;
- 
-}
+//reset all values
 function resetFunction() {
   document.getElementById("sliderForm").reset();
-  val.innerHTML = 0;
-  cum_change = 0;
-  slr.innerHTML = 0;
+  cum_change1 = 0;
+  cum_change2 = 0;
+  cum_change3 = 0;
+  cum_change4 = 0;
+  cum_change5 = 0;
+  cum_change6 = 0;
+  cum_change7 = 0;
+  document.getElementById("ttl").innerHTML=0;
 }
 
 slider1.onchange = function() {
-  cum_change += Number(val.innerHTML);
-  console.log(cum_change);
-    update_sealevel({"gt":cum_change},cb4);
+  cum_change1 = Number(slider1.value - 10.1);
+  cum_change = Math.round(cum_change1 + cum_change2 +cum_change3 +cum_change4 + cum_change5 + cum_change6 +cum_change7);
+  
+  document.getElementById("ttl").innerHTML = cum_change;
 }
 
-
 slider2.onchange = function() {
-  cum_change += Number(val.innerHTML);
-    update_sealevel({"gt":cum_change},cb4);
+  cum_change2 = Number(slider2.value - 9.9);
+  cum_change = Math.round(cum_change1 + cum_change2 +cum_change3 +cum_change4 + cum_change5 + cum_change6 +cum_change7);
+  document.getElementById("ttl").innerHTML = cum_change;
 }
 
 slider3.onchange = function() {
-  cum_change += Number(val.innerHTML);
-    update_sealevel({"gt":cum_change},cb4);
+  cum_change3 = Number(slider3.value - 5.6);
+  cum_change = Math.round(cum_change1 + cum_change2 +cum_change3 +cum_change4 + cum_change5 + cum_change6 +cum_change7);
+  document.getElementById("ttl").innerHTML = cum_change;
 }
 
-slider4.onchange = function() {
-  cum_change += Number(val.innerHTML);
-    update_sealevel({"gt":cum_change},cb4);
+slider4.onchange= function() {
+  cum_change4 = Number(slider4.value - 5.4);
+  cum_change = Math.round(cum_change1 + cum_change2 +cum_change3 +cum_change4 + cum_change5 + cum_change6 +cum_change7);
+  document.getElementById("ttl").innerHTML = cum_change;
 }
 
 slider5.onchange = function() {
-  cum_change += Number(val.innerHTML);
-    update_sealevel({"gt":cum_change},cb4);
+  cum_change5 = Number(slider5.value - 2.66);
+  cum_change =Math.round(cum_change1 + cum_change2 +cum_change3 +cum_change4 + cum_change5 + cum_change6 +cum_change7);
+  document.getElementById("ttl").innerHTML = cum_change;
 }
 
 slider6.onchange = function() {
-  cum_change += Number(val.innerHTML);
-    update_sealevel({"gt":cum_change},cb4);
+  cum_change6 = Number(slider6.value - 1.7);
+  cum_change = Math.round(cum_change1 + cum_change2 +cum_change3 +cum_change4 + cum_change5 + cum_change6 +cum_change7);
+  document.getElementById("ttl").innerHTML = cum_change;
 
 }
 
 slider7.onchange = function() {
-  cum_change += Number(val.innerHTML);
-    update_sealevel({"gt":cum_change},cb4);
-
+  cum_change7 = Number(slider7.value - 1.2);
+  cum_change = Math.round(cum_change1 + cum_change2 +cum_change3 +cum_change4 + cum_change5 + cum_change6 +cum_change7);
+  document.getElementById("ttl").innerHTML = cum_change;
 }
 
 function gen_slr() {
@@ -157,4 +140,5 @@ function gen_slr() {
   else {slr.innerHTML = Math.round(((-34.518+(14.327+5.97*cum_change+base_line_ppm)*0.135-base_line_sl)/100)*(1.016**num_yrs))
   }
   }
+
 

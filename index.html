@@ -59,28 +59,34 @@
         <div class="spacer"></div>
 
 
-        <h2> CO2 Emissions by Country </h2>
-        <h3> Prepared by Yang Jing </h3>
+        <h2> CO2 Emissions by Country (gt) in 2018 </h2>
+        <div align = center> Change in CO2 Emissions(gt): <output class="output" id="ttl"></output></div> 
+        <div></div>
+        <input id="chart4years" class="seaSlider" type="range" min="2018" max="2200" step="1" value="2018">
         <div id="sliderdiv">
             <form id="sliderForm">
                 <label for slider 1> China </label>
-                <input class="slider" id="slider1" type="range" min="0" max="20" step="1" value="10.1"/>
+                <input class="yslider" id="slider1" type="range" min="0" max="20" step="1" value="10.1"/>
+                <br>
                 <label for slider 3> Europe </label>
-                <input class="slider" id="slider3" type="range" min="0" max="20" step="1" value="5.6"/>
+                <input class="yslider" id="slider3" type="range" min="0" max="20" step="1" value="5.6"/>
+                <br>
                 <label for slider 4> United States </label>
-                <input class="slider" id="slider4" type="range" min="0" max="20" step="1" value="5.4"/>
+                <input class="yslider" id="slider4" type="range" min="0" max="20" step="1" value="5.4"/>
+                <br>
                 <label for slider 5> India </label>
-                <input class="slider" id="slider5" type="range" min="0" max="20" step="1" value="2.66"/>
+                <input class="yslider" id="slider5" type="range" min="0" max="20" step="1" value="2.66"/>
+                <br>
                 <label for slider 6> Russia </label>
-                <input class="slider" id="slider6" type="range" min="0" max="20" step="1" value="1.7"/>
+                <input class="yslider" id="slider6" type="range" min="0" max="20" step="1" value="1.7"/>
+                <br>
                 <label for slider 7> Japan </label>
-                <input class="slider" id="slider7" type="range" min="0" max="20" step="1" value="1.2"/>
+                <input class="yslider" id="slider7" type="range" min="0" max="20" step="1" value="1.2"/>
+                <br>
                 <label for slider 2> Rest of the World </label>
-                <input class="slider" id="slider2" type="range" min="0" max="20" step="1" value="9.9"/>
+                <input class="yslider" id="slider2" type="range" min="0" max="20" step="1" value="9.9"/>
+                <br>
                 <input type="button" onclick="resetFunction()" value="Reset">
-                <input type="button" onclick="gen_slr()" value="Update SLR"> 
-                <output class="output" id="CO2"></output>
-                <output class="output" id="SLR"></output>
             </form>
         </div>
         <div class="spacer"></div>
