@@ -17,6 +17,10 @@ app = Flask(__name__,
 def hello_world():
     return render_template('seattle.html')
 
+@app.route("/chart2")
+def chart2():
+    return render_template("multiline_chart.html")
+
 @app.route("/predict", methods=["POST"])
 def predict():
     p = request.get_json()
