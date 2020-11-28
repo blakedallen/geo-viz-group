@@ -1,4 +1,3 @@
-
 body { margin: 0; padding: 0; }
 
 .axisWhite {
@@ -250,3 +249,4 @@ input::-moz-focus-inner {
 #slider .range_value {
     text-align: left;
 }
+
