@@ -68,10 +68,42 @@
 </div>
 
     </div>
-    <div id="chart3"></div>
-    <div id="chart4"></div>
-
+    <div id="chart3">
+    <div id="main-container" class="clearfix">
+        <div id="slider">
+            <h1>Pollution by Industry Sector</h1>
+            <p>If that industry is gone..</p>
+        </div>
+        <div id="pie"></div>
     </div>
+    </div>
+    <div id="chart4">
+<h2> CO2 Emissions by Country </h2>
+        <h3> Prepared by Yang Jing </h3>
+        <div id="sliderdiv">
+            <form id="sliderForm">
+                <label for slider 1> China </label>
+                <input class="slider" id="yslider1" type="range" min="0" max="20" step="1" value="10.1"/>
+                <label for slider 3> Europe </label>
+                <input class="slider" id="yslider3" type="range" min="0" max="20" step="1" value="5.6"/>
+                <label for slider 4> United States </label>
+                <input class="slider" id="yslider4" type="range" min="0" max="20" step="1" value="5.4"/>
+                <label for slider 5> India </label>
+                <input class="slider" id="yslider5" type="range" min="0" max="20" step="1" value="2.66"/>
+                <label for slider 6> Russia </label>
+                <input class="slider" id="yslider6" type="range" min="0" max="20" step="1" value="1.7"/>
+                <label for slider 7> Japan </label>
+                <input class="slider" id="yslider7" type="range" min="0" max="20" step="1" value="1.2"/>
+                <label for slider 2> Rest of the World </label>
+                <input class="slider" id="yslider2" type="range" min="0" max="20" step="1" value="9.9"/>
+                <input type="button" onclick="resetFunction()" value="Reset">
+                <input type="button" onclick="gen_slr()" value="Update SLR"> 
+                <div class="output" id="CO2"></div>
+                <output class="output" id="SLR"></output>
+            </form>
+        </div>
+    </div>
+        </div>
   
 </div> 
   
@@ -302,5 +334,7 @@ map.on('load', function () {
 <script type="text/javascript" src="/js/chart1.js" ></script>
 <script type="text/javascript" src="/js/chart2.js" ></script>
  
+<script type="text/javascript" src="/js/chart3.js" ></script>
+<script type="text/javascript" src="/js/chart4.js" ></script>
 </body>
 </html>
