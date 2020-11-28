@@ -38,14 +38,9 @@
         <button onclick="displayWidget(2)">Widget 2</button>
         <button onclick="displayWidget(3)">Widget 3</button>
         <button onclick="displayWidget(4)">Widget 4</button>
-        <div id="yearsContainer">
-        <h3> Years: <span id="yearsText">0</span></h3>
-        <input id="years" class="seaSlider" type="range" min="0" max="2000" step="1" value="0" />
-        </div>
-        <div id="legend" class="legend">
           <div class="bar"></div>
           <div id="chart1">
-            <h2> NOAA projected Sea Level Rise by 2100</h2>
+            <h2> NOAA projected Sea Level Rise by 2200</h2>
             <h3> Carbon Emissions </h3>
             <select id="selectButton"></select>
           </div>
@@ -54,6 +49,8 @@
 
           <!-- escavic -->
 <div class="container">
+        <h3> Years: <span id="chart2yearsText">0</span></h3>
+        <input id="chart2years" class="seaSlider" type="range" min="0" max="2000" step="1" value="0" />
 <h12>Total CO2 Emissions(Tons): <span id="COO2text">0</span></h2>
     <h2>🚗 Cars Per Year(M): <span id="slider1textmin">0</span> = 🏭 CO2 (Tons): <span id="slider1textemission">0</span></h2>
     <div id="slider1" class="slider"></div>
@@ -70,6 +67,8 @@
     </div>
     <div id="chart3">
     <div id="main-container" class="clearfix">
+        <h3> Years: <span id="chart3yearsText">0</span></h3>
+        <input id="chart3years" class="seaSlider" type="range" min="0" max="2000" step="1" value="0" />
         <div id="slider">
             <h1>Pollution by Industry Sector</h1>
             <p>If that industry is gone..</p>
@@ -80,25 +79,39 @@
     <div id="chart4">
 <h2> CO2 Emissions by Country </h2>
         <h3> Prepared by Yang Jing </h3>
+        <h3> Years: <span id="chart4yearsText">0</span></h3>
+        <input id="chart4years" class="seaSlider" type="range" min="0" max="2000" step="1" value="0" />
         <div id="sliderdiv">
             <form id="sliderForm">
-                <label for slider 1> China </label>
+                <label for="yslider1"> China </label>
+                </br>
                 <input class="slider" id="yslider1" type="range" min="0" max="20" step="1" value="10.1"/>
-                <label for slider 3> Europe </label>
+                </br>
+                <label for="yslider3"> Europe </label>
+                </br>
                 <input class="slider" id="yslider3" type="range" min="0" max="20" step="1" value="5.6"/>
-                <label for slider 4> United States </label>
+                </br>
+                <label for="yslider4"> US </label>
+                </br>
                 <input class="slider" id="yslider4" type="range" min="0" max="20" step="1" value="5.4"/>
-                <label for slider 5> India </label>
+                </br>
+                <label  for="yslider5">India </label>
+                </br>
                 <input class="slider" id="yslider5" type="range" min="0" max="20" step="1" value="2.66"/>
-                <label for slider 6> Russia </label>
+                </br>
+                <label for="yslider6"> Russia </label>
+                </br>
                 <input class="slider" id="yslider6" type="range" min="0" max="20" step="1" value="1.7"/>
-                <label for slider 7> Japan </label>
+                </br>
+                <label for="yslider7"> Japan </label>
+                </br>
                 <input class="slider" id="yslider7" type="range" min="0" max="20" step="1" value="1.2"/>
-                <label for slider 2> Rest of the World </label>
+                </br>
+                <label for="yslider2">Rest Of World </label>
+                </br>
                 <input class="slider" id="yslider2" type="range" min="0" max="20" step="1" value="9.9"/>
+                </br>
                 <input type="button" onclick="resetFunction()" value="Reset">
-                <input type="button" onclick="gen_slr()" value="Update SLR"> 
-                <div class="output" id="CO2"></div>
                 <output class="output" id="SLR"></output>
             </form>
         </div>
@@ -136,9 +149,6 @@ c2.style.display = "none";
 c3.style.display = "none";
 c4.style.display = "none";
 
-//by default set years as invisible for chart 1
-var yearsContainer = document.getElementById("yearsContainer");
-yearsContainer.style.display = "none";
 
 //display / switch which widget is visible
 displayWidget = function(x){
@@ -147,13 +157,10 @@ displayWidget = function(x){
   c2.style.display = "none";
   c3.style.display = "none";
   c4.style.display = "none";
-  yearsContainer.style.display = "block";
 
   switch(x) {
   case 1:
     c1.style.display = "block";
-    //ignore years on first chart
-    yearsContainer.style.display = "none";
     break;
   case 2:
     c2.style.display = "block";
@@ -295,15 +302,6 @@ map.on('load', function () {
       
     });
 
-
-
-
- document.getElementById("years")
-  .addEventListener("input", function(e){
-    var yearText = document.getElementById("yearsText");
-    yearText.textContent = e.target.value;
-    //todo: update sea level when years value is changed
-});
 
   // contours to map
   map.addSource('contours', {
