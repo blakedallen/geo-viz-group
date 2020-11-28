@@ -5,7 +5,6 @@
 import numpy as np 
 import pandas as pd 
 import os
-import matplotlib.pyplot as plt
 
 # Libraries for models 
 from sklearn.linear_model import LinearRegression
@@ -24,23 +23,6 @@ def linear_model():
     new_df2 = pd.DataFrame(zip(df["co2_gt"].iloc[0:-1],ppm_chg),columns=["co2_gt","ppm_chg"])
     
     
-    fig, (ax1,ax2, ax3) = plt.subplots(1,3,figsize=(15,6))
-    #plot the correlation of sea level and annual change in co2 emission (ppm)
-    ax1.plot(new_df["ppm_chg"],new_df["sl_chg"])
-    ax1.set_xlabel("Annual CO2 Emission Change (ppm)")
-    ax1.set_ylabel("Annual Sea Level Change(cm)")
-
-    
-    #plot the correlation of sea level and cumulative co2 emission(ppm)
-    ax2.plot(df["co2_ppm"],df["sea_level (cm)"])
-    ax2.set_xlabel("Cum. CO2 Emissions")
-    ax2.set_ylabel("Sea Level (cm)")
-    
-    #plot the correlation of co2 annual emission (gt) and change in cumulative co2 emission(ppm)
-    ax3.plot(new_df["ppm_chg"],df["co2_gt"].iloc[:-1])
-    ax3.set_xlabel("Annual CO2 Emission Change (ppm)")
-    ax3.set_ylabel("Annual CO2 Emission (gt)")
-
     #1-split the data into training and dev datasets
     training_df1 = new_df.sample(frac=0.8)
     dev_df1 = new_df.drop(training_df1.index)
