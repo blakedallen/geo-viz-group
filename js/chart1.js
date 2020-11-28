@@ -1,18 +1,303 @@
 
-var t = "Chart 1";
-var svg_width = 600;
-var svg_height = 600;
+//possible future sea levels for different greenhouse gas pathways
+//https://www.climate.gov/news-features/understanding-climate/climate-change-global-sea-level#:~:text=Based%20on%20their%20new%20scenarios,above%202000%20levels%20by%202100.
+//
+//
+//update the select button
+var allGroup = [
+  "Low",
+  "Intermediate-low",
+  "Intermediate",
+  "Intermediate-high",
+  "High",
+  "Extreme",
+]
+
+d3.select("#selectButton")
+      .selectAll('myOptions')
+      .data(allGroup)
+      .enter()
+      .append('option')
+      .text(function (d) { return d; }) // text showed in the menu
+      .attr("value", function (d) { return d; }) // corresponding value returned by the button
+
+// set the dimensions and margins of the graph
+// set the dimensions and margins of the graph
+var margin = {top: 10, right: 30, bottom: 30, left: 60},
+    width = 500 - margin.left - margin.right,
+    height = 300 - margin.top - margin.bottom;
+
+// append the svg object to the body of the page
 var svg = d3.select("#chart1")
-    .append("svg")
-    .attr("width", svg_width)
-    .attr("height", svg_height)
-    .attr("fill", "black")
-    .style("background-color","#daeddf")
-    .style("border","1px dashed #888888")
+  .append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+    .attr("transform",
+          "translate(" + margin.left + "," + margin.top + ")");
 
-svg.append("text")
-    .text(t)
-    .attr("y",20)
-    .attr("x",svg_width/2-20);
+var line = svg.append("path")
 
+var chart1Data = {
+
+low : [
+    {
+        "year":2000,
+        "height":0,
+    },
+    {
+        "year":2050,
+        "height":0.15,
+    },
+    {
+        "year":2100,
+        "height":0.3,
+    },
+],
+intermediateLow:[
+    {
+        "year":2000,
+        "height":0,
+    },
+    {
+        "year":2050,
+        "height":0.25,
+    },
+    {
+        "year":2100,
+        "height":0.5,
+    },
+],
+intermediate:[
+    {
+        "year":2000,
+        "height":0,
+    },
+    {
+        "year":2050,
+        "height":0.5,
+    },
+    {
+        "year":2100,
+        "height":1.0,
+    },
+],
+intermediateHigh:[
+    {
+        "year":2000,
+        "height":0,
+    },
+    {
+        "year":2050,
+        "height":0.75,
+    },
+    {
+        "year":2100,
+        "height":1.5,
+    },
+],
+high:[
+    {
+        "year":2000,
+        "height":0,
+    },
+    {
+        "year":2050,
+        "height":1.0,
+    },
+    {
+        "year":2100,
+        "height":2.0,
+    },
+],
+extreme:[
+    {
+        "year":2000,
+        "height":0,
+    },
+    {
+        "year":2050,
+        "height":1.25,
+    },
+    {
+        "year":2100,
+        "height":2.5,
+    },
+],
+}
+var colors = [
+"#fef0d9",
+"#fdd49e",
+"#fdbb84",
+"#fc8d59",
+"#e34a33",
+"#b30000"
+];
+var pt = d3.timeParse("%Y");
+
+// Add X axis
+var x = d3.scaleTime()
+  .domain([pt(2000),pt(2100)])
+  .range([ 0, width ])
+
+svg.append("g")
+  .attr("transform", "translate(0," + height + ")")
+  .call(d3.axisBottom(x));
+
+// Add Y axis
+var y = d3.scaleLinear()
+  .domain([0, 2.5])
+  .range([ height, 0 ]);
+
+svg.append("g")
+  .call(d3.axisLeft(y));
+
+// text label for the y axis
+  svg.append("text")
+      .attr("transform", "rotate(-90)")
+      .attr("y", 0 - margin.left)
+      .attr("x",0 - (height / 2))
+      .attr("dy", "1em")
+      .style("text-anchor", "middle")
+      .attr("fill","white")
+      .text("Sea Level Rise (meters)");  
+
+// text label for the x axis
+  svg.append("text")
+      .attr("transform",
+            "translate(" + (width/2) + " ," +
+                           (height + margin.top + 20) + ")")
+      .style("text-anchor", "middle")
+      .attr("fill","white")
+      .text("Year");
+
+// Add the line - default is business as usual
+var line = svg.append("path")
+  .datum(chart1Data.low)
+  .attr("fill", "none")
+  .attr("stroke", "#fef0d9")
+  .attr("stroke-width", 1.5)
+  .attr("d", d3.line()
+    .x(function(d) { return x(pt(d.year)) })
+    .y(function(d) { return y(d.height) })
+    );
+
+
+//default prev_idg
+var prev_idg = "image_0";
+//function to manually update sea level
+var setSeaLevel = function(meters){
+    
+    var numMeters = document.getElementById("numMeters");
+    numMeters.textContent = meters.toString();
+    var numFeet = document.getElementById("numFeet");
+    var feet = meters * 3.281; //approximate conversion from
+    numFeet.textContent = feet.toFixed(1);
+    
+    //update our map
+    map.setLayoutProperty(prev_idg, 'visibility', 'none');
+    if (meters > 0){
+       meters -= 1;
+       var idg = "image_"+meters.toString();
+       //console.log(idg);
+       map.setLayoutProperty(idg, 'visibility', 'visible');
+       prev_idg = idg;
+    }
+
+    
+}
+
+
+
+//update our chart when selecting a new simulation
+var updateChart = function(option, data){
+    var t = d3.transition()
+        .duration(1000)
+        .ease(d3.easeLinear);
+    
+
+    switch(option){
+        case "Low":
+            line
+                .datum(data.intermediateLow)
+                .transition(t)
+                .attr("stroke", "#fef0d9")
+                .attr("d", d3.line()
+                    .x(function(d) { return x(pt(d.year)) })
+                    .y(function(d) { return y(d.height) })
+                )
+            setSeaLevel(1);
+            break;
+        case "Intermediate-low":
+            line
+                .datum(data.intermediateLow)
+                .transition(t)
+                .attr("stroke", "#fdd49e")
+                .attr("d", d3.line()
+                    .x(function(d) { return x(pt(d.year)) })
+                    .y(function(d) { return y(d.height) })
+                )
+            setSeaLevel(1);
+            break;
+        case "Intermediate":
+            line
+            .datum(data.intermediate)
+            .transition()
+            .attr("stroke", "#fdbb84")
+            .duration(1000)
+            .attr("d", d3.line()
+              .x(function(d) { return x(pt(d.year)) })
+              .y(function(d) { return y(d.height) })
+            )
+            setSeaLevel(1);
+            break;
+        case "Intermediate-high":
+            line
+            .datum(data.intermediateHigh)
+            .transition()
+            .attr("stroke", "#fc8d59")
+            .duration(1000)
+            .attr("d", d3.line()
+              .x(function(d) { return x(pt(d.year)) })
+              .y(function(d) { return y(d.height) })
+            )
+            setSeaLevel(2);
+            break;
+        case "High":
+            line
+            .datum(data.high)
+            .transition()
+            .attr("stroke", "#e34a33")
+            .duration(1000)
+            .attr("d", d3.line()
+              .x(function(d) { return x(pt(d.year)) })
+              .y(function(d) { return y(d.height) })
+            )
+            setSeaLevel(2);
+            break;
+        case "Extreme":
+            line
+            .datum(data.extreme)
+            .transition()
+            .attr("stroke", "#b30000")
+            .duration(1000)
+            .attr("d", d3.line()
+              .x(function(d) { return x(pt(d.year)) })
+              .y(function(d) { return y(d.height) })
+            )
+            setSeaLevel(3);
+            break;
+        default:
+            console.log("undefined option", option);
+    }
+}
+
+//update based on the button pressed
+// When the button is changed, run the updateChart function
+d3.select("#selectButton").on("change", function(d) {
+      // recover the option that has been chosen
+      const selectedOption = d3.select(this).property("value")
+      // run the updateChart function with this selected option
+      updateChart(selectedOption, chart1Data)
+ });
 
