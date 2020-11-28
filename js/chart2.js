@@ -45,6 +45,7 @@ var cb = function(data){
 }
 
 
+
 //escavic
 
 var TonsToPPM = 0.001
@@ -68,6 +69,14 @@ var maxAirCOO2 = 100000
 var maxBurgerCOO2 = 200000
 var maxTreeCOO2 = 50000
 var maxSolarCOO2 = 5000
+
+//add another event listener to the years slider, update based on totalC002
+document.getElementById("years")
+  .addEventListener("input", function(e){
+    console.log("update years");
+    //update sea level when years value is changed
+    update_sealevel({"gt":totalCOO2}, cb);
+});
 
 var slider1 = d3
     .sliderHorizontal()
