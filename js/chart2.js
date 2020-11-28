@@ -1,7 +1,7 @@
 //update sea level api request
 var update_sealevel = function(data, cb){
     //get years from years slider
-    var y = document.getElementById("years");
+    var y = document.getElementById("chart2years");
     data["years"] = parseInt(y.value);
 
     const url = "/predict";
@@ -26,16 +26,16 @@ var data = {
 }
 
 //update sealevel here
-var prev_idg = "image_0";
+var prev_idg2 = "image_0";
 var cb = function(data){
     //console.log(data);
     var meters = data["sea_level"];
     var s = document.getElementById("sea_level");
     s.value = meters;
-        map.setLayoutProperty(prev_idg, 'visibility', 'none');
+    map.setLayoutProperty(prev_idg2, 'visibility', 'none');
     let idg = "image_"+meters.toString();
     map.setLayoutProperty(idg, 'visibility', 'visible');
-    prev_idg = idg;
+    prev_idg2 = idg;
 
     var numMeters = document.getElementById("numMeters");
     numMeters.textContent = meters.toString();
@@ -43,6 +43,7 @@ var cb = function(data){
     var feet = data["sea_level"] * 3.281;
     numFeet.textContent = feet.toFixed(1);
 }
+
 
 
 //escavic
@@ -68,6 +69,15 @@ var maxAirCOO2 = 100000
 var maxBurgerCOO2 = 200000
 var maxTreeCOO2 = 50000
 var maxSolarCOO2 = 5000
+
+//add another event listener to the years slider, update based on totalC002
+document.getElementById("chart2years")
+  .addEventListener("input", function(e){
+    var yearText = document.getElementById("chart2yearsText");
+      yearText.textContent = e.target.value;
+    //update sea level when years value is changed
+    update_sealevel({"gt":totalCOO2}, cb);
+});
 
 var slider1 = d3
     .sliderHorizontal()

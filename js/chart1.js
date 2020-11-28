@@ -50,8 +50,8 @@ low : [
         "height":0.15,
     },
     {
-        "year":2100,
-        "height":0.3,
+        "year":2200,
+        "height":0.6,
     },
 ],
 intermediateLow:[
@@ -64,8 +64,8 @@ intermediateLow:[
         "height":0.25,
     },
     {
-        "year":2100,
-        "height":0.5,
+        "year":2200,
+        "height":1,
     },
 ],
 intermediate:[
@@ -78,8 +78,8 @@ intermediate:[
         "height":0.5,
     },
     {
-        "year":2100,
-        "height":1.0,
+        "year":2200,
+        "height":2.0,
     },
 ],
 intermediateHigh:[
@@ -92,8 +92,8 @@ intermediateHigh:[
         "height":0.75,
     },
     {
-        "year":2100,
-        "height":1.5,
+        "year":2200,
+        "height":3,
     },
 ],
 high:[
@@ -106,8 +106,8 @@ high:[
         "height":1.0,
     },
     {
-        "year":2100,
-        "height":2.0,
+        "year":2200,
+        "height":4.0,
     },
 ],
 extreme:[
@@ -120,8 +120,8 @@ extreme:[
         "height":1.25,
     },
     {
-        "year":2100,
-        "height":2.5,
+        "year":2200,
+        "height":5,
     },
 ],
 }
@@ -137,7 +137,7 @@ var pt = d3.timeParse("%Y");
 
 // Add X axis
 var x = d3.scaleTime()
-  .domain([pt(2000),pt(2100)])
+  .domain([pt(2000),pt(2200)])
   .range([ 0, width ])
 
 svg.append("g")
@@ -146,7 +146,7 @@ svg.append("g")
 
 // Add Y axis
 var y = d3.scaleLinear()
-  .domain([0, 2.5])
+  .domain([0, 5])
   .range([ height, 0 ]);
 
 svg.append("g")
@@ -219,14 +219,14 @@ var updateChart = function(option, data){
     switch(option){
         case "Low":
             line
-                .datum(data.intermediateLow)
+                .datum(data.low)
                 .transition(t)
                 .attr("stroke", "#fef0d9")
                 .attr("d", d3.line()
                     .x(function(d) { return x(pt(d.year)) })
                     .y(function(d) { return y(d.height) })
                 )
-            setSeaLevel(1);
+            setSeaLevel(data.low[2].height);
             break;
         case "Intermediate-low":
             line
@@ -237,7 +237,7 @@ var updateChart = function(option, data){
                     .x(function(d) { return x(pt(d.year)) })
                     .y(function(d) { return y(d.height) })
                 )
-            setSeaLevel(1);
+            setSeaLevel(data.intermediateLow[2].height);
             break;
         case "Intermediate":
             line
@@ -249,7 +249,7 @@ var updateChart = function(option, data){
               .x(function(d) { return x(pt(d.year)) })
               .y(function(d) { return y(d.height) })
             )
-            setSeaLevel(1);
+            setSeaLevel(data.intermediate[2].height);
             break;
         case "Intermediate-high":
             line
@@ -261,7 +261,7 @@ var updateChart = function(option, data){
               .x(function(d) { return x(pt(d.year)) })
               .y(function(d) { return y(d.height) })
             )
-            setSeaLevel(2);
+            setSeaLevel(data.intermediateHigh[2].height);
             break;
         case "High":
             line
@@ -273,7 +273,7 @@ var updateChart = function(option, data){
               .x(function(d) { return x(pt(d.year)) })
               .y(function(d) { return y(d.height) })
             )
-            setSeaLevel(2);
+            setSeaLevel(data.high[3].height);
             break;
         case "Extreme":
             line
@@ -285,7 +285,7 @@ var updateChart = function(option, data){
               .x(function(d) { return x(pt(d.year)) })
               .y(function(d) { return y(d.height) })
             )
-            setSeaLevel(3);
+            setSeaLevel(data.extreme[2].height);
             break;
         default:
             console.log("undefined option", option);

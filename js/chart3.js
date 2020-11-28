@@ -1,6 +1,7 @@
 //
 d3.json("./data/tsung-chin.json", function(data){
 
+  console.log("tsung-chin", data);
   // define range of slider
   var data_len = Object.keys(data).length - 1;
 
