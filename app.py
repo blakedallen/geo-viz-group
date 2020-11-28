@@ -8,20 +8,22 @@ from model import gen_slr
 
 
 
-app = Flask(__name__, 
+application = Flask(__name__, 
+        template_folder="templates",
         static_folder="", 
         static_url_path="")
 
 
-@app.route('/')
+@application.route('/')
+@application.route('/index')
 def hello_world():
     return render_template('seattle.html')
 
-@app.route("/chart2")
+@application.route("/chart2")
 def chart2():
     return render_template("multiline_chart.html")
 
-@app.route("/predict", methods=["POST"])
+@application.route("/predict", methods=["POST"])
 def predict():
     p = request.get_json()
     years = p["years"]
@@ -36,4 +38,5 @@ def predict():
     return json.dumps({"sea_level":res})
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    application.run(debug=True)
+
