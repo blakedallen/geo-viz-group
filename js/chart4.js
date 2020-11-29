@@ -1,10 +1,9 @@
 
 //update sea level api request
-var update_sealevel2 = function(data, cb){
+var update_sealevel4 = function(data, cb){
     //get years from years slider
     var y = document.getElementById("chart4years");
-    data["years"] = parseInt(y.value)-2018;
-
+    data["years"] = parseInt(y.value);
     const url = "/predict";
     const params = {
         "headers":{
@@ -20,16 +19,10 @@ var update_sealevel2 = function(data, cb){
         });
 
 }
-
-var data = {
-  "years":2000,
-  "gt":10000,
-}
-
 //update sealevel here
 var prev_idg4 = "image_0";
 var cb4 = function(data){
-    //console.log(data);
+    console.log("cb4", data);
     var meters = data["sea_level"];
     var s = document.getElementById("sea_level");
     s.value = meters;
@@ -52,9 +45,9 @@ document.getElementById("chart4years")
   .addEventListener("input", function(e){
     var yearText = document.getElementById("chart4yearsText");
       yearText.textContent = e.target.value;
-      console.log(yearText)
+      //console.log(yearText, yTotalC02);
     //update sea level when years value is changed
-    update_sealevel({"gt":yTotalCO2}, cb4);
+    //update_sealevel4({"gt":yTotalCO2}, cb4);
 });
 
 
@@ -100,7 +93,7 @@ slider1.onchange = function() {
   yTotalCO2 = Math.round(cum_change1 + cum_change2 +cum_change3 +cum_change4 + cum_change5 + cum_change6 +cum_change7);
   ttl.innerHTML = yTotalCO2;
   var d = {"gt":yTotalCO2};
-  update_sealevel(d,cb4);
+  update_sealevel4(d,cb4);
 }
 
 slider2.onchange = function() {
@@ -108,7 +101,7 @@ slider2.onchange = function() {
   yTotalCO2 = Math.round(cum_change1 + cum_change2 +cum_change3 +cum_change4 + cum_change5 + cum_change6 +cum_change7);
   ttl.innerHTML = yTotalCO2;
   var d = {"gt":yTotalCO2};
-  update_sealevel(d,cb4);
+  update_sealevel4(d,cb4);
 }
 
 slider3.onchange = function() {
@@ -116,7 +109,7 @@ slider3.onchange = function() {
   yTotalCO2 = Math.round(cum_change1 + cum_change2 +cum_change3 +cum_change4 + cum_change5 + cum_change6 +cum_change7);
   ttl.innerHTML = yTotalCO2;
   var d = {"gt":yTotalCO2};
-  update_sealevel(d,cb4);
+  update_sealevel4(d,cb4);
 }
 
 slider4.onchange= function() {
@@ -124,7 +117,7 @@ slider4.onchange= function() {
   yTotalCO2 = Math.round(cum_change1 + cum_change2 +cum_change3 +cum_change4 + cum_change5 + cum_change6 +cum_change7);
   ttl.innerHTML = yTotalCO2;
   var d = {"gt":yTotalCO2};
-  update_sealevel(d,cb4);
+  update_sealevel4(d,cb4);
 }
 
 slider5.onchange = function() {
@@ -132,7 +125,7 @@ slider5.onchange = function() {
   yTotalCO2 =Math.round(cum_change1 + cum_change2 +cum_change3 +cum_change4 + cum_change5 + cum_change6 +cum_change7);
   ttl.innerHTML = yTotalCO2;
   var d = {"gt":yTotalCO2};
-  update_sealevel(d,cb4);
+  update_sealevel4(d,cb4);
 }
 
 slider6.onchange = function() {
@@ -140,7 +133,7 @@ slider6.onchange = function() {
   yTotalCO2 = Math.round(cum_change1 + cum_change2 +cum_change3 +cum_change4 + cum_change5 + cum_change6 +cum_change7);
   document.getElementById("ttl").innerHTML = yTotalCO2;
   var d = {"gt":yTotalCO2};
-  update_sealevel(d,cb4);
+  update_sealevel4(d,cb4);
 
 }
 
@@ -149,7 +142,7 @@ slider7.onchange = function() {
   yTotalCO2 = Math.round(cum_change1 + cum_change2 +cum_change3 +cum_change4 + cum_change5 + cum_change6 +cum_change7);
   ttl.innerHTML = yTotalCO2;
   var d = {"gt":yTotalCO2};
-  update_sealevel(d,cb4);
+  update_sealevel4(d,cb4);
 }
 
 
