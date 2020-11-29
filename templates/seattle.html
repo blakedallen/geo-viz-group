@@ -37,6 +37,7 @@
         <button onclick="displayWidget(1)">Widget 1</button>
         <button onclick="displayWidget(2)">Widget 2</button>
         <button onclick="displayWidget(3)">Widget 3</button>
+        <button onclick="displayWidget(4)">Widget 4</button>
           <div class="bar"></div>
           <div id="chart1">
             <h2> NOAA projected Sea Level Rise by 2200</h2>
@@ -46,30 +47,38 @@
 
           <div id="chart2">
           <!-- escavic -->
-<div class="container">
-        <h3> Years: <span id="chart2yearsText">0</span></h3>
-        <input id="chart2years" class="seaSlider" type="range" min="0" max="2000" step="1" value="0" />
-<h12>Total CO2 Emissions(Tons): <span id="COO2text">0</span></h2>
-    <h2>🚗 Cars Per Year(M): <span id="slider1textmin">0</span> = 🏭 CO2 (Tons): <span id="slider1textemission">0</span></h2>
-    <div id="slider1" class="slider"></div>
-    <h2>✈️ Airplane Mi Per Year(M): <span id="slider2textmin">0</span> = 🏭 CO2 (Tons): <span id="slider2textemission">0</span></h2>
-    <div id="slider2" class="slider"></div>
-    <h2>🍔 Burgers Per Year(M): <span id="slider3textmin">0</span> = 🏭 CO2 (Tons): <span id="slider3textemission">0</span></h2>
-    <div id="slider3" class="slider"></div>
-    <h2>🌲 Trees Planted Per Year(K): <span id="slider4textmin">0</span> = 🏭 CO2 (Tons): <span id="slider4textemission">0</span></h2>  
-    <div id="slider4" class="slider"></div>
-    <h2>☀️ Solar Panels Installed Per Year(K): <span id="slider5textmin">0</span> = 🏭 CO2 (Tons): <span id="slider5textemission">0</span></h2>  
-    <div id="slider5" class="slider"></div>
-</div>
+          <div class="container">
+                  <h3> Years: <span id="chart2yearsText">0</span></h3>
+                  <input id="chart2years" class="seaSlider" type="range" min="0" max="2000" step="1" value="0" />
+          <h12>Total CO2 Emissions(Tons): <span id="COO2text">0</span></h2>
+              <h2>🚗 Cars Per Year(M): <span id="slider1textmin">0</span> = 🏭 CO2 (Tons): <span id="slider1textemission">0</span></h2>
+              <div id="slider1" class="slider"></div>
+              <h2>✈️ Airplane Mi Per Year(M): <span id="slider2textmin">0</span> = 🏭 CO2 (Tons): <span id="slider2textemission">0</span></h2>
+              <div id="slider2" class="slider"></div>
+              <h2>🍔 Burgers Per Year(M): <span id="slider3textmin">0</span> = 🏭 CO2 (Tons): <span id="slider3textemission">0</span></h2>
+              <div id="slider3" class="slider"></div>
+              <h2>🌲 Trees Planted Per Year(K): <span id="slider4textmin">0</span> = 🏭 CO2 (Tons): <span id="slider4textemission">0</span></h2>  
+              <div id="slider4" class="slider"></div>
+              <h2>☀️ Solar Panels Installed Per Year(K): <span id="slider5textmin">0</span> = 🏭 CO2 (Tons): <span id="slider5textemission">0</span></h2>  
+              <div id="slider5" class="slider"></div>
+          </div>
 
     </div>
-    <div id="chart3">
-<h2> CO2 Emissions by Country </h2>
+      <div id="chart3">
+            <div id="tchslider">
+                <h1>Pollution by Industry Sector</h1>
+                <p>(Tsung-Chin Han)</p>
+                <p>If that industry is gone..</p>
+            </div>
+            <div id="pie" style="height:500px;background-color:red;"></div>
+        </div>
+        <div id="chart4">
+        <h2> CO2 Emissions by Country </h2>
         <h3> Prepared by Yang Jing </h3>
         <h3> Years: <span id="chart4yearsText">0</span></h3>
         <input id="chart4years" class="seaSlider" type="range" min="0" max="2000" step="1" value="0" />
-        <div id="sliderdiv">
-            <form id="sliderForm">
+            <div id="sliderdiv">
+              <form id="sliderForm">
                 <label for="yslider1"> China </label>
                 </br>
                 <input class="slider" id="yslider1" type="range" min="0" max="20" step="1" value="10.1"/>
@@ -101,11 +110,11 @@
                 <input type="button" onclick="resetFunction()" value="Reset">
                 <div class="output" id="CO2"></div>
 
-            </form>
+              </form>
+            </div>
         </div>
-    </div>
         </div>
-  
+  </div>
 </div> 
   
 
@@ -131,11 +140,11 @@ expandPanel = function() {
 var c1 = document.getElementById("chart1");
 var c2 = document.getElementById("chart2");
 var c3 = document.getElementById("chart3");
-//var c4 = document.getElementById("chart4");
+var c4 = document.getElementById("chart4");
     
 c2.style.display = "none";
 c3.style.display = "none";
-//c4.style.display = "none";
+c4.style.display = "none";
 
 
 //display / switch which widget is visible
@@ -144,7 +153,7 @@ displayWidget = function(x){
   c1.style.display = "none";
   c2.style.display = "none";
   c3.style.display = "none";
-  //c4.style.display = "none";
+  c4.style.display = "none";
 
   switch(x) {
   case 1:
@@ -157,7 +166,7 @@ displayWidget = function(x){
     c3.style.display = "block";
     break;
   case 4:
-    //c4.style.display = "block";
+    c4.style.display = "block";
     break;
   default:
     // code block

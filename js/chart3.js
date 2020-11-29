@@ -1,10 +1,13 @@
-//
-d3.json("./data/tsung-chin.json", function(data){
 
-  console.log("tsung-chin", data);
+console.log("chart3.js");
+//
+    var svg = d3.select("#pie")
+                  .append("svg:svg")
+
+d3.json("/data/tsung-chin.json", function(data){
+    console.log("tch",data);
   // define range of slider
   var data_len = Object.keys(data).length - 1;
-
   // setup margin
   var margin = {top:100, right:100, bottom:100, left:200};
 
@@ -35,7 +38,7 @@ d3.json("./data/tsung-chin.json", function(data){
   var h = radius*2 + margin.top + margin.bottom;
 
   // setup color
-  var color = d3.scaleOrdinal(d3.schemeCategory20);
+  var color = d3.scaleOrdinal().range(d3.schemeCategory10)
   // var color = d3.scaleOrdinal([
   //   "#ffe0cc", "#ffc299", "#ffa366", "#ff944d", "#ff8533",
   //   "#ff751a", "#ff6600", "#e65c00", "#cc5200", "#b34700", "#993d00"
@@ -54,7 +57,7 @@ d3.json("./data/tsung-chin.json", function(data){
   //
   function show() {
     // append slider
-    var slider = d3.select('#slider')
+    var slider = d3.select('#tchslider')
 
     // setup initial value
     slider.append('input')
@@ -327,3 +330,25 @@ d3.json("./data/tsung-chin.json", function(data){
 //
 
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//
