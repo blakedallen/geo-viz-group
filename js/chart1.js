@@ -1,4 +1,7 @@
 
+//maximum meters global
+const MAX_METERS=79;
+
 //possible future sea levels for different greenhouse gas pathways
 //https://www.climate.gov/news-features/understanding-climate/climate-change-global-sea-level#:~:text=Based%20on%20their%20new%20scenarios,above%202000%20levels%20by%202100.
 //
@@ -11,6 +14,8 @@ var allGroup = [
   "Intermediate-high",
   "High",
   "Extreme",
+  "Ultra-Extreme",
+  "Exponential",
 ]
 
 d3.select("#selectButton")
@@ -25,7 +30,7 @@ d3.select("#selectButton")
 // set the dimensions and margins of the graph
 var margin = {top: 10, right: 30, bottom: 30, left: 60},
     width = 500 - margin.left - margin.right,
-    height = 300 - margin.top - margin.bottom;
+    height = 600 - margin.top - margin.bottom;
 
 // append the svg object to the body of the page
 var svg = d3.select("#chart1")
@@ -33,8 +38,7 @@ var svg = d3.select("#chart1")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
   .append("g")
-    .attr("transform",
-          "translate(" + margin.left + "," + margin.top + ")");
+    .attr("transform","translate(" + margin.left + "," + margin.top + ")");
 
 var line = svg.append("path")
 
@@ -124,6 +128,34 @@ extreme:[
         "height":5,
     },
 ],
+ultraExtreme:[
+    {
+        "year":2000,
+        "height":0,
+    },
+    {
+        "year":2050,
+        "height":3.0,
+    },
+    {
+        "year":2200,
+        "height":25,
+    }
+],  
+exponential:[
+    {
+        "year":2000,
+        "height":0,
+    },
+    {
+        "year":2050,
+        "height":8,
+    },
+    {
+        "year":2200,
+        "height":70,
+    }
+]
 }
 var colors = [
 "#fef0d9",
@@ -131,7 +163,9 @@ var colors = [
 "#fdbb84",
 "#fc8d59",
 "#e34a33",
-"#b30000"
+"#b30000",
+"#dd1c77",
+"#f03b20"
 ];
 var pt = d3.timeParse("%Y");
 
@@ -146,7 +180,7 @@ svg.append("g")
 
 // Add Y axis
 var y = d3.scaleLinear()
-  .domain([0, 5])
+  .domain([0, 70])
   .range([ height, 0 ]);
 
 svg.append("g")
@@ -193,18 +227,19 @@ var setSeaLevel = function(meters){
     var numFeet = document.getElementById("numFeet");
     var feet = meters * 3.281; //approximate conversion from
     numFeet.textContent = feet.toFixed(1);
-    
+    if (meters > MAX_METERS){
+        meters = MAX_METERS;
+    }
     //update our map
-    map.setLayoutProperty(prev_idg, 'visibility', 'none');
     if (meters > 0){
        meters -= 1;
        var idg = "image_"+meters.toString();
        //console.log(idg);
        map.setLayoutProperty(idg, 'visibility', 'visible');
-       prev_idg = idg;
+        map.setLayoutProperty(prev_idg, 'visibility', 'none');
+        prev_idg = idg;
     }
 
-    
 }
 
 
@@ -273,7 +308,7 @@ var updateChart = function(option, data){
               .x(function(d) { return x(pt(d.year)) })
               .y(function(d) { return y(d.height) })
             )
-            setSeaLevel(data.high[3].height);
+            setSeaLevel(data.high[2].height);
             break;
         case "Extreme":
             line
@@ -286,6 +321,31 @@ var updateChart = function(option, data){
               .y(function(d) { return y(d.height) })
             )
             setSeaLevel(data.extreme[2].height);
+            break;
+        case "Ultra-Extreme":
+            line
+            .datum(data.ultraExtreme)
+            .transition()
+            .attr("stroke", "#b30000")
+            .duration(1000)
+            .attr("d", d3.line()
+              .x(function(d) { return x(pt(d.year)) })
+              .y(function(d) { return y(d.height) })
+            )
+            setSeaLevel(data.ultraExtreme[2].height);
+            break;
+        case "Exponential":
+            line
+            .datum(data.exponential)
+            .transition()
+            .attr("stroke", "#b30000")
+            .duration(1000)
+            .attr("d", d3.line()
+              .x(function(d) { return x(pt(d.year)) })
+              .y(function(d) { return y(d.height) })
+            )
+
+            setSeaLevel(data.exponential[2].height);
             break;
         default:
             console.log("undefined option", option);
