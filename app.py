@@ -3,7 +3,6 @@ from flask import Flask
 from flask import request
 from flask import Response
 from flask import render_template
-
 from model import gen_slr
 
 application = Flask(__name__, 
