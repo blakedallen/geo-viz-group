@@ -299,7 +299,7 @@ input::-moz-focus-inner {
   cursor: pointer; /* Cursor on hover */
 }
 
-#slider1::-webkit-slider-thumb {
+#yslider1::-webkit-slider-thumb {
   position:relative;
   -webkit-appearance: none; /* Override default look */
   appearance: none;
@@ -321,7 +321,7 @@ input::-moz-focus-inner {
 
 }
 
-#slider1::-moz-range-thumb {
+#yslider1::-moz-range-thumb {
   width: 30px; /* Set a specific slider handle width */
   height: 25px; /* Slider handle height */
   border-radius: 50%;
@@ -329,7 +329,7 @@ input::-moz-focus-inner {
   cursor: pointer; /* Cursor on hover */
 }
 
-#slider2::-webkit-slider-thumb {
+#yslider2::-webkit-slider-thumb {
   position:relative;
   -webkit-appearance: none; /* Override default look */
   appearance: none;
@@ -351,7 +351,7 @@ input::-moz-focus-inner {
 
 }
 
-#slider2::-moz-range-thumb {
+#yslider2::-moz-range-thumb {
   width: 30px; /* Set a specific slider handle width */
   height: 25px; /* Slider handle height */
   border-radius: 50%;
@@ -359,7 +359,7 @@ input::-moz-focus-inner {
   cursor: pointer; /* Cursor on hover */
 }
 
-#slider3::-webkit-slider-thumb {
+#yslider3::-webkit-slider-thumb {
   position:relative;
   -webkit-appearance: none; /* Override default look */
   appearance: none;
@@ -381,7 +381,7 @@ input::-moz-focus-inner {
 
 }
 
-#slider3::-moz-range-thumb {
+#yslider3::-moz-range-thumb {
   width: 30px; /* Set a specific slider handle width */
   height: 25px; /* Slider handle height */
   border-radius: 50%;
@@ -389,7 +389,7 @@ input::-moz-focus-inner {
   cursor: pointer; /* Cursor on hover */
 }
 
-#slider5::-webkit-slider-thumb {
+#yslider5::-webkit-slider-thumb {
   position:relative;
   -webkit-appearance: none; /* Override default look */
   appearance: none;
@@ -411,7 +411,7 @@ input::-moz-focus-inner {
 
 }
 
-#slider5::-moz-range-thumb {
+#yslider5::-moz-range-thumb {
   width: 30px; /* Set a specific slider handle width */
   height: 25px; /* Slider handle height */
   border-radius: 50%;
@@ -419,7 +419,7 @@ input::-moz-focus-inner {
   cursor: pointer; /* Cursor on hover */
 }
 
-#slider6::-webkit-slider-thumb {
+#yslider6::-webkit-slider-thumb {
   position:relative;
   -webkit-appearance: none; /* Override default look */
   appearance: none;
@@ -441,7 +441,7 @@ input::-moz-focus-inner {
 
 }
 
-#slider6::-moz-range-thumb {
+#yslider6::-moz-range-thumb {
   width: 30px; /* Set a specific slider handle width */
   height: 25px; /* Slider handle height */
   border-radius: 50%;
@@ -449,7 +449,7 @@ input::-moz-focus-inner {
   cursor: pointer; /* Cursor on hover */
 }
 
-#slider7::-webkit-slider-thumb {
+#yslider7::-webkit-slider-thumb {
   position:relative;
   -webkit-appearance: none; /* Override default look */
   appearance: none;
@@ -471,7 +471,7 @@ input::-moz-focus-inner {
 
 }
 
-#slider7::-moz-range-thumb {
+#yslider7::-moz-range-thumb {
   width: 30px; /* Set a specific slider handle width */
   height: 25px; /* Slider handle height */
   border-radius: 50%;

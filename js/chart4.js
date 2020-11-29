@@ -21,6 +21,10 @@ var update_sealevel = function(data, cb){
 
 }
 
+var data = {
+  "years":2000,
+  "gt":10000,
+}
 
 //update sealevel here
 var prev_idg4 = "image_0";
@@ -41,7 +45,7 @@ var cb4 = function(data){
     numFeet.textContent = feet.toFixed(1);
 }
 
-var cum_change = 0;
+var totalCOO2 = 0;
 
 //add another event listener to the years slider, update based on totalC002
 document.getElementById("chart4years")
@@ -50,7 +54,7 @@ document.getElementById("chart4years")
       yearText.textContent = e.target.value;
       console.log(yearText)
     //update sea level when years value is changed
-    update_sealevel({"gt":cum_change}, cb4);
+    update_sealevel({"gt":totalCOO2}, cb4);
 });
 
 
@@ -59,13 +63,14 @@ var t = "CO2 Emission Slider";
 var svg_width = 600;
 var svg_height = 600;
 
-var slider1 = document.getElementById("slider1");
-var slider2 = document.getElementById("slider2");
-var slider3 = document.getElementById("slider3");
-var slider4 = document.getElementById("slider4");
-var slider5 = document.getElementById("slider5");
-var slider6 = document.getElementById("slider6");
-var slider7 = document.getElementById("slider7");
+var slider1 = document.getElementById("yslider1");
+var slider2 = document.getElementById("yslider2");
+var slider3 = document.getElementById("yslider3");
+var slider4 = document.getElementById("yslider4");
+var slider5 = document.getElementById("yslider5");
+var slider6 = document.getElementById("yslider6");
+var slider7 = document.getElementById("yslider7");
+var ttl = document.getElementById("ttl");
 var base_line_sl = 21.36 
 var base_line_ppm = 408.52
 var num_yrs = 2100 - 2018
@@ -87,58 +92,66 @@ function resetFunction() {
   cum_change5 = 0;
   cum_change6 = 0;
   cum_change7 = 0;
-  document.getElementById("ttl").innerHTML=0;
+  ttl.innerHTML=0;
 }
 
 slider1.onchange = function() {
   cum_change1 = Number(slider1.value - 10.1);
-  cum_change = Math.round(cum_change1 + cum_change2 +cum_change3 +cum_change4 + cum_change5 + cum_change6 +cum_change7);
-  
-  document.getElementById("ttl").innerHTML = cum_change;
+  totalCOO2 = Math.round(cum_change1 + cum_change2 +cum_change3 +cum_change4 + cum_change5 + cum_change6 +cum_change7);
+  ttl.innerHTML = totalCOO2;
+  var d = {"gt":totalCOO2};
+  update_sealevel(d,cb4);
 }
 
 slider2.onchange = function() {
   cum_change2 = Number(slider2.value - 9.9);
-  cum_change = Math.round(cum_change1 + cum_change2 +cum_change3 +cum_change4 + cum_change5 + cum_change6 +cum_change7);
-  document.getElementById("ttl").innerHTML = cum_change;
+  totalCOO2 = Math.round(cum_change1 + cum_change2 +cum_change3 +cum_change4 + cum_change5 + cum_change6 +cum_change7);
+  ttl.innerHTML = totalCOO2;
+  var d = {"gt":totalCOO2};
+  update_sealevel(d,cb4);
 }
 
 slider3.onchange = function() {
   cum_change3 = Number(slider3.value - 5.6);
-  cum_change = Math.round(cum_change1 + cum_change2 +cum_change3 +cum_change4 + cum_change5 + cum_change6 +cum_change7);
-  document.getElementById("ttl").innerHTML = cum_change;
+  totalCOO2 = Math.round(cum_change1 + cum_change2 +cum_change3 +cum_change4 + cum_change5 + cum_change6 +cum_change7);
+  ttl.innerHTML = totalCOO2;
+  var d = {"gt":totalCOO2};
+  update_sealevel(d,cb4);
 }
 
 slider4.onchange= function() {
   cum_change4 = Number(slider4.value - 5.4);
-  cum_change = Math.round(cum_change1 + cum_change2 +cum_change3 +cum_change4 + cum_change5 + cum_change6 +cum_change7);
-  document.getElementById("ttl").innerHTML = cum_change;
+  totalCOO2 = Math.round(cum_change1 + cum_change2 +cum_change3 +cum_change4 + cum_change5 + cum_change6 +cum_change7);
+  ttl.innerHTML = totalCOO2;
+  var d = {"gt":totalCOO2};
+  update_sealevel(d,cb4);
 }
 
 slider5.onchange = function() {
   cum_change5 = Number(slider5.value - 2.66);
-  cum_change =Math.round(cum_change1 + cum_change2 +cum_change3 +cum_change4 + cum_change5 + cum_change6 +cum_change7);
-  document.getElementById("ttl").innerHTML = cum_change;
+  totalCOO2 =Math.round(cum_change1 + cum_change2 +cum_change3 +cum_change4 + cum_change5 + cum_change6 +cum_change7);
+  ttl.innerHTML = totalCOO2;
+  var d = {"gt":totalCOO2};
+  update_sealevel(d,cb4);
 }
 
 slider6.onchange = function() {
   cum_change6 = Number(slider6.value - 1.7);
-  cum_change = Math.round(cum_change1 + cum_change2 +cum_change3 +cum_change4 + cum_change5 + cum_change6 +cum_change7);
-  document.getElementById("ttl").innerHTML = cum_change;
+  totalCOO2 = Math.round(cum_change1 + cum_change2 +cum_change3 +cum_change4 + cum_change5 + cum_change6 +cum_change7);
+  document.getElementById("ttl").innerHTML = totalCOO2;
+  var d = {"gt":totalCOO2};
+  update_sealevel(d,cb4);
 
 }
 
 slider7.onchange = function() {
   cum_change7 = Number(slider7.value - 1.2);
-  cum_change = Math.round(cum_change1 + cum_change2 +cum_change3 +cum_change4 + cum_change5 + cum_change6 +cum_change7);
-  document.getElementById("ttl").innerHTML = cum_change;
+  totalCOO2 = Math.round(cum_change1 + cum_change2 +cum_change3 +cum_change4 + cum_change5 + cum_change6 +cum_change7);
+  ttl.innerHTML = totalCOO2;
+  var d = {"gt":totalCOO2};
+  update_sealevel(d,cb4);
 }
 
-function gen_slr() {
-  if (14.327+5.97*cum_change <0){
-    slr.innerHTML =  Math.round(0.001*(1.016**num_yrs))}
-  else {slr.innerHTML = Math.round(((-34.518+(14.327+5.97*cum_change+base_line_ppm)*0.135-base_line_sl)/100)*(1.016**num_yrs))
-  }
-  }
+
 
 
