@@ -1,10 +1,11 @@
 
-console.log("chart3.js");
+console.log("hello chart3.js");
 //
     var svg = d3.select("#pie")
                   .append("svg:svg")
 
-d3.json("/data/tsung-chin.json", function(data){
+d3.json("/data/tsung-chin.json")
+    .then((data) => {
     console.log("tch",data);
   // define range of slider
   var data_len = Object.keys(data).length - 1;
