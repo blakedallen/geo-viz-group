@@ -37,7 +37,6 @@
         <button onclick="displayWidget(1)">Widget 1</button>
         <button onclick="displayWidget(2)">Widget 2</button>
         <button onclick="displayWidget(3)">Widget 3</button>
-        <button onclick="displayWidget(4)">Widget 4</button>
           <div class="bar"></div>
           <div id="chart1">
             <h2> NOAA projected Sea Level Rise by 2200</h2>
@@ -46,7 +45,6 @@
           </div>
 
           <div id="chart2">
-
           <!-- escavic -->
 <div class="container">
         <h3> Years: <span id="chart2yearsText">0</span></h3>
@@ -66,17 +64,6 @@
 
     </div>
     <div id="chart3">
-    <div id="main-container" class="clearfix">
-        <h3> Years: <span id="chart3yearsText">0</span></h3>
-        <input id="chart3years" class="seaSlider" type="range" min="0" max="2000" step="1" value="0" />
-        <div id="slider">
-            <h1>Pollution by Industry Sector</h1>
-            <p>If that industry is gone..</p>
-        </div>
-        <div id="pie"></div>
-    </div>
-    </div>
-    <div id="chart4">
 <h2> CO2 Emissions by Country </h2>
         <h3> Prepared by Yang Jing </h3>
         <h3> Years: <span id="chart4yearsText">0</span></h3>
@@ -112,7 +99,8 @@
                 <input class="slider" id="yslider2" type="range" min="0" max="20" step="1" value="9.9"/>
                 </br>
                 <input type="button" onclick="resetFunction()" value="Reset">
-                <output class="output" id="SLR"></output>
+                <div class="output" id="CO2"></div>
+
             </form>
         </div>
     </div>
@@ -143,11 +131,11 @@ expandPanel = function() {
 var c1 = document.getElementById("chart1");
 var c2 = document.getElementById("chart2");
 var c3 = document.getElementById("chart3");
-var c4 = document.getElementById("chart4");
+//var c4 = document.getElementById("chart4");
     
 c2.style.display = "none";
 c3.style.display = "none";
-c4.style.display = "none";
+//c4.style.display = "none";
 
 
 //display / switch which widget is visible
@@ -156,7 +144,7 @@ displayWidget = function(x){
   c1.style.display = "none";
   c2.style.display = "none";
   c3.style.display = "none";
-  c4.style.display = "none";
+  //c4.style.display = "none";
 
   switch(x) {
   case 1:
@@ -169,7 +157,7 @@ displayWidget = function(x){
     c3.style.display = "block";
     break;
   case 4:
-    c4.style.display = "block";
+    //c4.style.display = "block";
     break;
   default:
     // code block
