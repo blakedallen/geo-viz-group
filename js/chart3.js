@@ -7,7 +7,7 @@ console.log("hello chart3.js");
 d3.json("/data/tsung-chin.json")
     .then((data) => {
     console.log("tch",data);
-  // define range of slider
+  // define range of tchslider
   var data_len = Object.keys(data).length - 1;
   // setup margin
   var margin = {top:100, right:100, bottom:100, left:200};
@@ -57,13 +57,13 @@ d3.json("/data/tsung-chin.json")
 
   //
   function show() {
-    // append slider
+    // append tchslider
     var slider = d3.select('#tchslider')
 
     // setup initial value
     slider.append('input')
           .attr('type', 'range')
-          .attr('data-id', 'slider')
+          .attr('data-id', 'tchslider')
           .attr('class', 'range')
           .attr('step',0)
           .attr('min', 0)
@@ -95,7 +95,7 @@ d3.json("/data/tsung-chin.json")
   // get data
   function extractData(){
     var d_value
-    d3.selectAll('#slider .range').each(function(){
+    d3.selectAll('#tchslider .range').each(function(){
       d_value = this.value
     });
     return data[d_value]['data'];
@@ -105,7 +105,7 @@ d3.json("/data/tsung-chin.json")
 
   // show slider value
   function showSliderValues() {
-    d3.selectAll('#slider .range').each(function() {
+    d3.selectAll('#tchslider .range').each(function() {
       var level = "Total CO2 Level becomes: " + data[this.value]['amount'] + " million tonnes";
       d3.select('.range_value').html(level);
 
