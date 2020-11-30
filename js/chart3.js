@@ -1,16 +1,82 @@
-//
-d3.json("./data/tsung-chin.json", function(data){
+var last_co2 = 0;
+//update sea level api request
+var update_sealevel3 = function(data, cb){
+    //get years from years slider
+    var y = document.getElementById("chart3years");
+    data["years"] = parseInt(y.value);
 
-  console.log("tsung-chin", data);
+
+    const url = "/predict";
+    const params = {
+        "headers":{
+            "content-type":"application/json",
+        },
+        "body":JSON.stringify(data),
+        "method":"POST",
+    }
+    fetch(url, params)
+        .then(response => response.json())
+        .then(data =>{
+            cb(data);
+        });
+}
+
+//update sealevel here
+var prev_idg3 = "image_0";
+var cb = function(data){
+    console.log(data);
+    var meters = data["sea_level"];
+    var s = document.getElementById("sea_level");
+    s.value = meters;
+    let idg = "image_"+meters.toString();
+    map.setLayoutProperty(idg, 'visibility', 'visible');
+    map.setLayoutProperty(prev_idg3, 'visibility', 'none');
+    prev_idg3 = idg;
+
+    var numMeters = document.getElementById("numMeters");
+    numMeters.textContent = meters.toString();
+    var numFeet = document.getElementById("numFeet");
+    var feet = data["sea_level"] * 3.281;
+    numFeet.textContent = feet.toFixed(1);
+}
+
+//add another event listener to the years slider, update based on totalC00
+document.getElementById("chart3years")
+  .addEventListener("input", function(e){
+    var yearText = document.getElementById("chart3yearsText");
+    yearText.textContent = e.target.value;
+    console.log(e.target.value, MASKS_LOADED);
+    if (MASKS_LOADED === true){
+        //update sea level when years value is changed
+        update_sealevel({"gt":last_co2,"years":e.target.value}, cb);
+    }
+});
+
+//
+d3.json("/data/tsung-chin.json").then(function(data){
+
+  // console.log(data)
   // define range of slider
   var data_len = Object.keys(data).length - 1;
-
   // setup margin
   var margin = {top:100, right:100, bottom:100, left:200};
 
   // setup radius for pie chart to use
   var radius
   setR();
+
+  // show slider value
+  function showSliderValues() {
+    d3.selectAll('#slider .range').each(function() {
+      var level = "Total CO2 Level becomes: " + data[this.value]['amount'] + " million ";
+      d3.select('.range_value').html(level);
+      var gt = parseInt(data[this.value]['amount']) /1000; //convert from megatons --> gigatons
+      if (MASKS_LOADED === true){
+        update_sealevel3({"gt":parseInt(gt)}, cb);
+      }
+      last_co2 = gt;
+    });
+  };
 
   function setR(){
     //radius based on the interior width of the window
@@ -35,7 +101,7 @@ d3.json("./data/tsung-chin.json", function(data){
   var h = radius*2 + margin.top + margin.bottom;
 
   // setup color
-  var color = d3.scaleOrdinal(d3.schemeCategory20);
+  var color = d3.scaleOrdinal().range(d3.schemeCategory10)
   // var color = d3.scaleOrdinal([
   //   "#ffe0cc", "#ffc299", "#ffa366", "#ff944d", "#ff8533",
   //   "#ff751a", "#ff6600", "#e65c00", "#cc5200", "#b34700", "#993d00"
@@ -94,19 +160,12 @@ d3.json("./data/tsung-chin.json", function(data){
     d3.selectAll('#slider .range').each(function(){
       d_value = this.value
     });
+    // console.log(data[d_value]['data'])
     return data[d_value]['data'];
 
   }
 
 
-  // show slider value
-  function showSliderValues() {
-    d3.selectAll('#slider .range').each(function() {
-      var level = "Total CO2 Level becomes: " + data[this.value]['amount'] + " million tonnes";
-      d3.select('.range_value').html(level);
-
-    });
-  };
 
   // draw pie
   function drawPie() {
@@ -119,34 +178,38 @@ d3.json("./data/tsung-chin.json", function(data){
 
     // svg element
     var svg = d3.select("#pie")
-                  .append("svg:svg")
+                  .append("svg")
                   .attr("width", w)
                   .attr("height", h)
-                  .append("svg:g")
+                  .append("g")
                   .attr("transform", "translate(" + w / 2 + "," + h / 2 + ")");
 
-   // create classes under the transform
-   d3.select("g")
-      .append("g")
-      .attr("class", "slices");
-   d3.select("g")
-      .append("g")
-      .attr("class", "labels");
-   d3.select("g")
-      .append("g")
-      .attr("class", "lines");
-   d3.select("g")
-      .append("g")
-      .attr("class", "legned");
+    // create classes under the transform
+    d3.selectAll("#pie")
+       .select("g")
+       .append("g")
+       .attr("class", "slices");
+    d3.selectAll("#pie")
+       .select("g")
+       .append("g")
+       .attr("class", "labels");
+    d3.selectAll("#pie")
+       .select("g")
+       .append("g")
+       .attr("class", "lines");
+    d3.selectAll("#pie")
+       .select("g")
+       .append("g")
+       .attr("class", "legend");
 
-   // group paths into slices
+   // // group paths into slices
    var paths = svg.select(".slices")
-                    .selectAll("path")
-                    .data(pie(extractData()))
+                   .selectAll("path")
+                   .data(pie(j))
 
    // render the slices
    paths.enter()
-          .append("svg:path")
+          .append("path")
           .attr("class", "slice")
           .attr("fill", function(d, i){
             return color(i);
@@ -162,12 +225,12 @@ d3.json("./data/tsung-chin.json", function(data){
 
     // group all path into label
     var labels = svg.select(".labels")
-                     .selectAll("label")
+                    .selectAll("label")
                      .data(pie(extractData()));
 
     // render labels
     labels.enter()
-           .append("svg:text")
+           .append("text")
            .attr("class", "label")
            .text(function(d, i){
              if (j[i].value > 0) {
@@ -179,10 +242,6 @@ d3.json("./data/tsung-chin.json", function(data){
            .attr("fill", function(d, i){
              return color(i);
            })
-    //
-    // arcUpdate();
-    // labelUpdate();
-    // linesUpdate();
 
     //
     updatePie();
@@ -217,6 +276,7 @@ d3.json("./data/tsung-chin.json", function(data){
   // text labels and update
   function labelUpdate() {
     labelr = radius + 20 // radius for label anchor
+
     d3.selectAll("#pie text")
         .data(pie(extractData()))
         .transition()
@@ -323,7 +383,10 @@ d3.json("./data/tsung-chin.json", function(data){
 
   window.addEventListener('resize', ChartUpdate());
 
-
 //
 
 });
+
+
+
+//
