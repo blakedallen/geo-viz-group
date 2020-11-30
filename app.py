@@ -8,9 +8,9 @@ from model import gen_slr
 
 
 
-application = Flask(__name__, 
+application = Flask(__name__,
         template_folder="templates",
-        static_folder="", 
+        static_folder="",
         static_url_path="")
 
 
@@ -32,7 +32,7 @@ def predict():
     except Execption as e:
         return json.dumps({"sea_level":0})
     res = gen_slr(years, gt)
-    
+
     #Note: max sea level rise set here
     #https://www.usgs.gov/faqs/how-would-sea-level-change-if-all-glaciers-melted?qt-news_science_products=0#qt-news_science_products
     if res > 70:
@@ -42,4 +42,3 @@ def predict():
 
 if __name__ == "__main__":
     application.run(debug=True)
-

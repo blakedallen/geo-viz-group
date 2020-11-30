@@ -1,13 +1,11 @@
 
 console.log("hello chart3.js");
-//
-    var svg = d3.select("#pie")
-                  .append("svg:svg")
 
-d3.json("/data/tsung-chin.json")
-    .then((data) => {
-    console.log("tch",data);
-  // define range of tchslider
+//
+d3.json("/data/tsung-chin.json").then(function(data){
+
+  // console.log(data)
+  // define range of slider
   var data_len = Object.keys(data).length - 1;
   // setup margin
   var margin = {top:100, right:100, bottom:100, left:200};
@@ -57,13 +55,13 @@ d3.json("/data/tsung-chin.json")
 
   //
   function show() {
-    // append tchslider
-    var slider = d3.select('#tchslider')
+    // append slider
+    var slider = d3.select('#slider')
 
     // setup initial value
     slider.append('input')
           .attr('type', 'range')
-          .attr('data-id', 'tchslider')
+          .attr('data-id', 'slider')
           .attr('class', 'range')
           .attr('step',0)
           .attr('min', 0)
@@ -95,9 +93,10 @@ d3.json("/data/tsung-chin.json")
   // get data
   function extractData(){
     var d_value
-    d3.selectAll('#tchslider .range').each(function(){
+    d3.selectAll('#slider .range').each(function(){
       d_value = this.value
     });
+    // console.log(data[d_value]['data'])
     return data[d_value]['data'];
 
   }
@@ -105,7 +104,7 @@ d3.json("/data/tsung-chin.json")
 
   // show slider value
   function showSliderValues() {
-    d3.selectAll('#tchslider .range').each(function() {
+    d3.selectAll('#slider .range').each(function() {
       var level = "Total CO2 Level becomes: " + data[this.value]['amount'] + " million tonnes";
       d3.select('.range_value').html(level);
 
@@ -123,10 +122,10 @@ d3.json("/data/tsung-chin.json")
 
     // svg element
     var svg = d3.select("#pie")
-                  .append("svg:svg")
+                  .append("svg")
                   .attr("width", w)
                   .attr("height", h)
-                  .append("svg:g")
+                  .append("g")
                   .attr("transform", "translate(" + w / 2 + "," + h / 2 + ")");
 
    // create classes under the transform
@@ -150,9 +149,10 @@ d3.json("/data/tsung-chin.json")
 
    // render the slices
    paths.enter()
-          .append("svg:path")
+          .append("path")
           .attr("class", "slice")
           .attr("fill", function(d, i){
+            console.log(color(i))
             return color(i);
           })
           .attr("d", arc)
@@ -171,7 +171,7 @@ d3.json("/data/tsung-chin.json")
 
     // render labels
     labels.enter()
-           .append("svg:text")
+           .append("text")
            .attr("class", "label")
            .text(function(d, i){
              if (j[i].value > 0) {
@@ -183,10 +183,6 @@ d3.json("/data/tsung-chin.json")
            .attr("fill", function(d, i){
              return color(i);
            })
-    //
-    // arcUpdate();
-    // labelUpdate();
-    // linesUpdate();
 
     //
     updatePie();
@@ -331,25 +327,6 @@ d3.json("/data/tsung-chin.json")
 //
 
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 //

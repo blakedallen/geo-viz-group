@@ -19,11 +19,11 @@
 </head>
 <body>
 
-<!-- background: linear-gradient(to right, #fca107, #7f3121); -->  
+<!-- background: linear-gradient(to right, #fca107, #7f3121); -->
 <div id="map" class="map"></div>
 
 <div id="control_panel" class="control_panel" >
-        
+
         <h2>Sea Rise: <span id="numMeters">0</span> Meters | <span id="numFeet">0</span> Feet</h2>
         <input id="sea_level" class="seaSlider" type="range" min="0" max="80" step="1" value="0" />
         <button
@@ -57,21 +57,25 @@
               <div id="slider2" class="slider"></div>
               <h2>🍔 Burgers Per Year(M): <span id="slider3textmin">0</span> = 🏭 CO2 (Tons): <span id="slider3textemission">0</span></h2>
               <div id="slider3" class="slider"></div>
-              <h2>🌲 Trees Planted Per Year(K): <span id="slider4textmin">0</span> = 🏭 CO2 (Tons): <span id="slider4textemission">0</span></h2>  
+              <h2>🌲 Trees Planted Per Year(K): <span id="slider4textmin">0</span> = 🏭 CO2 (Tons): <span id="slider4textemission">0</span></h2>
               <div id="slider4" class="slider"></div>
-              <h2>☀️ Solar Panels Installed Per Year(K): <span id="slider5textmin">0</span> = 🏭 CO2 (Tons): <span id="slider5textemission">0</span></h2>  
+              <h2>☀️ Solar Panels Installed Per Year(K): <span id="slider5textmin">0</span> = 🏭 CO2 (Tons): <span id="slider5textemission">0</span></h2>
               <div id="slider5" class="slider"></div>
           </div>
 
-    </div>
-      <div id="chart3">
-            <div id="tchslider">
-                <h1>Pollution by Industry Sector</h1>
-                <p>(Tsung-Chin Han)</p>
-                <p>If that industry is gone..</p>
-            </div>
-            <div id="pie"></div>
         </div>
+
+        <div id="chart3">
+            <div id="main-container" class="clearfix">
+                <div id="slider">
+                    <h1>Pollutions by Industry Sector</h1>
+                    <p>(Tsung-Chin Han)</p>
+                    <p>If that industry is gone..</p>
+                </div>
+                <div id="pie"></div>
+            </div>
+        </div>
+
         <div id="chart4">
         <h2> CO2 Emissions by Country </h2>
         <h3> Prepared by Yang Jing </h3>
@@ -115,8 +119,8 @@
         </div>
         </div>
   </div>
-</div> 
-  
+</div>
+
 
 <script>
 
@@ -141,7 +145,7 @@ var c1 = document.getElementById("chart1");
 var c2 = document.getElementById("chart2");
 var c3 = document.getElementById("chart3");
 var c4 = document.getElementById("chart4");
-    
+
 c2.style.display = "none";
 c3.style.display = "none";
 c4.style.display = "none";
@@ -149,7 +153,7 @@ c4.style.display = "none";
 
 //display / switch which widget is visible
 displayWidget = function(x){
-  
+
   c1.style.display = "none";
   c2.style.display = "none";
   c3.style.display = "none";
@@ -207,7 +211,7 @@ coordinates[0][1] += t_lat;
 coordinates[1][0] += t_lng;
 coordinates[1][1] += t_lat;
 
-//translate bottom right 
+//translate bottom right
 coordinates[2][0] += t_lng;
 coordinates[2][1] -= t_lat;
 
@@ -228,7 +232,7 @@ coordinates[0][1] -= move_down;
 coordinates[1][1] -= move_down;
 coordinates[2][1] -= move_down;
 coordinates[3][1] -= move_down;
-  
+
 
 //generate our dataset
 //TODO: load our dataset from json
@@ -245,18 +249,18 @@ for (var i = 0; i < 80; i += 1){
 }
 
 map.on('load', function () {
-  
+
   //add each of our masks
   for (var i = 0; i < masks.length; i++){
     var d = masks[i];
-    
+
     //add images
     map.addSource(d["source"], {
     "type": "image",
     "url": d["url"],
     "coordinates": d["coordinates"],
     });
-    
+
     map.addLayer({
     "id": d["id"],
     "source": d["source"],
@@ -272,7 +276,7 @@ map.on('load', function () {
 
 
 
-  var first_mask_id = masks[0]["id"];  
+  var first_mask_id = masks[0]["id"];
 
   var prev_idg = first_mask_id;
   //set our initial layer as visible
@@ -285,18 +289,18 @@ map.on('load', function () {
       var numMeters = document.getElementById("numMeters");
       numMeters.textContent = meters;
       var numFeet = document.getElementById("numFeet");
-      var feet = meters * 3.281; //approximate conversion from 
+      var feet = meters * 3.281; //approximate conversion from
       numFeet.textContent = feet.toFixed(1);
 
       map.setLayoutProperty(prev_idg, 'visibility', 'none');
       if (meters > 0){
-        meters -= 1; 
+        meters -= 1;
         var idg = "image_"+meters.toString();
         //console.log(idg);
         map.setLayoutProperty(idg, 'visibility', 'visible');
         prev_idg = idg;
       }
-      
+
     });
 
 
@@ -322,13 +326,12 @@ map.on('load', function () {
     }
   });
 
-});  
-  
+});
+
 </script>
 
 <script type="text/javascript" src="/js/chart1.js" ></script>
 <script type="text/javascript" src="/js/chart2.js" ></script>
- 
 <script type="text/javascript" src="/js/chart3.js" ></script>
 <script type="text/javascript" src="/js/chart4.js" ></script>
 </body>
