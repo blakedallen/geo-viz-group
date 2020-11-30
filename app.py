@@ -10,7 +10,6 @@ application = Flask(__name__,
         static_folder="",
         static_url_path="")
 
-
 @application.route('/')
 @application.route('/index')
 def hello_world():
