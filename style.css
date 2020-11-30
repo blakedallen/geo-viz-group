@@ -212,27 +212,33 @@ input::-moz-focus-outer {
     margin: 0 auto;
     overflow: hidden;
 }
+
 #pie svg {
     display: block;
     margin: 0 auto;
 }
+
 #pie path.slice {
     opacity: 0.65;
 }
+
 #pie text.label {
     opacity: 1;
     font-size: 0.8em;
 }
+
 #pie polyline {
     opacity: 0.15;
     stroke: white;
     stroke-width: 1px;
     fill: none;
 }
+
 ::-moz-range-track {
     background: #ccc;
     border: 0;
 }
+
 input::-moz-focus-inner {
     border: 0;
 }
@@ -246,6 +252,7 @@ input::-moz-focus-inner {
     width: 400px;
     margin: 25px 0 10px;
 }
+
 #slider .range_value {
     text-align: left;
 }
