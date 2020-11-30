@@ -137,16 +137,17 @@ d3.json("/data/tsung-chin.json").then(function(data){
        .attr("class", "labels");
     d3.selectAll("#pie")
        .select("g")
+       .append("g")
        .attr("class", "lines");
     d3.selectAll("#pie")
        .select("g")
        .append("g")
-       .attr("class", "legned");
+       .attr("class", "legend");
 
-   // group paths into slices
-   var paths = svg.selectAll("path")
-                    .select(".slices")
-                    .data(pie(j))
+   // // group paths into slices
+   var paths = svg.select(".slices")
+                   .selectAll("path")
+                   .data(pie(j))
 
    // render the slices
    paths.enter()
@@ -165,8 +166,8 @@ d3.json("/data/tsung-chin.json").then(function(data){
           });
 
     // group all path into label
-    var labels = svg.selectAll("label")
-                     .select(".labels")
+    var labels = svg.select(".labels")
+                    .selectAll("label")
                      .data(pie(extractData()));
 
     // render labels
