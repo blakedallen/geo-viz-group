@@ -1,3 +1,56 @@
+var last_co2 = 0;
+//update sea level api request
+var update_sealevel3 = function(data, cb){
+    //get years from years slider
+    var y = document.getElementById("chart3years");
+    data["years"] = parseInt(y.value);
+
+
+    const url = "/predict";
+    const params = {
+        "headers":{
+            "content-type":"application/json",
+        },
+        "body":JSON.stringify(data),
+        "method":"POST",
+    }
+    fetch(url, params)
+        .then(response => response.json())
+        .then(data =>{
+            cb(data);
+        });
+}
+
+//update sealevel here
+var prev_idg3 = "image_0";
+var cb = function(data){
+    console.log(data);
+    var meters = data["sea_level"];
+    var s = document.getElementById("sea_level");
+    s.value = meters;
+    let idg = "image_"+meters.toString();
+    map.setLayoutProperty(idg, 'visibility', 'visible');
+    map.setLayoutProperty(prev_idg3, 'visibility', 'none');
+    prev_idg3 = idg;
+
+    var numMeters = document.getElementById("numMeters");
+    numMeters.textContent = meters.toString();
+    var numFeet = document.getElementById("numFeet");
+    var feet = data["sea_level"] * 3.281;
+    numFeet.textContent = feet.toFixed(1);
+}
+
+//add another event listener to the years slider, update based on totalC00
+document.getElementById("chart3years")
+  .addEventListener("input", function(e){
+    var yearText = document.getElementById("chart3yearsText");
+    yearText.textContent = e.target.value;
+    console.log(e.target.value, MASKS_LOADED);
+    if (MASKS_LOADED === true){
+        //update sea level when years value is changed
+        update_sealevel({"gt":last_co2,"years":e.target.value}, cb);
+    }
+});
 
 //
 d3.json("/data/tsung-chin.json").then(function(data){
@@ -11,6 +64,19 @@ d3.json("/data/tsung-chin.json").then(function(data){
   // setup radius for pie chart to use
   var radius
   setR();
+
+  // show slider value
+  function showSliderValues() {
+    d3.selectAll('#slider .range').each(function() {
+      var level = "Total CO2 Level becomes: " + data[this.value]['amount'] + " million ";
+      d3.select('.range_value').html(level);
+      var gt = parseInt(data[this.value]['amount']) /1000; //convert from megatons --> gigatons
+      if (MASKS_LOADED === true){
+        update_sealevel3({"gt":parseInt(gt)}, cb);
+      }
+      last_co2 = gt;
+    });
+  };
 
   function setR(){
     //radius based on the interior width of the window
@@ -100,14 +166,6 @@ d3.json("/data/tsung-chin.json").then(function(data){
   }
 
 
-  // show slider value
-  function showSliderValues() {
-    d3.selectAll('#slider .range').each(function() {
-      var level = "Total CO2 Level becomes: " + data[this.value]['amount'] + " million tonnes";
-      d3.select('.range_value').html(level);
-
-    });
-  };
 
   // draw pie
   function drawPie() {

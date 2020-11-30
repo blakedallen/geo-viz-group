@@ -67,6 +67,8 @@
 
         <div id="chart3">
             <div id="main-container" class="clearfix">
+                  <h3> Years: <span id="chart3yearsText">0</span></h3>
+                  <input id="chart3years" class="seaSlider" type="range" min="0" max="2000" step="1" value="0" />
                 <div id="slider">
                     <h1>Pollutions by Industry Sector</h1>
                     <p>If that industry is gone..</p>
@@ -122,6 +124,9 @@
 
 
 <script>
+
+//global variable, wait until loaded
+var MASKS_LOADED = false;
 
 //expand or hide control panel widgets
 var hidden = true;
@@ -272,7 +277,7 @@ map.on('load', function () {
       }
     });
   }
-
+  MASKS_LOADED = true;
 
 
   var first_mask_id = masks[0]["id"];
