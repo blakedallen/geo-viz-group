@@ -325,10 +325,10 @@ d3.json("/data/tsung-chin.json").then(function(data){
 
   window.addEventListener('resize', ChartUpdate());
 
-
 //
 
 });
+
 
 
 //
