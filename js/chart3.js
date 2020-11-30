@@ -120,10 +120,10 @@ d3.json("/data/tsung-chin.json").then(function(data){
 
     // svg element
     var svg = d3.select("#pie")
-                  .append("svg:svg")
+                  .append("svg")
                   .attr("width", w)
                   .attr("height", h)
-                  .append("svg:g")
+                  .append("g")
                   .attr("transform", "translate(" + w / 2 + "," + h / 2 + ")");
 
     // create classes under the transform
@@ -151,7 +151,7 @@ d3.json("/data/tsung-chin.json").then(function(data){
 
    // render the slices
    paths.enter()
-          .append("svg:path")
+          .append("path")
           .attr("class", "slice")
           .attr("fill", function(d, i){
             return color(i);
@@ -172,7 +172,7 @@ d3.json("/data/tsung-chin.json").then(function(data){
 
     // render labels
     labels.enter()
-           .append("svg:text")
+           .append("text")
            .attr("class", "label")
            .text(function(d, i){
              if (j[i].value > 0) {
