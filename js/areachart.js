@@ -15,7 +15,7 @@ var svg = d3.select("#chart1")
           "translate(" + margin.left + "," + margin.top + ")");
 
 // Parse the Data
-d3.csv("/data/simulated.csv", 
+d3.csv("/data/simulated.csv",
   function(data) {
   //////////
   // GENERAL //
@@ -67,7 +67,7 @@ d3.csv("/data/simulated.csv",
       .attr("text-anchor", "start")
 
   // Add Y axis
-  var max_pollution = 200000; //todo calculate 
+  var max_pollution = 200000; //todo calculate
   var y = d3.scaleLinear()
     .domain([0, max_pollution])
     .range([ height, 0 ]);
@@ -154,7 +154,7 @@ d3.csv("/data/simulated.csv",
 
     // What to do when one group is hovered
     var highlight = function(d){
-      
+
       // reduce opacity of all groups
       d3.selectAll(".myArea").style("opacity", .1)
       // expect the one that is hovered

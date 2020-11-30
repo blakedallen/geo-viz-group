@@ -217,15 +217,15 @@ input::-moz-focus-outer {
     margin: 0 auto;
 }
 #pie path.slice {
-    opacity: 0.85;
+    opacity: 0.65;
 }
 #pie text.label {
     opacity: 1;
     font-size: 0.8em;
 }
 #pie polyline {
-    opacity: .15;
-    stroke: black;
+    opacity: 1;
+    stroke: white;
     stroke-width: 1px;
     fill: none;
 }

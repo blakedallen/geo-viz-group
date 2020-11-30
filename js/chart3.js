@@ -1,6 +1,4 @@
 
-console.log("hello chart3.js");
-
 //
 d3.json("/data/tsung-chin.json").then(function(data){
 
@@ -143,16 +141,15 @@ d3.json("/data/tsung-chin.json").then(function(data){
       .attr("class", "legned");
 
    // group paths into slices
-   var paths = svg.select(".slices")
-                    .selectAll("path")
-                    .data(pie(extractData()))
+   var paths = svg.selectAll("path")
+                    .select(".slice")
+                    .data(pie(j))
 
    // render the slices
    paths.enter()
           .append("path")
           .attr("class", "slice")
           .attr("fill", function(d, i){
-            console.log(color(i))
             return color(i);
           })
           .attr("d", arc)
@@ -165,8 +162,8 @@ d3.json("/data/tsung-chin.json").then(function(data){
           });
 
     // group all path into label
-    var labels = svg.select(".labels")
-                     .selectAll("label")
+    var labels = svg.selectAll("label")
+                     .select(".labels")
                      .data(pie(extractData()));
 
     // render labels
@@ -217,6 +214,7 @@ d3.json("/data/tsung-chin.json").then(function(data){
   // text labels and update
   function labelUpdate() {
     labelr = radius + 20 // radius for label anchor
+
     d3.selectAll("#pie text")
         .data(pie(extractData()))
         .transition()
