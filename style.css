@@ -224,7 +224,7 @@ input::-moz-focus-outer {
     font-size: 0.8em;
 }
 #pie polyline {
-    opacity: 1;
+    opacity: 0.15;
     stroke: white;
     stroke-width: 1px;
     fill: none;

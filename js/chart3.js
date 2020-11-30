@@ -120,34 +120,37 @@ d3.json("/data/tsung-chin.json").then(function(data){
 
     // svg element
     var svg = d3.select("#pie")
-                  .append("svg")
+                  .append("svg:svg")
                   .attr("width", w)
                   .attr("height", h)
-                  .append("g")
+                  .append("svg:g")
                   .attr("transform", "translate(" + w / 2 + "," + h / 2 + ")");
 
-   // create classes under the transform
-   d3.select("g")
-      .append("g")
-      .attr("class", "slices");
-   d3.select("g")
-      .append("g")
-      .attr("class", "labels");
-   d3.select("g")
-      .append("g")
-      .attr("class", "lines");
-   d3.select("g")
-      .append("g")
-      .attr("class", "legned");
+    // create classes under the transform
+    d3.selectAll("#pie")
+       .select("g")
+       .append("g")
+       .attr("class", "slices");
+    d3.selectAll("#pie")
+       .select("g")
+       .append("g")
+       .attr("class", "labels");
+    d3.selectAll("#pie")
+       .select("g")
+       .attr("class", "lines");
+    d3.selectAll("#pie")
+       .select("g")
+       .append("g")
+       .attr("class", "legned");
 
    // group paths into slices
    var paths = svg.selectAll("path")
-                    .select(".slice")
+                    .select(".slices")
                     .data(pie(j))
 
    // render the slices
    paths.enter()
-          .append("path")
+          .append("svg:path")
           .attr("class", "slice")
           .attr("fill", function(d, i){
             return color(i);
@@ -168,7 +171,7 @@ d3.json("/data/tsung-chin.json").then(function(data){
 
     // render labels
     labels.enter()
-           .append("text")
+           .append("svg:text")
            .attr("class", "label")
            .text(function(d, i){
              if (j[i].value > 0) {
