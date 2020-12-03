@@ -3,7 +3,8 @@ var update_sealevel = function(data, cb){
     if(data.years === undefined){
         //get years from years slider
         var y = document.getElementById("chart2years");
-        data["years"] = parseInt(y.value);
+        data["years"] = 2018 + parseInt(y.value);
+
     }
     //sensible defaults:
    
