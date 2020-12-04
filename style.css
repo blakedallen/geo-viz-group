@@ -214,17 +214,18 @@ input::-moz-focus-outer {
 }
 
 #pie svg {
+    width: 1500px;
     display: block;
     margin: 0 auto;
 }
 
 #pie path.slice {
-    opacity: 0.65;
+    opacity: 0.60;
 }
 
 #pie text.label {
     opacity: 1;
-    font-size: 0.8em;
+    font-size: 0.5em;
 }
 
 #pie polyline {
@@ -285,7 +286,7 @@ input::-moz-focus-inner {
   border-radius: 50%;
   background:orange; /* orange background */
   cursor: pointer; /* Cursor on hover */
-  box-shadow: 
+  box-shadow:
    1px 5px 10px -1px #d3d3d3,
   -50px 0 0 50px orange,
   -100px 0 0 40px orange,
@@ -315,7 +316,7 @@ input::-moz-focus-inner {
   border-radius: 50%;
   background:rgb(255, 72, 0); /* orange background */
   cursor: pointer; /* Cursor on hover */
-  box-shadow: 
+  box-shadow:
    1px 5px 10px -1px #d3d3d3,
   -50px 0 0 50px rgb(255, 30, 0),
   -100px 0 0 40px rgb(255,30, 0),
@@ -345,7 +346,7 @@ input::-moz-focus-inner {
   border-radius: 50%;
   background:rgb(255, 80, 0); /* orange background */
   cursor: pointer; /* Cursor on hover */
-  box-shadow: 
+  box-shadow:
    1px 5px 10px -1px #d3d3d3,
   -50px 0 0 50px rgb(255, 80, 0),
   -100px 0 0 40px rgb(255, 80, 0),
@@ -375,7 +376,7 @@ input::-moz-focus-inner {
   border-radius: 50%;
   background:rgb(255, 102, 0); /* orange background */
   cursor: pointer; /* Cursor on hover */
-  box-shadow: 
+  box-shadow:
    1px 5px 10px -1px #d3d3d3,
   -50px 0 0 50px rgb(255, 102, 0),
   -100px 0 0 40px rgb(255, 102, 0),
@@ -405,7 +406,7 @@ input::-moz-focus-inner {
   border-radius: 50%;
   background:rgb(255, 196, 0); /* orange background */
   cursor: pointer; /* Cursor on hover */
-  box-shadow: 
+  box-shadow:
    1px 5px 10px -1px #d3d3d3,
   -50px 0 0 50px rgb(255, 196, 0),
   -100px 0 0 40px rgb(255, 196, 0),
@@ -435,7 +436,7 @@ input::-moz-focus-inner {
   border-radius: 50%;
   background:rgb(255, 208, 0); /* orange background */
   cursor: pointer; /* Cursor on hover */
-  box-shadow: 
+  box-shadow:
    1px 5px 10px -1px #d3d3d3,
   -50px 0 0 50px rgb(255, 208, 0),
   -100px 0 0 40px rgb(255, 208, 0),
@@ -465,7 +466,7 @@ input::-moz-focus-inner {
   border-radius: 50%;
   background:rgb(255, 230, 0); /* orange background */
   cursor: pointer; /* Cursor on hover */
-  box-shadow: 
+  box-shadow:
    1px 5px 10px -1px #d3d3d3,
   -50px 0 0 50px rgb(255, 230, 0),
   -100px 0 0 40px rgb(255, 230, 0),
@@ -489,4 +490,3 @@ input::-moz-focus-inner {
 #sliderdiv{
   padding-left: 40px;
  }
-

@@ -82,12 +82,12 @@ d3.json("/data/tsung-chin.json").then(function(data){
     //radius based on the interior width of the window
     var width = window.innerWidth;
     if (width < 1024) {
-      radius = width/ 5;
-    } else if (width < 520) {
       radius = width/ 6;
+    } else if (width < 520) {
+      radius = width/ 8;
     } else {
       //default
-      radius = 150;
+      radius = 80;
     }
   };
 
@@ -101,11 +101,11 @@ d3.json("/data/tsung-chin.json").then(function(data){
   var h = radius*2 + margin.top + margin.bottom;
 
   // setup color
-  var color = d3.scaleOrdinal().range(d3.schemeCategory10)
-  // var color = d3.scaleOrdinal([
-  //   "#ffe0cc", "#ffc299", "#ffa366", "#ff944d", "#ff8533",
-  //   "#ff751a", "#ff6600", "#e65c00", "#cc5200", "#b34700", "#993d00"
-  //   ]);
+  // var color = d3.scaleOrdinal().range(d3.schemeCategory10)
+  var color = d3.scaleOrdinal([
+    "#FDAC53", "#9BB7D4", "#EFE1CE", "#F5DF4D", "#0072B5",
+    "#A0DAA9", "#E9897E", "#00A170", "#926AA6", "#D2386C", "#9A8B4F"
+    ]);
 
   // define pie chart
   var pie = d3.pie()
@@ -182,7 +182,7 @@ d3.json("/data/tsung-chin.json").then(function(data){
                   .attr("width", w)
                   .attr("height", h)
                   .append("g")
-                  .attr("transform", "translate(" + w / 2 + "," + h / 2 + ")");
+                  .attr("transform", "translate(" + (w / 2) + "," + (h / 2) + ")");
 
     // create classes under the transform
     d3.selectAll("#pie")
