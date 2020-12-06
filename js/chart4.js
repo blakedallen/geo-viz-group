@@ -1,4 +1,5 @@
 
+var yTotalCO2 = 0;
 //update sea level api request
 var chart4yr = document.getElementById("chart4years");
 var update_sealevel4 = function(data, cb4){
@@ -38,7 +39,7 @@ var cb4 = function(data){
     numFeet.textContent = feet.toFixed(1);
 }
 
-var yTotalCO2 = 0;
+
 
 //add another event listener to the years slider, update based on totalC002
 chart4yr.addEventListener("input", function(e){
@@ -55,11 +56,16 @@ var svg_height = 600;
 
 var slider1 = document.getElementById("yslider1");
 var slider2 = document.getElementById("yslider2");
-var slider3 = document.getElementById("yslider3");
 var slider4 = document.getElementById("yslider4");
 var slider5 = document.getElementById("yslider5");
 var slider6 = document.getElementById("yslider6");
 var slider7 = document.getElementById("yslider7");
+var label1 = document.getElementById("yslider1textemission");
+var label2 = document.getElementById("yslider2textemission");
+var label4 = document.getElementById("yslider4textemission");
+var label5 = document.getElementById("yslider5textemission");
+var label6 = document.getElementById("yslider6textemission");
+var label7 = document.getElementById("yslider7textemission");
 var ttl = document.getElementById("ttl");
 var change1 = document.getElementById("yslider1textemission");
 var change2 = document.getElementById("yslider2textemission");
@@ -144,6 +150,8 @@ slider6.onchange = function() {
   cum_change6 = Number(slider6.value - 1.7);
   yTotalCO2 = Math.round(cum_change1 + cum_change2 +cum_change4 + cum_change5 + cum_change6 +cum_change7);
   document.getElementById("ttl").innerHTML = yTotalCO2;
+  ttl.innerHTML = yTotalCO2;
+  label6.innerText = cum_change6.toFixed(1);
   var d = {"gt":yTotalCO2};
   change6.innerHTML = cum_change6.toFixed(0);
   update_sealevel4(d,cb4);
