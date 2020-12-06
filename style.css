@@ -14,7 +14,7 @@ body { margin: 0; padding: 0; }
 
 .axisRed text{
   stroke: white;
-}  
+}
 
 .map-overlay {
 font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
@@ -24,7 +24,7 @@ top: 0;
 left: 0;
 padding: 10px;
 }
- 
+
 .map-overlay .map-overlay-inner {
 background-color: #fff;
 box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
@@ -32,19 +32,19 @@ border-radius: 3px;
 padding: 10px;
 margin-bottom: 10px;
 }
- 
+
 .map-overlay h2 {
 line-height: 24px;
 display: block;
 margin: 0 0 10px;
 }
- 
+
 .map-overlay .legend .bar {
 height: 10px;
 width: 100%;
 background: linear-gradient(to right, #0000CD, #fca107);
 }
-  
+
 .map-overlay input {
 background-color: transparent;
 display: inline-block;
@@ -212,27 +212,33 @@ input::-moz-focus-outer {
     margin: 0 auto;
     overflow: hidden;
 }
+
 #pie svg {
     display: block;
     margin: 0 auto;
 }
+
 #pie path.slice {
-    opacity: 0.85;
+    opacity: 0.65;
 }
+
 #pie text.label {
     opacity: 1;
     font-size: 0.8em;
 }
+
 #pie polyline {
-    opacity: .15;
-    stroke: black;
+    opacity: 0.15;
+    stroke: white;
     stroke-width: 1px;
     fill: none;
 }
+
 ::-moz-range-track {
     background: #ccc;
     border: 0;
 }
+
 input::-moz-focus-inner {
     border: 0;
 }
@@ -246,6 +252,7 @@ input::-moz-focus-inner {
     width: 400px;
     margin: 25px 0 10px;
 }
+
 #slider .range_value {
     text-align: left;
 }
@@ -478,8 +485,49 @@ input::-moz-focus-inner {
   background: rgb(255, 230, 0); /* blue background */
   cursor: pointer; /* Cursor on hover */
 }
+/* Add a black background color to the top navigation */
+.topnav {
+  background-color: #333;
+  overflow: hidden;
+}
 
-#sliderdiv{
-  padding-left: 40px;
- }
+/* Style the links inside the navigation bar */
+.topnav a {
+  float: left;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
 
+/* Change the color of links on hover */
+.topnav a:hover {
+  background-color: #ddd;
+  color: black;
+  
+}
+
+/* Add a color to the active/current link */
+.topnav a.active {
+  background-color: blue;
+  color: white;
+
+}
+
+#intro { 
+  margin: 30px;
+  font-family: Arial, Helvetica, sans-serif;
+  color: white;
+  font-size: 3 em;
+  vertical-align: -webkit-baseline-middle;
+} 
+
+
+body {
+  background-image: url('background.png');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+ 
+}
