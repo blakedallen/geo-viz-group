@@ -15,6 +15,18 @@ application = Flask(__name__,
 def hello_world():
     return render_template('seattle.html')
 
+@application.route('/sf')
+def sf():
+    return render_template('sf.html')
+
+@application.route('/hawaii')
+def hawaii():
+    return render_template('hawaii.html')
+
+@application.route('/ny')
+def ny():
+    return render_template('ny.html')
+
 @application.route("/chart2")
 def chart2():
     return render_template("multiline_chart.html")
