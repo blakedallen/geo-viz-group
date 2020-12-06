@@ -13,6 +13,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Goldman&display=swap" rel="stylesheet">
 
+<link rel="stylesheet" type="text/css" href="style.css">
 
 <style>
 	body { margin: 0; padding: 0; }
@@ -88,9 +89,20 @@ cursor: ew-resize;
   color: #222;
   background-color: #fff;
 }
-</style>  
+</style> 
+
+
+
 <!-- background: linear-gradient(to right, #fca107, #7f3121); -->  
 <div id="map"></div>
+
+
+<div id="nav" class="cnavbar">
+  <a href="/ny">New York</a>
+  <a href="/">Seattle</a>
+  <a href="/hawaii">Maui</a>
+  <a href="/sf">San Francisco</a>
+</div>
 
 <div    id="control_panel"
         style="
@@ -111,9 +123,9 @@ cursor: ew-resize;
         <div id="chart1"></div>
         <div id="chart2"></div>
         <div id="chart3"></div>
-        <h2>Sea Rise - <span id="numMeters">0</span> Meters</h2>
+        <h2>Sea Rise: <span id="numMeters">0</span> Meters | <span id="numFeet">0</span> Feet</h2>
         <!-- see how to update d3 via slider here: https://bl.ocks.org/tomshanley/3c49d036610853d380e3fcaf8d3f0b89 -->
-        <input id="slider" type="range" min="0" max="20" step="1" value="0" 
+        <input id="slider" type="range" min="0" max="80" step="1" value="0" 
           style="
             width:100%;
           "
@@ -124,14 +136,6 @@ cursor: ew-resize;
           id="hideButton"
           onclick="myFunction()"
         >Expand + </button>
-
-         <h2>Year - <span id="numMeters">0</span> years</h2>
-        <!-- see how to update d3 via slider here: https://bl.ocks.org/tomshanley/3c49d036610853d380e3fcaf8d3f0b89 -->
-        <input id="slider" type="range" min="0" max="20" step="1" value="0" 
-          style="
-            width:100%;
-          "
-        />
 
         <button >Widget 1</button>
         <button >Widget 2</button>
@@ -190,8 +194,8 @@ var map = new mapboxgl.Map({
 container: 'map', // container id
 //style: 'mapbox://styles/mapbox/streets-v11', // style URL
 style: 'mapbox://styles/mapbox/satellite-streets-v11',
-center: [-122.34, 47.61], // starting position [lng, lat]
-zoom: 13, // starting zoom
+center: [-156.447, 20.829], // starting position [lng, lat]
+zoom: 11, // starting zoom
 pitch: 60
 });
 
@@ -199,18 +203,31 @@ pitch: 60
 //-122.44 47.51 -122.24 47.71
 
 coordinates = [
-  [-122.44, 47.71], //top_left
-  [-122.24, 47.71], //top_right
-  [-122.24, 47.51], //bottom_right
-  [-122.44, 47.51], //bottom_left
+  // [-122.44, 47.71], //top_left
+  // [-122.24, 47.71], //top_right
+  // [-122.24, 47.51], //bottom_right
+  // [-122.44, 47.51], //bottom_left
+  // [-156.694, 21.033], //top_left
+  // [-155.950, 21.033], //top_right
+  // [-156.694, 20.551], //bottom_right
+  // [-155.950, 20.551], //bottom_left  
+  [-156.694, 21.033], //top_left
+  [-155.950, 21.033], //top_right
+  [-155.950, 20.551], //bottom_right
+  [-156.694, 20.551], //bottom_left  
+
 ];
 
 //-122.41 --> -122.44
 //47.65 --> 47.66
 
 //stretch our image
-var t_lng = 0.0335; //stretches left and right
-var t_lat = 0.032; //stretches up and down
+//var t_lng = 0.0335; //stretches left and right
+//var t_lat = 0.032; //stretches up and down
+var t_lng = 0.1095; //stretches left and right
+var t_lat = 0.239; //stretches up and down
+
+
 
 //translate top_left
 coordinates[0][0] -= t_lng;
@@ -249,14 +266,16 @@ coordinates[3][0] *= s_lng;
 coordinates[3][1] *= s_lat;
 
 //move left
-var move_left = 0.004;
+//var move_left = 0.004;
+var move_left = 0.0125;
 coordinates[0][0] -= move_left;
 coordinates[1][0] -= move_left;
 coordinates[2][0] -= move_left;
 coordinates[3][0] -= move_left;
 
 //move down
-var move_down = 0.0001;
+//var move_down = 0.0001;
+var move_down = 0.003;
 coordinates[0][1] -= move_down;
 coordinates[1][1] -= move_down;
 coordinates[2][1] -= move_down;
@@ -266,12 +285,12 @@ coordinates[3][1] -= move_down;
 //generate our dataset
 //TODO: load our dataset from json
 masks = [];
-for (var i = 0; i < 200; i += 10){
+for (var i = 0; i < 80; i += 1){
   var istr = i.toString();
   var d = {
     source:"source_"+istr,
     id:"image_"+istr,
-    url:"/masks/seattle_"+istr+".png",
+    url:"masks/maui_"+istr+".png",
     coordinates: coordinates,
   }
   masks.push(d);
@@ -320,12 +339,14 @@ map.on('load', function () {
     .addEventListener('input', function (e) {
       var meters = parseInt(e.target.value, 10);
       var numMeters = document.getElementById("numMeters");
-      numMeters.textContent = meters * 10;
+      numMeters.textContent = meters;
+      var numFeet = document.getElementById("numFeet");
+      var feet = meters * 3.281;
+      numFeet.textContent = feet.toFixed(1);
 
       map.setLayoutProperty(prev_idg, 'visibility', 'none');
       if (meters > 0){
         meters -= 1; 
-        meters *= 10; //scale meters by our increment value 10x
         let idg = "image_"+meters.toString();
         console.log(idg);
         map.setLayoutProperty(idg, 'visibility', 'visible');
