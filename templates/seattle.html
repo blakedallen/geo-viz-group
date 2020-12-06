@@ -19,6 +19,13 @@
 </head>
 <body>
 
+  <div class="topnav">
+    <a href="About">About</a>
+    <a class = "active" href="seattle">Seattle</a>
+    <a href="newyork">New York</a>
+    <a href="sanfrancisco">San Francisco</a>
+  </div>
+
 <!-- background: linear-gradient(to right, #fca107, #7f3121); -->
 <div id="map" class="map"></div>
 
@@ -48,8 +55,8 @@
           <div id="chart2">
           <!-- escavic -->
           <div class="container">
-                  <h3> Years: <span id="chart2yearsText">0</span></h3>
-                  <input id="chart2years" class="seaSlider" type="range" min="0" max="2000" step="1" value="0" />
+            <h3> Year: <span id="chart2yearsText">2018</span></h3>
+            <input id="chart2years" class="seaSlider" type="range" min="2018" max="2500" step="1" value="2018">
           <h12>Total CO2 Emissions(Tons): <span id="COO2text">0</span></h2>
               <h2>🚗 Cars Per Year(M): <span id="slider1textmin">0</span> = 🏭 CO2 (Tons): <span id="slider1textemission">0</span></h2>
               <div id="slider1" class="slider"></div>
@@ -67,8 +74,8 @@
 
         <div id="chart3">
             <div id="main-container" class="clearfix">
-                  <h3> Years: <span id="chart3yearsText">0</span></h3>
-                  <input id="chart3years" class="seaSlider" type="range" min="0" max="2000" step="1" value="0" />
+              <h3> Year: <span id="chart3yearsText">2018</span></h3>
+              <input id="chart3years" class="seaSlider" type="range" min="2018" max="2500" step="1" value="2018">
                 <div id="slider">
                     <h1>Pollutions by Industry Sector</h1>
                     <p>If that industry is gone..</p>
@@ -79,7 +86,7 @@
 
     <div id="chart4">
       <h3> Year: <span id="chart4yearsText">2018</span></h3>
-      <input id="chart4years" class="seaSlider" type="range" min="2018" max="2200" step="1" value="2018">
+      <input id="chart4years" class="seaSlider" type="range" min="2018" max="2500" step="1" value="2018">
       <h2> Global Change in CO2 Emissions(gt): <output class="output" id="ttl"></output></h2> <input type="button" onclick="resetFunction()" value="Reset to 2018 level">
       <h3> CO2 Emissions by Country (gt) in 2018 </h3>
       <div></div>

@@ -1,10 +1,9 @@
 
 //update sea level api request
-var y = document.getElementById("chart4years");
+var chart4yr = document.getElementById("chart4years");
 var update_sealevel4 = function(data, cb4){
     //get years from years slider
-    // var y = document.getElementById("chart4years");
-    data["years"] = parseInt(y.value);
+    data["years"] = parseInt(chart4yr.value);
     const url = "/predict";
     const params = {
         "headers":{
@@ -42,11 +41,10 @@ var cb4 = function(data){
 var yTotalCO2 = 0;
 
 //add another event listener to the years slider, update based on totalC002
-y.addEventListener("input", function(e){
+chart4yr.addEventListener("input", function(e){
     var yearText = document.getElementById("chart4yearsText");
       yearText.textContent = e.target.value;
-      
-    update_sealevel4({"gt":yTotalCO2}, cb4);
+      update_sealevel4({"gt":yTotalCO2}, cb4);
 });
 
 
@@ -95,9 +93,13 @@ function resetFunction() {
   change5.innerHTML=0;
   change6.innerHTML=0;
   change7.innerHTML=0;
-  var d = {"gt":yTotalCO2};
-  y.value = 2018;
-  update_sealevel4(d,cb4);
+  chart4yr.value = 2018;
+  update_sealevel4({"gt":0,"years":2018},cb4);
+  document.getElementById("chart4yearsText").textContent = 2018;
+  document.getElementById("numMeters").textContent = 0;
+  document.getElementById("numFeet").textContent = 0;
+  document.getElementById("sea_level").value = 0;
+  
 }
 
 slider1.onchange = function() {
@@ -115,6 +117,8 @@ slider2.onchange = function() {
   ttl.innerHTML = yTotalCO2;
   change2.innerHTML = cum_change2.toFixed(0);
   var d = {"gt":yTotalCO2};
+  document.getElementById("chart4years").value = 2018;
+  document.getElementById("chart4yearsText").innerHTML = 2018;
   update_sealevel4(d,cb4);
 }
 
