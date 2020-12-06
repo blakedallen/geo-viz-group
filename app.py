@@ -13,7 +13,7 @@ application = Flask(__name__,
 @application.route('/')
 @application.route('/index')
 def hello_world():
-    return render_template('seattle.html')
+    return render_template('sf.html')
 
 @application.route('/sf')
 def sf():
@@ -30,6 +30,14 @@ def ny():
 @application.route("/chart2")
 def chart2():
     return render_template("multiline_chart.html")
+
+@application.route("/seattle")
+def sea_map():
+    return render_template("seattle.html")
+
+@application.route("/about")
+def about():
+    return render_template("home.html")
 
 @application.route("/predict", methods=["POST"])
 def predict():
