@@ -94,6 +94,7 @@ var cb = function(data){
 
 //escavic
 
+var GTperTon = 1000000000
 var TonsToPPM = 0.001
 var COO2perCar = 4.7
 var COO2perAirMi = 0.0265
@@ -138,13 +139,14 @@ var slider1 = d3
     .on('onchange', (value) => {
             d3.select('#slider1textmin')
               .text(value)
-            CarCOO2 = (value) * COO2perCar * 1000000
-            CarCOO2 = Math.ceil(CarCOO2)
+            CarCOO2 = (value) * COO2perCar * 1000000 / GTperTon
+            var dispVar1 = Number.parseFloat(CarCOO2).toPrecision(4)
             d3.select('#slider1textemission')
-              .text(CarCOO2);  
-            totalCOO2 = AirCOO2 + CarCOO2 + BurgerCOO2 + TreeCOO2 + SolarCOO2
+              .text(dispVar1);  
+            totalCOO2 = AirCOO2 + CarCOO2 + BurgerCOO2 + TreeCOO2 + SolarCOO2            
+            var dispVar2 = Number.parseFloat(totalCOO2).toPrecision(6)
             d3.select('#COO2text')
-              .text(totalCOO2);
+              .text(dispVar2);
         var d = {"gt":totalCOO2};
         update_sealevel(d,cb);
     });
@@ -169,13 +171,14 @@ var slider2 = d3
     .on('onchange', (value) => {
             d3.select('#slider2textmin')
               .text(value);
-            AirCOO2 = (value) * COO2perAirMi * 1000000
-            AirCOO2 = Math.ceil(AirCOO2)
+            AirCOO2 = (value) * COO2perAirMi * 1000000 / GTperTon
+            var dispVar1 = Number.parseFloat(AirCOO2).toPrecision(4)
             d3.select('#slider2textemission')
-              .text(AirCOO2);    
+              .text(dispVar1);    
             totalCOO2 = AirCOO2 + CarCOO2 + BurgerCOO2 + TreeCOO2 + SolarCOO2
+            var dispVar2 = Number.parseFloat(AirCOO2).toPrecision(6)
             d3.select('#COO2text')
-              .text(totalCOO2);
+              .text(dispVar2);
         var d = {"gt":totalCOO2};
         update_sealevel(d,cb);
     });
@@ -200,13 +203,14 @@ var slider3 = d3
     .on('onchange', (value) => {
             d3.select('#slider3textmin')
               .text(value)
-            BurgerCOO2 = (value) * COO2perBurger * 1000000
-            BurgerCOO2 = Math.ceil(BurgerCOO2)
+            BurgerCOO2 = (value) * COO2perBurger * 1000000 / GTperTon
+            var dispVar1 = Number.parseFloat(BurgerCOO2).toPrecision(4)
             d3.select('#slider3textemission')
-              .text(BurgerCOO2);      
+              .text(dispVar1);      
             totalCOO2 = AirCOO2 + CarCOO2 + BurgerCOO2 + TreeCOO2 + SolarCOO2
+            var dispVar2 = Number.parseFloat(BurgerCOO2).toPrecision(6)
             d3.select('#COO2text')
-              .text(totalCOO2);
+              .text(dispVar2);      
         var d = {"gt":totalCOO2};
         update_sealevel(d,cb);
     });
@@ -231,13 +235,14 @@ var slider4 = d3
     .on('onchange', (value) => {
             d3.select('#slider4textmin')
               .text(value)
-            TreeCOO2 = (value) * COO2perTree * 1000
-            TreeCOO2 = Math.ceil(TreeCOO2)
+            TreeCOO2 = (value) * COO2perTree * 1000 / GTperTon
+            var dispVar1 = Number.parseFloat(TreeCOO2).toPrecision(4)
             d3.select('#slider4textemission')
-              .text(TreeCOO2);     
+              .text(dispVar1);     
             totalCOO2 = AirCOO2 + CarCOO2 + BurgerCOO2 + TreeCOO2 + SolarCOO2
+            var dispVar2 = Number.parseFloat(totalCOO2).toPrecision(4)
             d3.select('#COO2text')
-              .text(totalCOO2);
+              .text(dispVar2);
         var d = {"gt":totalCOO2};
         update_sealevel(d,cb);
     });
@@ -262,13 +267,14 @@ var slider5 = d3
     .on('onchange', (value) => {
             d3.select('#slider5textmin')
               .text(value)
-            SolarCOO2 = (value) * COO2perSolar * 1000
-            SolarCOO2 = Math.ceil(SolarCOO2)
+            SolarCOO2 = (value) * COO2perSolar * 1000 / GTperTon
+            var dispVar1 = Number.parseFloat(SolarCOO2).toPrecision(4)
             d3.select('#slider5textemission')
-              .text(SolarCOO2);      
+              .text(dispVar1);      
             totalCOO2 = AirCOO2 + CarCOO2 + BurgerCOO2 + TreeCOO2 + SolarCOO2
+            var dispVar2 = Number.parseFloat(totalCOO2).toPrecision(4)
             d3.select('#COO2text')
-              .text(totalCOO2);
+              .text(dispVar2);
         var d = {"gt":totalCOO2};
         update_sealevel(d,cb);
     });
