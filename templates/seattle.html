@@ -143,6 +143,10 @@ c2.style.display = "none";
 c3.style.display = "none";
 c4.style.display = "none";
 
+var sl1 = 1;
+var sl2 = 20;
+var sl3 = 30;
+var sl4 = 40;
 
 //display / switch which widget is visible
 displayWidget = function(x){
@@ -155,15 +159,23 @@ displayWidget = function(x){
   switch(x) {
   case 1:
     c1.style.display = "block";
+    document.getElementById('sea_level').value = sl1;
+    console.log(sl1);
     break;
   case 2:
     c2.style.display = "block";
+    document.getElementById('sea_level').value = sl2;
+    console.log(sl2);    
     break;
   case 3:
     c3.style.display = "block";
+    document.getElementById('sea_level').value = sl3;
+    console.log(sl3);    
     break;
   case 4:
     c4.style.display = "block";
+    document.getElementById('sea_level').value = sl4;
+    console.log(sl4);    
     break;
   default:
     // code block
