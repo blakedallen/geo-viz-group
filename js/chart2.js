@@ -144,7 +144,7 @@ var slider1 = d3
             d3.select('#slider1textemission')
               .text(dispVar1);  
             totalCOO2 = AirCOO2 + CarCOO2 + BurgerCOO2 + TreeCOO2 + SolarCOO2            
-            var dispVar2 = Number.parseFloat(totalCOO2).toPrecision(6)
+            var dispVar2 = Number.parseFloat(totalCOO2).toPrecision(5)
             d3.select('#COO2text')
               .text(dispVar2);
         var d = {"gt":totalCOO2};
@@ -176,7 +176,7 @@ var slider2 = d3
             d3.select('#slider2textemission')
               .text(dispVar1);    
             totalCOO2 = AirCOO2 + CarCOO2 + BurgerCOO2 + TreeCOO2 + SolarCOO2
-            var dispVar2 = Number.parseFloat(AirCOO2).toPrecision(6)
+            var dispVar2 = Number.parseFloat(totalCOO2).toPrecision(5)
             d3.select('#COO2text')
               .text(dispVar2);
         var d = {"gt":totalCOO2};
@@ -208,7 +208,7 @@ var slider3 = d3
             d3.select('#slider3textemission')
               .text(dispVar1);      
             totalCOO2 = AirCOO2 + CarCOO2 + BurgerCOO2 + TreeCOO2 + SolarCOO2
-            var dispVar2 = Number.parseFloat(BurgerCOO2).toPrecision(6)
+            var dispVar2 = Number.parseFloat(totalCOO2).toPrecision(5)
             d3.select('#COO2text')
               .text(dispVar2);      
         var d = {"gt":totalCOO2};
@@ -240,7 +240,7 @@ var slider4 = d3
             d3.select('#slider4textemission')
               .text(dispVar1);     
             totalCOO2 = AirCOO2 + CarCOO2 + BurgerCOO2 + TreeCOO2 + SolarCOO2
-            var dispVar2 = Number.parseFloat(totalCOO2).toPrecision(4)
+            var dispVar2 = Number.parseFloat(totalCOO2).toPrecision(5)
             d3.select('#COO2text')
               .text(dispVar2);
         var d = {"gt":totalCOO2};
@@ -272,7 +272,7 @@ var slider5 = d3
             d3.select('#slider5textemission')
               .text(dispVar1);      
             totalCOO2 = AirCOO2 + CarCOO2 + BurgerCOO2 + TreeCOO2 + SolarCOO2
-            var dispVar2 = Number.parseFloat(totalCOO2).toPrecision(4)
+            var dispVar2 = Number.parseFloat(totalCOO2).toPrecision(5)
             d3.select('#COO2text')
               .text(dispVar2);
         var d = {"gt":totalCOO2};
