@@ -5,7 +5,7 @@ from flask import Response
 from flask import render_template
 from model import gen_slr
 
-application = Flask(__name__, 
+application = Flask(__name__,
         template_folder="templates",
         static_folder="",
         static_url_path="")
@@ -13,7 +13,7 @@ application = Flask(__name__,
 @application.route('/')
 @application.route('/index')
 def hello_world():
-    return render_template('seattle.html')
+    return render_template('ny_test.html')
 
 @application.route("/chart2")
 def chart2():
@@ -27,7 +27,7 @@ def predict():
         gt = int(p["gt"])
     except Exception as e:
         return json.dumps({
-            "sea_level":0, 
+            "sea_level":0,
             "error":str(e),
             "r":p})
     res = gen_slr(years, gt)
