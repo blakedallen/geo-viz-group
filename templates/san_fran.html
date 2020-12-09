@@ -83,6 +83,8 @@
 
         </br>
         </br>
+        </br>
+        </br>
 
    
         
@@ -179,6 +181,12 @@ var gprev_idg = "image_0";
 
 //expand or hide control panel widgets
 var hidden = true;
+
+//TODO: update all chart mask functions
+var ebutton = document.getElementById("hideButton")
+ebutton.style.display = "none";
+
+
 expandPanel = function() {
     var div = document.getElementById("control_panel");
     var button = document.getElementById("hideButton");
@@ -206,7 +214,7 @@ setTimeout(function(){
 }, 2000);
 
 
-
+//TODO: update all chart mask functions
 c2.style.display = "none";
 c3.style.display = "none";
 c4.style.display = "none";
