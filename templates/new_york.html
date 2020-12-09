@@ -408,6 +408,10 @@ map.on('load', function () {
       numFeet.textContent = feet.toFixed(1);
 
       if (meters > 0){
+        //temp fix for every 10 error
+        if (meters % 10 == 0){
+          meters += 2 
+        }
         meters -= 1;
         var idg = "image_"+meters.toString();
         console.log(idg);
