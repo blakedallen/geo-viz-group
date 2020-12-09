@@ -44,7 +44,7 @@ document.getElementById("chart3years")
   .addEventListener("input", function(e){
     var yearText = document.getElementById("chart3yearsText");
     yearText.textContent = e.target.value;
-    console.log(e.target.value, MASKS_LOADED);
+    //console.log(e.target.value, MASKS_LOADED);
     if (MASKS_LOADED === true){
         //update sea level when years value is changed
         update_sealevel({"gt":last_co2,"years":e.target.value}, cb);
@@ -58,7 +58,7 @@ d3.json("/data/tsung-chin.json").then(function(data){
   // define range of slider
   var data_len = Object.keys(data).length - 1;
   // setup margin
-  var margin = {top:100, right:100, bottom:100, left:200};
+  var margin = {top:100, right:100, bottom:100, left:300};
 
   // setup radius for pie chart to use
   var radius
@@ -80,10 +80,13 @@ d3.json("/data/tsung-chin.json").then(function(data){
   function setR(){
     //radius based on the interior width of the window
     var width = window.innerWidth;
-    if (width < 1024) {
-      radius = width/ 6;
+    console.log(width);
+    if (width > 1024){
+      radius = width / 14;
+    } else if (width < 1024) {
+      radius = width / 8;
     } else if (width < 520) {
-      radius = width/ 8;
+      radius = width/ 6;
     } else {
       //default
       radius = 80;
@@ -181,7 +184,7 @@ d3.json("/data/tsung-chin.json").then(function(data){
                   .attr("width", w)
                   .attr("height", h)
                   .append("g")
-                  .attr("transform", "translate(" + (w / 2) + "," + (h / 2) + ")");
+                  .attr("transform", "translate(" +400 + "," + 200 + ")");
 
     // create classes under the transform
     d3.selectAll("#pie")

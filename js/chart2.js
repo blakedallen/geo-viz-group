@@ -68,6 +68,9 @@ var maxBurgerCOO2 = 200000
 var maxTreeCOO2 = 50000
 var maxSolarCOO2 = 5000
 
+var sliderWidth = 720;
+var sliderTransform = "translate(20,20)";
+
 //add another event listener to the years slider, update based on totalC002
 document.getElementById("chart2years")
   .addEventListener("input", function(e){
@@ -87,13 +90,14 @@ document.getElementById("chart2years")
     update_sealevel({"gt":totalCOO2,"years":e.target.value}, cb);
 });
 
+
 var slider1 = d3
     .sliderHorizontal()
     .min(0)
     .max(maxCarCOO2)
     .ticks(20)
     .step(1)
-    .width(530)
+    .width(sliderWidth)
     .fill("red")
     .displayValue(true)
     .on('onchange', (value) => {
@@ -116,7 +120,7 @@ var slider1 = d3
     .attr('width', 800)
     .attr('height', 65)
     .append('g')
-    .attr('transform', 'translate(30,30)')
+    .attr('transform', sliderTransform)
     .call(slider1);
 
 var slider2 = d3
@@ -125,7 +129,7 @@ var slider2 = d3
     .max(maxAirCOO2)
     .ticks(10)
     .step(1)
-    .width(530)
+    .width(sliderWidth)
     .fill("red")
     .displayValue(true)
     .on('onchange', (value) => {
@@ -148,7 +152,7 @@ var slider2 = d3
     .attr('width', 800)
     .attr('height', 65)
     .append('g')
-    .attr('transform', 'translate(30,30)')
+    .attr('transform', sliderTransform)
     .call(slider2);
   
 var slider3 = d3
@@ -157,7 +161,7 @@ var slider3 = d3
     .max(maxBurgerCOO2)
     //.ticks(20)
     .step(1)
-    .width(530)
+    .width(sliderWidth)
     .fill("red")
     .displayValue(true)
     .on('onchange', (value) => {
@@ -180,7 +184,7 @@ var slider3 = d3
     .attr('width', 800)
     .attr('height', 65)
     .append('g')
-    .attr('transform', 'translate(30,30)')
+    .attr('transform', sliderTransform)
     .call(slider3);  
 
 var slider4 = d3
@@ -189,7 +193,7 @@ var slider4 = d3
     .max(maxTreeCOO2)
     //.ticks(20)
     .step(1)
-    .width(530)
+    .width(sliderWidth)
     .fill("green")
     .displayValue(true)
     .on('onchange', (value) => {
@@ -212,7 +216,7 @@ var slider4 = d3
     .attr('width', 800)
     .attr('height', 65)
     .append('g')
-    .attr('transform', 'translate(30,30)')
+    .attr('transform', sliderTransform)
     .call(slider4);  
 
 var slider5 = d3
@@ -221,7 +225,7 @@ var slider5 = d3
     .max(maxSolarCOO2)
     //.ticks(20)
     .step(1)
-    .width(530)
+    .width(sliderWidth)
     .fill("green")
     .displayValue(true)
     .on('onchange', (value) => {
@@ -244,5 +248,5 @@ var slider5 = d3
     .attr('width', 800)
     .attr('height', 65)
     .append('g')
-    .attr('transform', 'translate(30,30)')
+    .attr('transform', sliderTransform)
     .call(slider5);  

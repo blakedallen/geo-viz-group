@@ -186,10 +186,10 @@ myFunction = function() {
 
 
 
-	// TO MAKE THE MAP APPEAR YOU MUST
-	// ADD YOUR ACCESS TOKEN FROM
-	// https://account.mapbox.com
-	mapboxgl.accessToken = 'pk.eyJ1IjoiZXNjYWRhd2ciLCJhIjoiY2tmdmdrZGhkMTYzZDJ6czMyNWo0eWZmNCJ9.XAG-cdhWcLN2IEFAP6bCbg';
+// TO MAKE THE MAP APPEAR YOU MUST
+// ADD YOUR ACCESS TOKEN FROM
+// https://account.mapbox.com
+mapboxgl.accessToken = 'pk.eyJ1IjoiZXNjYWRhd2ciLCJhIjoiY2tmdmdrZGhkMTYzZDJ6czMyNWo0eWZmNCJ9.XAG-cdhWcLN2IEFAP6bCbg';
 var map = new mapboxgl.Map({
 container: 'map', // container id
 //style: 'mapbox://styles/mapbox/streets-v11', // style URL
@@ -295,8 +295,6 @@ for (var i = 0; i < 80; i += 1){
   }
   masks.push(d);
 }
-
-console.log(masks);
 
 map.on('load', function () {
   

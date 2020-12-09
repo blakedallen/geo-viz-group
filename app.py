@@ -17,15 +17,15 @@ def hello_world():
 
 @application.route('/sf')
 def sf():
-    return render_template('sf.html')
+    return render_template('san_fran.html')
 
-@application.route('/hawaii')
-def hawaii():
-    return render_template('hawaii.html')
+@application.route('/maui')
+def maui():
+    return render_template('maui.html')
 
 @application.route('/ny')
 def ny():
-    return render_template('ny.html')
+    return render_template('new_york.html')
 
 @application.route("/chart2")
 def chart2():

@@ -23,7 +23,7 @@ var update_sealevel4 = function(data, cb4){
 //update sealevel here
 var prev_idg4 = "image_0";
 var cb4 = function(data){
-    console.log("cb4", data);
+    //console.log("cb4", data);
     var meters = data["sea_level"];
     var s = document.getElementById("sea_level");
     s.value = meters;

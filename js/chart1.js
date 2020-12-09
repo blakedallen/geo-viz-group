@@ -25,11 +25,11 @@ d3.select("#selectButton")
 // set the dimensions and margins of the graph
 // set the dimensions and margins of the graph
 var margin = {top: 10, right: 30, bottom: 30, left: 60},
-    width = 500 - margin.left - margin.right,
-    height = 500 - margin.top - margin.bottom;
+    width = 800 - margin.left - margin.right,
+    height = 600 - margin.top - margin.bottom;
 
 // append the svg object to the body of the page
-var svg = d3.select("#chart1")
+var svg = d3.select("#chart1graph")
   .append("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
@@ -190,6 +190,7 @@ svg.append("g")
       .attr("x",0 - (height / 2))
       .attr("dy", "1em")
       .style("text-anchor", "middle")
+      .style("font-size", "20px")
       .attr("fill","white")
       .text("Sea Level Rise (meters)");  
 
@@ -200,6 +201,7 @@ svg.append("g")
                            (height + margin.top + 20) + ")")
       .style("text-anchor", "middle")
       .attr("fill","white")
+      .style("font-size", "20px")
       .text("Year");
 
 // Add the line - default is business as usual
@@ -219,7 +221,7 @@ var prev_idg = "image_0";
 //function to manually update sea level
 var setSeaLevel = function(meters){
 
-    
+
   
     document.getElementById('sea_level').value = Math.round(meters);
     var numMeters = document.getElementById("numMeters");
