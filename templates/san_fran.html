@@ -65,7 +65,7 @@
 
 <div id="control_panel" class="control_panel" >
 
-        <h3>Location: <span id="current">Seattle</span></h3>
+        <h3>Location: <span id="current">San Francisco</span></h3>
         <a class="locationNavItem" href="/ny">New York</a>
         <a class="locationNavItem"  href="/seattle">Seattle</a>
         <a  class="locationNavItem"  href="/maui">Maui</a>
@@ -217,74 +217,226 @@ var sl3 = 0;
 var sl4 = 0;
 
 
-//MAPBOX SETUP
-	mapboxgl.accessToken = 'pk.eyJ1IjoiZXNjYWRhd2ciLCJhIjoiY2tmdmdrZGhkMTYzZDJ6czMyNWo0eWZmNCJ9.XAG-cdhWcLN2IEFAP6bCbg';
+
+
+  // TO MAKE THE MAP APPEAR YOU MUST
+  // ADD YOUR ACCESS TOKEN FROM
+  // https://account.mapbox.com
+  mapboxgl.accessToken = 'pk.eyJ1IjoiZXNjYWRhd2ciLCJhIjoiY2tmdmdrZGhkMTYzZDJ6czMyNWo0eWZmNCJ9.XAG-cdhWcLN2IEFAP6bCbg';
 var map = new mapboxgl.Map({
 container: 'map', // container id
 //style: 'mapbox://styles/mapbox/streets-v11', // style URL
 style: 'mapbox://styles/mapbox/satellite-streets-v11',
-center: [-122.34, 47.61], // starting position [lng, lat]
-zoom: 13, // starting zoom
-pitch: 60
+//37.86240503897279, -122.28268391890137
+center: [-122.283, 37.762], // starting position [lng, lat]
+zoom: 10, // starting zoom
+pitch: 0
 });
 
+//actual gps coordinates used from elevation
+// SF 38.2654816996427, -123.03271012693054 - 37.38640541626585, -121.67026118592658
 
-//SETUP MASKS VIA COORDINATES
-coordinates = [
-  [-122.44, 47.71], //top_left
-  [-122.24, 47.71], //top_right
-  [-122.24, 47.51], //bottom_right
-  [-122.44, 47.51], //bottom_left
+//var iterations = 6;
+var iterations = 2;
+var bLat = -123.00;
+var bLong = 37.0;
+var count = 0;
+
+var dist = 0.5
+
+coordinates = [];
+for (var i = 0; i < iterations; i += 1){
+    for (var j = 0; j < iterations; j += 1){
+    var x1 = bLat + i*dist;
+    var y1 = bLong + j*dist;
+    var x2 = x1 + dist;
+    var y2 = y1 + dist;
+
+    var d = [
+        [x1, y2],
+        [x2, y2],
+        [x2, y1],
+        [x1, y1],
+    ];
+
+    coordinates.push(d);
+    }
+}
+
+// [stretches left and right, stretches up and down]
+stretch_values = [
+  [0.0, 0.0], // 1a
+  [0.082, 0.08], // 1b
+  [0.082, 0.08], // 1c
+  [0.083, 0.080], // 1d
+  [0.2275, 0.439], // 1e
+  [0.2275, 0.439], // 1f
+  [0.2275, 0.439], // 2a
+  [0.2275, 0.439], // 2a
+  [0.2275, 0.439], // 2b
+  [0.2275, 0.439], // 2c
+  [0.2275, 0.439], // 2d
+  [0.2275, 0.439], // 2e
+  [0.2275, 0.439], // 2f
+  [0.2275, 0.439], // 3a
+  [0.2275, 0.439], // 3b
+  [0.2275, 0.439], // 3c
+  [0.2275, 0.439], // 3d
+  [0.2275, 0.439], // 3e
+  [0.2275, 0.439], // 3f
+  [0.2275, 0.439], // 4a
+  [0.2275, 0.439], // 4b
+  [0.2275, 0.439], // 4c
+  [0.2275, 0.439], // 4d
+  [0.2275, 0.439], // 4e
+  [0.2275, 0.439], // 4f
+  [0.2275, 0.439], // 5a
+  [0.2275, 0.439], // 5b
+  [0.2275, 0.439], // 5c
+  [0.2275, 0.439], // 5d
+  [0.2275, 0.439], // 5e
+  [0.2275, 0.439], // 5f
+  [0.2275, 0.439], // 6a
+  [0.2275, 0.439], // 6b
+  [0.2275, 0.439], // 6c
+  [0.2275, 0.439], // 6d
+  [0.2275, 0.439], // 6e
+  [0.2275, 0.439], // 6f
 ];
 
-//stretch our image
-var t_lng = 0.0335; //stretches left and right
-var t_lat = 0.032; //stretches up and down
+// [move left, move down]
+move_values = [
+  [0.0, 0.0], // 1a
+  [0.01, 0.0027], // 1b
+  [0.01, 0.0003], // 1c
+  [0.008, 0.0027], // 1d
+  [0.0275, 0.008], // 1e
+  [0.0275, 0.008], // 1f
+  [0.0275, 0.008], // 2a
+  [0.0275, 0.008], // 2a
+  [0.0275, 0.008], // 2b
+  [0.0275, 0.008], // 2c
+  [0.0275, 0.008], // 2d
+  [0.0275, 0.008], // 2e
+  [0.0275, 0.008], // 2f
+  [0.0275, 0.008], // 3a
+  [0.0275, 0.008], // 3b
+  [0.0275, 0.008], // 3c
+  [0.0275, 0.008], // 3d
+  [0.0275, 0.008], // 3e
+  [0.0275, 0.008], // 3f
+  [0.0275, 0.008], // 4a
+  [0.0275, 0.008], // 4b
+  [0.0275, 0.008], // 4c
+  [0.0275, 0.008], // 4d
+  [0.0275, 0.008], // 4e
+  [0.0275, 0.008], // 4f
+  [0.0275, 0.008], // 5a
+  [0.0275, 0.008], // 5b
+  [0.0275, 0.008], // 5c
+  [0.0275, 0.008], // 5d
+  [0.0275, 0.008], // 5e
+  [0.0275, 0.008], // 5f
+  [0.0275, 0.008], // 6a
+  [0.0275, 0.008], // 6b
+  [0.0275, 0.008], // 6c
+  [0.0275, 0.008], // 6d
+  [0.0275, 0.008], // 6e
+  [0.0275, 0.008], // 6f
+];
 
-//translate top_left
-coordinates[0][0] -= t_lng;
-coordinates[0][1] += t_lat;
+//scale our image coordinates
+var s_lng = 1.0;
+var s_lat = 1.0;
 
-//translate top right
-coordinates[1][0] += t_lng;
-coordinates[1][1] += t_lat;
 
-//translate bottom right
-coordinates[2][0] += t_lng;
-coordinates[2][1] -= t_lat;
+var image_count = iterations * iterations;
+for (var i = 0; i < image_count; i += 1){
 
-//translate bottom left
-coordinates[3][0] -= t_lng;
-coordinates[3][1] -= t_lat;
+    //stretch our image
+    var t_lng = 0.2275; //stretches left and right
+    var t_lat = 0.439; //stretches up and down
 
-//move left
-var move_left = 0.004;
-coordinates[0][0] -= move_left;
-coordinates[1][0] -= move_left;
-coordinates[2][0] -= move_left;
-coordinates[3][0] -= move_left;
 
-//move down
-var move_down = 0.0001;
-coordinates[0][1] -= move_down;
-coordinates[1][1] -= move_down;
-coordinates[2][1] -= move_down;
-coordinates[3][1] -= move_down;
 
+    //translate top_left
+    coordinates[i][0][0] -= stretch_values[i][0];
+    coordinates[i][0][1] += stretch_values[i][1];
+
+    //translate top right
+    coordinates[i][1][0] += stretch_values[i][0];
+    coordinates[i][1][1] += stretch_values[i][1];
+
+    //translate bottom right 
+    coordinates[i][2][0] += stretch_values[i][0];
+    coordinates[i][2][1] -= stretch_values[i][1];
+
+    //translate bottom left
+    coordinates[i][3][0] -= stretch_values[i][0];
+    coordinates[i][3][1] -= stretch_values[i][1];
+
+
+    // //scale top left
+    // coordinates[i][0][0] *= s_lng;
+    // coordinates[i][0][1] *= s_lat;
+
+    // //scale top right
+    // coordinates[i][1][0] *= s_lng;
+    // coordinates[i][1][1] *= s_lat;
+
+    // //scale bottom right
+    // coordinates[i][2][0] *= s_lng;
+    // coordinates[i][2][1] *= s_lat;
+
+    // //scale bottom left
+    // coordinates[i][3][0] *= s_lng;
+    // coordinates[i][3][1] *= s_lat;
+
+    //move left
+    coordinates[i][0][0] -= move_values[i][0];
+    coordinates[i][1][0] -= move_values[i][0];
+    coordinates[i][2][0] -= move_values[i][0];
+    coordinates[i][3][0] -= move_values[i][0];
+
+    //move down
+    coordinates[i][0][1] -= move_values[i][1];
+    coordinates[i][1][1] -= move_values[i][1];
+    coordinates[i][2][1] -= move_values[i][1];
+    coordinates[i][3][1] -= move_values[i][1];
+
+}
+
+  
+var mask_num = 80;
 
 //generate our dataset
 //TODO: load our dataset from json
 masks = [];
-for (var i = 0; i < 80; i += 1){
-  var istr = i.toString();
-  var d = {
-    source:"source_"+istr,
-    id:"image_"+istr,
-    url:"/masks/seattle_"+istr+".png",
-    coordinates: coordinates,
-  }
-  masks.push(d);
+
+r = ["1", "2", "3", "4", "5", "6", "7","8","9","10"]
+c = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j"]
+
+var count = 0;
+var city = "sfbay"
+
+for (var row = 0; row < iterations; row += 1){
+    for (var j = 0; j < iterations; j += 1){        
+        for (var i = 0; i < mask_num; i += 1){
+        var istr = i.toString();
+        var d = {
+            source:"source"+r[row]+c[j]+"_"+istr,
+            id:"image"+r[row]+c[j]+"_"+istr,
+            url:"masks/"+city+r[row]+c[j]+"_"+istr+".png",
+            coordinates: coordinates[count],
+        }
+        //console.log(coordinates[count])
+        masks.push(d);
+        }
+        count += 1;
+    }
 }
+
+console.log(masks);
 
 //clear every mask
 var clearmasks = function(map){
@@ -343,7 +495,7 @@ displayWidget = function(x){
 map.on('load', function () {
 
   //add each of our masks
-  var totalMasks = masks.length;
+  var totalMasks = 320;
   for (var i = 0; i < masks.length; i++){
     var d = masks[i];
 
@@ -366,7 +518,7 @@ map.on('load', function () {
       }
     });
     var progress = 480 *i/totalMasks;
-    console.log(progress);
+    //console.log(progress);
     $("#maskLoading").attr('aria-valuenow', progress).css('width', progress);
     
   }
@@ -379,6 +531,7 @@ map.on('load', function () {
 
   var first_mask_id = masks[0]["id"];
   var prev_idg = first_mask_id;
+  var prev_meter = 0;
   //set our initial layer as visible
   //map.setLayoutProperty(prev_idg, 'visibility', 'visible');
 
@@ -392,13 +545,29 @@ map.on('load', function () {
       var feet = meters * 3.281; //approximate conversion from
       numFeet.textContent = feet.toFixed(1);
 
+      for (var i = 0; i < iterations; i += 1){
+        for (var j = 0; j < iterations; j += 1){
+            let prev_idg = "image"+r[i]+c[j]+"_"+prev_meter.toString();
+            map.setLayoutProperty(prev_idg, 'visibility', 'none');
+        }
+      }
+
+      //map.setLayoutProperty(prev_idg, 'visibility', 'none');
       if (meters > 0){
-        meters -= 1;
-        var idg = "image_"+meters.toString();
-        console.log(idg);
-        map.setLayoutProperty(idg, 'visibility', 'visible');
-        map.setLayoutProperty(prev_idg, 'visibility', 'none');
-        prev_idg = idg;
+        meters -= 1; 
+        //let idg = "image_"+meters.toString();
+        //console.log(idg);
+        for (var i = 0; i < iterations; i += 1){
+            for (var j = 0; j < iterations; j += 1){
+                let idg = "image"+r[i]+c[j]+"_"+meters.toString();
+                console.log(idg);
+                map.setLayoutProperty(idg, 'visibility', 'visible');
+            }
+        }        
+        //map.setLayoutProperty(idg, 'visibility', 'visible');
+        //prev_idg = idg;
+
+        prev_meter = meters;
       }
 
   });

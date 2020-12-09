@@ -65,7 +65,7 @@
 
 <div id="control_panel" class="control_panel" >
 
-        <h3>Location: <span id="current">Seattle</span></h3>
+        <h3>Location: <span id="current">Maui</span></h3>
         <a class="locationNavItem" href="/ny">New York</a>
         <a class="locationNavItem"  href="/seattle">Seattle</a>
         <a  class="locationNavItem"  href="/maui">Maui</a>
@@ -217,29 +217,49 @@ var sl3 = 0;
 var sl4 = 0;
 
 
-//MAPBOX SETUP
-	mapboxgl.accessToken = 'pk.eyJ1IjoiZXNjYWRhd2ciLCJhIjoiY2tmdmdrZGhkMTYzZDJ6czMyNWo0eWZmNCJ9.XAG-cdhWcLN2IEFAP6bCbg';
+
+// TO MAKE THE MAP APPEAR YOU MUST
+// ADD YOUR ACCESS TOKEN FROM
+// https://account.mapbox.com
+mapboxgl.accessToken = 'pk.eyJ1IjoiZXNjYWRhd2ciLCJhIjoiY2tmdmdrZGhkMTYzZDJ6czMyNWo0eWZmNCJ9.XAG-cdhWcLN2IEFAP6bCbg';
 var map = new mapboxgl.Map({
 container: 'map', // container id
 //style: 'mapbox://styles/mapbox/streets-v11', // style URL
 style: 'mapbox://styles/mapbox/satellite-streets-v11',
-center: [-122.34, 47.61], // starting position [lng, lat]
-zoom: 13, // starting zoom
+center: [-156.447, 20.829], // starting position [lng, lat]
+zoom: 11, // starting zoom
 pitch: 60
 });
 
+//actual gps coordinates used from elevation
+//-122.44 47.51 -122.24 47.71
 
-//SETUP MASKS VIA COORDINATES
 coordinates = [
-  [-122.44, 47.71], //top_left
-  [-122.24, 47.71], //top_right
-  [-122.24, 47.51], //bottom_right
-  [-122.44, 47.51], //bottom_left
+  // [-122.44, 47.71], //top_left
+  // [-122.24, 47.71], //top_right
+  // [-122.24, 47.51], //bottom_right
+  // [-122.44, 47.51], //bottom_left
+  // [-156.694, 21.033], //top_left
+  // [-155.950, 21.033], //top_right
+  // [-156.694, 20.551], //bottom_right
+  // [-155.950, 20.551], //bottom_left  
+  [-156.694, 21.033], //top_left
+  [-155.950, 21.033], //top_right
+  [-155.950, 20.551], //bottom_right
+  [-156.694, 20.551], //bottom_left  
+
 ];
 
+//-122.41 --> -122.44
+//47.65 --> 47.66
+
 //stretch our image
-var t_lng = 0.0335; //stretches left and right
-var t_lat = 0.032; //stretches up and down
+//var t_lng = 0.0335; //stretches left and right
+//var t_lat = 0.032; //stretches up and down
+var t_lng = 0.1095; //stretches left and right
+var t_lat = 0.239; //stretches up and down
+
+
 
 //translate top_left
 coordinates[0][0] -= t_lng;
@@ -249,7 +269,7 @@ coordinates[0][1] += t_lat;
 coordinates[1][0] += t_lng;
 coordinates[1][1] += t_lat;
 
-//translate bottom right
+//translate bottom right 
 coordinates[2][0] += t_lng;
 coordinates[2][1] -= t_lat;
 
@@ -257,20 +277,42 @@ coordinates[2][1] -= t_lat;
 coordinates[3][0] -= t_lng;
 coordinates[3][1] -= t_lat;
 
+//scale our image coordinates
+var s_lng = 1.0;
+var s_lat = 1.0;
+
+//scale top left
+coordinates[0][0] *= s_lng;
+coordinates[0][1] *= s_lat;
+
+//scale top right
+coordinates[1][0] *= s_lng;
+coordinates[1][1] *= s_lat;
+
+//scale bottom right
+coordinates[2][0] *= s_lng;
+coordinates[2][1] *= s_lat;
+
+//scale bottom left
+coordinates[3][0] *= s_lng;
+coordinates[3][1] *= s_lat;
+
 //move left
-var move_left = 0.004;
+//var move_left = 0.004;
+var move_left = 0.0125;
 coordinates[0][0] -= move_left;
 coordinates[1][0] -= move_left;
 coordinates[2][0] -= move_left;
 coordinates[3][0] -= move_left;
 
 //move down
-var move_down = 0.0001;
+//var move_down = 0.0001;
+var move_down = 0.003;
 coordinates[0][1] -= move_down;
 coordinates[1][1] -= move_down;
 coordinates[2][1] -= move_down;
 coordinates[3][1] -= move_down;
-
+  
 
 //generate our dataset
 //TODO: load our dataset from json
@@ -280,11 +322,12 @@ for (var i = 0; i < 80; i += 1){
   var d = {
     source:"source_"+istr,
     id:"image_"+istr,
-    url:"/masks/seattle_"+istr+".png",
+    url:"masks/maui_"+istr+".png",
     coordinates: coordinates,
   }
   masks.push(d);
 }
+
 
 //clear every mask
 var clearmasks = function(map){

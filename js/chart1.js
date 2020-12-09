@@ -8,14 +8,10 @@ const MAX_METERS=79;
 //
 //update the select button
 var allGroup = [
-  "Low",
-  "Intermediate-low",
-  "Intermediate",
-  "Intermediate-high",
-  "High",
-  "Extreme",
-  "Ultra-Extreme",
-  "Exponential",
+  "NOAA - Low Prediction",
+  "NOAA - Extreme Prediction",
+  "1/2 Global Sea Ice Melts",
+  "All Global Sea Ice Melts",
 ]
 
 d3.select("#selectButton")
@@ -29,18 +25,18 @@ d3.select("#selectButton")
 // set the dimensions and margins of the graph
 // set the dimensions and margins of the graph
 var margin = {top: 10, right: 30, bottom: 30, left: 60},
-    width = 500 - margin.left - margin.right,
-    height = 500 - margin.top - margin.bottom;
+    width = 800 - margin.left - margin.right,
+    height = 600 - margin.top - margin.bottom;
 
 // append the svg object to the body of the page
-var svg = d3.select("#chart1")
+var svg = d3.select("#chart1graph")
   .append("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
   .append("g")
     .attr("transform","translate(" + margin.left + "," + margin.top + ")");
 
-var line = svg.append("path")
+var line = svg.append("path");
 
 var chart1Data = {
 
@@ -55,7 +51,7 @@ low : [
     },
     {
         "year":2200,
-        "height":0.6,
+        "height":2,
     },
 ],
 intermediateLow:[
@@ -139,7 +135,7 @@ ultraExtreme:[
     },
     {
         "year":2200,
-        "height":25,
+        "height":35,
     }
 ],  
 exponential:[
@@ -167,6 +163,7 @@ var colors = [
 "#dd1c77",
 "#f03b20"
 ];
+
 var pt = d3.timeParse("%Y");
 
 // Add X axis
@@ -193,6 +190,7 @@ svg.append("g")
       .attr("x",0 - (height / 2))
       .attr("dy", "1em")
       .style("text-anchor", "middle")
+      .style("font-size", "20px")
       .attr("fill","white")
       .text("Sea Level Rise (meters)");  
 
@@ -203,6 +201,7 @@ svg.append("g")
                            (height + margin.top + 20) + ")")
       .style("text-anchor", "middle")
       .attr("fill","white")
+      .style("font-size", "20px")
       .text("Year");
 
 // Add the line - default is business as usual
@@ -221,7 +220,10 @@ var line = svg.append("path")
 var prev_idg = "image_0";
 //function to manually update sea level
 var setSeaLevel = function(meters){
-    
+
+
+  
+    document.getElementById('sea_level').value = Math.round(meters);
     var numMeters = document.getElementById("numMeters");
     numMeters.textContent = meters.toString();
     var numFeet = document.getElementById("numFeet");
@@ -232,12 +234,12 @@ var setSeaLevel = function(meters){
     }
     //update our map
     if (meters > 0){
-       meters -= 1;
-       var idg = "image_"+meters.toString();
-       //console.log(idg);
-       map.setLayoutProperty(idg, 'visibility', 'visible');
-        map.setLayoutProperty(prev_idg, 'visibility', 'none');
-        prev_idg = idg;
+      var meters_rounded = Math.round(meters);
+      var idg = "image_"+meters_rounded.toString();
+      console.log()
+      map.setLayoutProperty(idg, 'visibility', 'visible');
+      map.setLayoutProperty(prev_idg, 'visibility', 'none');
+      prev_idg = idg;
     }
 
 }
@@ -252,7 +254,7 @@ var updateChart = function(option, data){
     
 
     switch(option){
-        case "Low":
+        case "NOAA - Low Prediction":
             line
                 .datum(data.low)
                 .transition(t)
@@ -310,11 +312,11 @@ var updateChart = function(option, data){
             )
             setSeaLevel(data.high[2].height);
             break;
-        case "Extreme":
+        case "NOAA - Extreme Prediction":
             line
             .datum(data.extreme)
             .transition()
-            .attr("stroke", "#b30000")
+            .attr("stroke", "#fc8d59")
             .duration(1000)
             .attr("d", d3.line()
               .x(function(d) { return x(pt(d.year)) })
@@ -322,11 +324,11 @@ var updateChart = function(option, data){
             )
             setSeaLevel(data.extreme[2].height);
             break;
-        case "Ultra-Extreme":
+        case "1/2 Global Sea Ice Melts":
             line
             .datum(data.ultraExtreme)
             .transition()
-            .attr("stroke", "#b30000")
+            .attr("stroke", "#e34a33")
             .duration(1000)
             .attr("d", d3.line()
               .x(function(d) { return x(pt(d.year)) })
@@ -334,7 +336,7 @@ var updateChart = function(option, data){
             )
             setSeaLevel(data.ultraExtreme[2].height);
             break;
-        case "Exponential":
+        case "All Global Sea Ice Melts":
             line
             .datum(data.exponential)
             .transition()

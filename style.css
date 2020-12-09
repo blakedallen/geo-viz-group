@@ -16,6 +16,10 @@ body { margin: 0; padding: 0; }
   stroke: white;
 }
 
+.chartButtons {
+  padding-bottom: 10px;
+}
+
 .map-overlay {
 font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
 position: absolute;
@@ -23,6 +27,10 @@ width: 25%;
 top: 0;
 left: 0;
 padding: 10px;
+}
+
+.locationNavItem {
+  padding-right: 10px;
 }
 
 .map-overlay .map-overlay-inner {
@@ -68,10 +76,10 @@ cursor: ew-resize;
 }
 
 .control_panel {
-  width: 630px;
-  height:110px;
+  width: 810px;
+  height:180px;
   font-family: 'Goldman', cursive;
-  background-color: rgba(68, 68, 68, 0.79);
+  background-color: rgba(0, 0, 0, 0.82);
   color:#fefefe;
   padding:10px;
   text-align:left;
@@ -220,16 +228,14 @@ input::-moz-focus-outer {
 }
 
 #pie path.slice {
-<<<<<<< HEAD
+
     opacity: 0.65;
-=======
-    opacity: 0.60;
->>>>>>> master
+
 }
 
 #pie text.label {
     opacity: 1;
-    font-size: 0.5em;
+    font-size: 0.8em;
 }
 
 #pie polyline {
@@ -265,7 +271,7 @@ input::-moz-focus-inner {
 .yslider {
   -webkit-appearance: none;  /* Override default CSS styles */
   appearance: none;
-  width: 400px; /* Full-width */
+  width: 780px; /* Full-width */
   height: 10px; /* Specified height */
   overflow: hidden;
   background: #d3d3d3; /* Grey background */

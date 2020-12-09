@@ -3,53 +3,10 @@ var update_sealevel = function(data, cb){
     if(data.years === undefined){
         //get years from years slider
         var y = document.getElementById("chart2years");
-        data["years"] = 2018 + parseInt(y.value);
+        data["years"] = parseInt(y.value);
 
     }
-    //sensible defaults:
    
-    var co2scale = d3.scaleLinear()
-        .domain([0,13008000000])
-        .range([0,40])
-    //100-250 : 1-10 
-    var scale1 = d3.scaleLinear()
-          .domain([100, 250])
-          .range([0, 5]);
-    //250 - 500 : 10-17
-    var scale2 = d3.scaleLinear()
-          .domain([250, 500])
-          .range([5, 10]);
-    //500 - 1000 : 18 - 35
-    var scale3 = d3.scaleLinear()
-          .domain([500, 1000])
-          .range([10, 20]);
-    //1000 - 2000 : 36 - 70
-    var scale4 = d3.scaleLinear()
-          .domain([1000, 2000])
-          .range([20, 30]);
-    if (data["years"] > 100 && data["years"] < 250){
-        var sr = scale1(data["years"]);
-        var c2 = co2scale(data["gt"]);
-        sr = Math.ceil(sr+c2);
-        return cb({sea_level:sr})
-    } else if (data["years"] > 250 && data["years"] < 500 ) {
-        var sr = scale2(data["years"]);
-        var c2 = co2scale(data["gt"]);
-        sr = Math.ceil(sr+c2);
-        return cb({sea_level:sr})
-    } else if (data["years"] > 500 && data["years"] < 1000) {
-        var sr = scale3(data["years"]);
-        var c2 = co2scale(data["gt"]);
-        sr = Math.ceil(sr+c2);
-        return cb({sea_level:sr})
-    } else if (data["years"] > 1000) {
-        var sr = scale4(data["years"]);
-        var c2 = co2scale(data["gt"]);
-        sr = Math.ceil(sr+c2);
-        return cb({sea_level:sr})
-    } else {
-
-
     const url = "/predict";
     const params = {
         "headers":{
@@ -63,24 +20,18 @@ var update_sealevel = function(data, cb){
         .then(data =>{
             cb(data);
         });
-    }
-}
 
-var data = {
-    "years":2000,
-    "gt":10000,
 }
 
 //update sealevel here
 var prev_idg2 = "image_0";
 var cb = function(data){
-    console.log(data);
     var meters = data["sea_level"];
     var s = document.getElementById("sea_level");
     s.value = meters;
-    map.setLayoutProperty(prev_idg2, 'visibility', 'none');
     let idg = "image_"+meters.toString();
     map.setLayoutProperty(idg, 'visibility', 'visible');
+    map.setLayoutProperty(prev_idg2, 'visibility', 'none');
     prev_idg2 = idg;
     
     var numMeters = document.getElementById("numMeters");
@@ -94,6 +45,7 @@ var cb = function(data){
 
 //escavic
 
+var GTperTon = 1000000000
 var TonsToPPM = 0.001
 var COO2perCar = 4.7
 var COO2perAirMi = 0.0265
@@ -116,15 +68,28 @@ var maxBurgerCOO2 = 200000
 var maxTreeCOO2 = 50000
 var maxSolarCOO2 = 5000
 
+var sliderWidth = 720;
+var sliderTransform = "translate(20,20)";
+
 //add another event listener to the years slider, update based on totalC002
 document.getElementById("chart2years")
   .addEventListener("input", function(e){
     var yearText = document.getElementById("chart2yearsText");
       yearText.textContent = e.target.value;
-      console.log(e.target.value);
+      
     //update sea level when years value is changed
     update_sealevel({"gt":totalCOO2,"years":e.target.value}, cb);
 });
+
+document.getElementById("chart2years")
+  .addEventListener("ondragend", function(e){
+    var yearText = document.getElementById("chart2yearsText");
+      yearText.textContent = e.target.value;
+      
+    //update sea level when years value is changed
+    update_sealevel({"gt":totalCOO2,"years":e.target.value}, cb);
+});
+
 
 var slider1 = d3
     .sliderHorizontal()
@@ -132,19 +97,20 @@ var slider1 = d3
     .max(maxCarCOO2)
     .ticks(20)
     .step(1)
-    .width(530)
+    .width(sliderWidth)
     .fill("red")
     .displayValue(true)
     .on('onchange', (value) => {
             d3.select('#slider1textmin')
               .text(value)
-            CarCOO2 = (value) * COO2perCar * 1000000
-            CarCOO2 = Math.ceil(CarCOO2)
+            CarCOO2 = (value) * COO2perCar * 1000000 / GTperTon
+            var dispVar1 = Number.parseFloat(CarCOO2).toPrecision(4)
             d3.select('#slider1textemission')
-              .text(CarCOO2);  
-            totalCOO2 = AirCOO2 + CarCOO2 + BurgerCOO2 + TreeCOO2 + SolarCOO2
+              .text(dispVar1);  
+            totalCOO2 = AirCOO2 + CarCOO2 + BurgerCOO2 + TreeCOO2 + SolarCOO2            
+            var dispVar2 = Number.parseFloat(totalCOO2).toPrecision(5)
             d3.select('#COO2text')
-              .text(totalCOO2);
+              .text(dispVar2);
         var d = {"gt":totalCOO2};
         update_sealevel(d,cb);
     });
@@ -154,7 +120,7 @@ var slider1 = d3
     .attr('width', 800)
     .attr('height', 65)
     .append('g')
-    .attr('transform', 'translate(30,30)')
+    .attr('transform', sliderTransform)
     .call(slider1);
 
 var slider2 = d3
@@ -163,19 +129,20 @@ var slider2 = d3
     .max(maxAirCOO2)
     .ticks(10)
     .step(1)
-    .width(530)
+    .width(sliderWidth)
     .fill("red")
     .displayValue(true)
     .on('onchange', (value) => {
             d3.select('#slider2textmin')
               .text(value);
-            AirCOO2 = (value) * COO2perAirMi * 1000000
-            AirCOO2 = Math.ceil(AirCOO2)
+            AirCOO2 = (value) * COO2perAirMi * 1000000 / GTperTon
+            var dispVar1 = Number.parseFloat(AirCOO2).toPrecision(4)
             d3.select('#slider2textemission')
-              .text(AirCOO2);    
+              .text(dispVar1);    
             totalCOO2 = AirCOO2 + CarCOO2 + BurgerCOO2 + TreeCOO2 + SolarCOO2
+            var dispVar2 = Number.parseFloat(totalCOO2).toPrecision(5)
             d3.select('#COO2text')
-              .text(totalCOO2);
+              .text(dispVar2);
         var d = {"gt":totalCOO2};
         update_sealevel(d,cb);
     });
@@ -185,7 +152,7 @@ var slider2 = d3
     .attr('width', 800)
     .attr('height', 65)
     .append('g')
-    .attr('transform', 'translate(30,30)')
+    .attr('transform', sliderTransform)
     .call(slider2);
   
 var slider3 = d3
@@ -194,19 +161,20 @@ var slider3 = d3
     .max(maxBurgerCOO2)
     //.ticks(20)
     .step(1)
-    .width(530)
+    .width(sliderWidth)
     .fill("red")
     .displayValue(true)
     .on('onchange', (value) => {
             d3.select('#slider3textmin')
               .text(value)
-            BurgerCOO2 = (value) * COO2perBurger * 1000000
-            BurgerCOO2 = Math.ceil(BurgerCOO2)
+            BurgerCOO2 = (value) * COO2perBurger * 1000000 / GTperTon
+            var dispVar1 = Number.parseFloat(BurgerCOO2).toPrecision(4)
             d3.select('#slider3textemission')
-              .text(BurgerCOO2);      
+              .text(dispVar1);      
             totalCOO2 = AirCOO2 + CarCOO2 + BurgerCOO2 + TreeCOO2 + SolarCOO2
+            var dispVar2 = Number.parseFloat(totalCOO2).toPrecision(5)
             d3.select('#COO2text')
-              .text(totalCOO2);
+              .text(dispVar2);      
         var d = {"gt":totalCOO2};
         update_sealevel(d,cb);
     });
@@ -216,7 +184,7 @@ var slider3 = d3
     .attr('width', 800)
     .attr('height', 65)
     .append('g')
-    .attr('transform', 'translate(30,30)')
+    .attr('transform', sliderTransform)
     .call(slider3);  
 
 var slider4 = d3
@@ -225,19 +193,20 @@ var slider4 = d3
     .max(maxTreeCOO2)
     //.ticks(20)
     .step(1)
-    .width(530)
+    .width(sliderWidth)
     .fill("green")
     .displayValue(true)
     .on('onchange', (value) => {
             d3.select('#slider4textmin')
               .text(value)
-            TreeCOO2 = (value) * COO2perTree * 1000
-            TreeCOO2 = Math.ceil(TreeCOO2)
+            TreeCOO2 = (value) * COO2perTree * 1000 / GTperTon
+            var dispVar1 = Number.parseFloat(TreeCOO2).toPrecision(4)
             d3.select('#slider4textemission')
-              .text(TreeCOO2);     
+              .text(dispVar1);     
             totalCOO2 = AirCOO2 + CarCOO2 + BurgerCOO2 + TreeCOO2 + SolarCOO2
+            var dispVar2 = Number.parseFloat(totalCOO2).toPrecision(5)
             d3.select('#COO2text')
-              .text(totalCOO2);
+              .text(dispVar2);
         var d = {"gt":totalCOO2};
         update_sealevel(d,cb);
     });
@@ -247,7 +216,7 @@ var slider4 = d3
     .attr('width', 800)
     .attr('height', 65)
     .append('g')
-    .attr('transform', 'translate(30,30)')
+    .attr('transform', sliderTransform)
     .call(slider4);  
 
 var slider5 = d3
@@ -256,19 +225,20 @@ var slider5 = d3
     .max(maxSolarCOO2)
     //.ticks(20)
     .step(1)
-    .width(530)
+    .width(sliderWidth)
     .fill("green")
     .displayValue(true)
     .on('onchange', (value) => {
             d3.select('#slider5textmin')
               .text(value)
-            SolarCOO2 = (value) * COO2perSolar * 1000
-            SolarCOO2 = Math.ceil(SolarCOO2)
+            SolarCOO2 = (value) * COO2perSolar * 1000 / GTperTon
+            var dispVar1 = Number.parseFloat(SolarCOO2).toPrecision(4)
             d3.select('#slider5textemission')
-              .text(SolarCOO2);      
+              .text(dispVar1);      
             totalCOO2 = AirCOO2 + CarCOO2 + BurgerCOO2 + TreeCOO2 + SolarCOO2
+            var dispVar2 = Number.parseFloat(totalCOO2).toPrecision(5)
             d3.select('#COO2text')
-              .text(totalCOO2);
+              .text(dispVar2);
         var d = {"gt":totalCOO2};
         update_sealevel(d,cb);
     });
@@ -278,5 +248,5 @@ var slider5 = d3
     .attr('width', 800)
     .attr('height', 65)
     .append('g')
-    .attr('transform', 'translate(30,30)')
+    .attr('transform', sliderTransform)
     .call(slider5);  

@@ -65,7 +65,7 @@
 
 <div id="control_panel" class="control_panel" >
 
-        <h3>Location: <span id="current">Seattle</span></h3>
+        <h3>Location: <span id="current">New York</span></h3>
         <a class="locationNavItem" href="/ny">New York</a>
         <a class="locationNavItem"  href="/seattle">Seattle</a>
         <a  class="locationNavItem"  href="/maui">Maui</a>
@@ -218,28 +218,43 @@ var sl4 = 0;
 
 
 //MAPBOX SETUP
-	mapboxgl.accessToken = 'pk.eyJ1IjoiZXNjYWRhd2ciLCJhIjoiY2tmdmdrZGhkMTYzZDJ6czMyNWo0eWZmNCJ9.XAG-cdhWcLN2IEFAP6bCbg';
+  mapboxgl.accessToken = 'pk.eyJ1IjoiZXNjYWRhd2ciLCJhIjoiY2tmdmdrZGhkMTYzZDJ6czMyNWo0eWZmNCJ9.XAG-cdhWcLN2IEFAP6bCbg';
 var map = new mapboxgl.Map({
 container: 'map', // container id
 //style: 'mapbox://styles/mapbox/streets-v11', // style URL
 style: 'mapbox://styles/mapbox/satellite-streets-v11',
-center: [-122.34, 47.61], // starting position [lng, lat]
-zoom: 13, // starting zoom
-pitch: 60
+center: [-73.99, 40.74], // starting position [lng, lat]
+// center: [-73.905, 40.775], // starting position [lng, lat]
+zoom: 12, // starting zoom
+pitch: 45
 });
 
 
 //SETUP MASKS VIA COORDINATES
+//-122.44 47.51 -122.24 47.71
+// coordinates = [
+//   [-122.44, 47.71], //top_left
+//   [-122.24, 47.71], //top_right
+//   [-122.24, 47.51], //bottom_right
+//   [-122.44, 47.51], //bottom_left
+// ];
+
+// -74.15 40.65 -73.66 40.90
 coordinates = [
-  [-122.44, 47.71], //top_left
-  [-122.24, 47.71], //top_right
-  [-122.24, 47.51], //bottom_right
-  [-122.44, 47.51], //bottom_left
+    [-74.15, 40.90],
+    [-73.66, 40.90],
+    [-73.66, 40.65],
+    [-74.15, 40.65],
 ];
 
+
 //stretch our image
-var t_lng = 0.0335; //stretches left and right
-var t_lat = 0.032; //stretches up and down
+// var t_lng = 0.0335; //stretches left and right
+// var t_lat = 0.032; //stretches up and down
+
+var t_lng = 0.081; //stretches left and right
+var t_lat = 0.186; //stretches up and down
+
 
 //translate top_left
 coordinates[0][0] -= t_lng;
@@ -280,7 +295,7 @@ for (var i = 0; i < 80; i += 1){
   var d = {
     source:"source_"+istr,
     id:"image_"+istr,
-    url:"/masks/seattle_"+istr+".png",
+    url:"/masks/ny_"+istr+".png",
     coordinates: coordinates,
   }
   masks.push(d);
