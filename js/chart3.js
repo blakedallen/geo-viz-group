@@ -67,7 +67,7 @@ d3.json("/data/tsung-chin.json").then(function(data){
   // show slider value
   function showSliderValues() {
     d3.selectAll('#slider .range').each(function() {
-      var level = "Total CO2 Level becomes: " + data[this.value]['amount'] + " million ";
+      var level = "Total Greenhouse Gas level becomes: " + data[this.value]['amount'] + " million ";
       d3.select('.range_value').html(level);
       var gt = parseInt(data[this.value]['amount']) /1000; //convert from megatons --> gigatons
       if (MASKS_LOADED === true){
