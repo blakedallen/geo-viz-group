@@ -14,7 +14,7 @@ application = Flask(__name__,
 @application.route('/')
 @application.route('/index')
 def hello_world():
-    return render_template('templates/san_fran.html')
+    return render_template('templates/new_york.html')
 
 @application.route('/sf')
 def sf():
