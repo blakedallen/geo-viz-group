@@ -7,34 +7,30 @@ from model import gen_slr
 
 
 application = Flask(__name__, 
-        template_folder="templates",
+        template_folder="",
         static_folder="",
         static_url_path="")
 
 @application.route('/')
 @application.route('/index')
 def hello_world():
-    return render_template('sf.html')
+    return render_template('templates/sf.html')
 
 @application.route('/sf')
 def sf():
-    return render_template('san_fran.html')
+    return render_template('templates/san_fran.html')
 
 @application.route('/maui')
 def maui():
-    return render_template('maui.html')
+    return render_template('templates/maui.html')
 
 @application.route('/ny')
 def ny():
-    return render_template('new_york.html')
-
-@application.route("/chart2")
-def chart2():
-    return render_template("multiline_chart.html")
+    return render_template('templates/new_york.html')
 
 @application.route("/seattle")
 def sea_map():
-    return render_template("seattle.html")
+    return render_template("templates/seattle.html")
 
 @application.route("/about")
 def about():
