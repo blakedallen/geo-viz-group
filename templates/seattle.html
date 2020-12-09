@@ -48,8 +48,7 @@
         <button onclick="displayWidget(4)">Widget 4</button>
           <div class="bar"></div>
           <div id="chart1">
-            <h2> NOAA projected Sea Level Rise by 2200</h2>
-            <h3> Carbon Emissions </h3>
+            <h2> Sea Level Scenarios</h2>
             <select id="selectButton"></select>
           </div>
 
@@ -117,6 +116,10 @@
 //global variable, wait until loaded
 var MASKS_LOADED = false;
 
+//global
+var gsealevel = 0;
+var gprev_idg = "image_0";
+
 //expand or hide control panel widgets
 var hidden = true;
 expandPanel = function() {
@@ -143,45 +146,11 @@ c2.style.display = "none";
 c3.style.display = "none";
 c4.style.display = "none";
 
-var sl1 = 1;
-var sl2 = 20;
-var sl3 = 30;
-var sl4 = 40;
+var sl1 = 0;
+var sl2 = 0;
+var sl3 = 0;
+var sl4 = 0;
 
-//display / switch which widget is visible
-displayWidget = function(x){
-
-  c1.style.display = "none";
-  c2.style.display = "none";
-  c3.style.display = "none";
-  c4.style.display = "none";
-
-  switch(x) {
-  case 1:
-    c1.style.display = "block";
-    document.getElementById('sea_level').value = sl1;
-    console.log(sl1);
-    break;
-  case 2:
-    c2.style.display = "block";
-    document.getElementById('sea_level').value = sl2;
-    console.log(sl2);    
-    break;
-  case 3:
-    c3.style.display = "block";
-    document.getElementById('sea_level').value = sl3;
-    console.log(sl3);    
-    break;
-  case 4:
-    c4.style.display = "block";
-    document.getElementById('sea_level').value = sl4;
-    console.log(sl4);    
-    break;
-  default:
-    // code block
-    break;
-  }
-};
 
 
 //MAPBOX SETUP
@@ -253,6 +222,60 @@ for (var i = 0; i < 80; i += 1){
   masks.push(d);
 }
 
+//clear every mask
+var clearmasks = function(map){
+
+  //set global levels to 0
+  var numMeters = document.getElementById("numMeters");
+  numMeters.textContent = "0";
+  var numFeet = document.getElementById("numFeet");
+  numFeet.textContent = "0";
+
+  for (var i = 0; i < masks.length; i++){
+    var m = masks[i];
+    map.setLayoutProperty( m.id, 'visibility', 'none');
+  }
+}
+
+//display / switch which widget is visible
+displayWidget = function(x){
+
+  c1.style.display = "none";
+  c2.style.display = "none";
+  c3.style.display = "none";
+  c4.style.display = "none";
+
+  switch(x) {
+  case 1:
+    c1.style.display = "block";
+    document.getElementById('sea_level').value = sl1;
+    //console.log(sl1);
+    clearmasks(map);
+    break;
+  case 2:
+    c2.style.display = "block";
+    document.getElementById('sea_level').value = sl2;
+    //console.log(sl2);    
+    clearmasks(map);
+    break;
+  case 3:
+    c3.style.display = "block";
+    document.getElementById('sea_level').value = sl3;
+    //console.log(sl3);    
+    clearmasks(map);
+    break;
+  case 4:
+    c4.style.display = "block";
+    document.getElementById('sea_level').value = sl4;
+    //console.log(sl4);    
+    clearmasks(map);
+    break;
+  default:
+    // code block
+    break;
+  }
+};
+
 map.on('load', function () {
 
   //add each of our masks
@@ -282,38 +305,37 @@ map.on('load', function () {
 
 
   var first_mask_id = masks[0]["id"];
-
   var prev_idg = first_mask_id;
   //set our initial layer as visible
   //map.setLayoutProperty(prev_idg, 'visibility', 'visible');
 
-  document
-    .getElementById('sea_level')
+  document.getElementById('sea_level')
     .addEventListener('input', function (e) {
       var meters = parseInt(e.target.value, 10);
+
       var numMeters = document.getElementById("numMeters");
       numMeters.textContent = meters;
       var numFeet = document.getElementById("numFeet");
       var feet = meters * 3.281; //approximate conversion from
       numFeet.textContent = feet.toFixed(1);
 
-      map.setLayoutProperty(prev_idg, 'visibility', 'none');
       if (meters > 0){
         meters -= 1;
         var idg = "image_"+meters.toString();
-        //console.log(idg);
+        console.log(idg);
         map.setLayoutProperty(idg, 'visibility', 'visible');
+        map.setLayoutProperty(prev_idg, 'visibility', 'none');
         prev_idg = idg;
       }
 
-    });
+  });
 
-
-  // contours to map
+  // add contours to map
   map.addSource('contours', {
     type: 'vector',
     url: 'mapbox://mapbox.mapbox-terrain-v2'
   });
+
   map.addLayer({
     'id': 'contours',
     'type': 'line',
@@ -332,6 +354,8 @@ map.on('load', function () {
   });
 
 });
+
+
 
 </script>
 

@@ -23,21 +23,15 @@ var update_sealevel = function(data, cb){
 
 }
 
-var data = {
-    "years":2000,
-    "gt":10000,
-}
-
 //update sealevel here
 var prev_idg2 = "image_0";
 var cb = function(data){
-    console.log(data);
     var meters = data["sea_level"];
     var s = document.getElementById("sea_level");
     s.value = meters;
-    map.setLayoutProperty(prev_idg2, 'visibility', 'none');
     let idg = "image_"+meters.toString();
     map.setLayoutProperty(idg, 'visibility', 'visible');
+    map.setLayoutProperty(prev_idg2, 'visibility', 'none');
     prev_idg2 = idg;
     
     var numMeters = document.getElementById("numMeters");
@@ -79,7 +73,16 @@ document.getElementById("chart2years")
   .addEventListener("input", function(e){
     var yearText = document.getElementById("chart2yearsText");
       yearText.textContent = e.target.value;
-      console.log(e.target.value);
+      
+    //update sea level when years value is changed
+    update_sealevel({"gt":totalCOO2,"years":e.target.value}, cb);
+});
+
+document.getElementById("chart2years")
+  .addEventListener("ondragend", function(e){
+    var yearText = document.getElementById("chart2yearsText");
+      yearText.textContent = e.target.value;
+      
     //update sea level when years value is changed
     update_sealevel({"gt":totalCOO2,"years":e.target.value}, cb);
 });
