@@ -34,7 +34,7 @@ def sea_map():
 
 @application.route("/about")
 def about():
-    return render_template("home.html")
+    return render_template("templates/home.html")
 
 @application.route("/predict", methods=["POST"])
 def predict():
