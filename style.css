@@ -498,8 +498,13 @@ input::-moz-focus-inner {
 }
 /* Add a black background color to the top navigation */
 .topnav {
-  background-color: #333;
+  /* background-color: #333; */
   overflow: hidden;
+  background-image: url('background.png');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  height: 100px;
 }
 
 /* Style the links inside the navigation bar */
@@ -529,30 +534,8 @@ input::-moz-focus-inner {
 #intro { 
   margin: 30px;
   font-family: Arial, Helvetica, sans-serif;
-  color: white;
   font-size: 3 em;
   vertical-align: -webkit-baseline-middle;
+  color:darkblue;
 } 
 
-
-body {
-  /*background-image: url('background.png');*/
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-size: cover;
-} 
-
- .cnavbar {
-  width: 100%;
-  height: 20px;
-  background-color: black;
-  color: white;
-  text-align:left;
-  position: absolute;
- }
-
-.cnavbar a {
-  color: white;
-  text-decoration: none;
-  padding-left: 10px;
-}
