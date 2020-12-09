@@ -42,20 +42,20 @@
       </div>
       <div class="modal-body">
 
-        <p>In this interactive visualization you can view sea level rise under different scenarios. 
+        <p>In this interactive visualization you can view sea level rise under different scenarios.
         </p>
         <p>
-        Please note: 
+        Please note:
         We have optimized for a visual experience, data may not be 100% accurate.
         </p>
 
         Loading Visualization:
         <div class="progress">
         <div id="maskLoading" class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%"></div>
-      </div> 
+      </div>
       </div>
       <div class="modal-footer">
-      
+
       </div>
     </div>
   </div>
@@ -71,10 +71,10 @@
         <a  class="locationNavItem"  href="/maui">Maui</a>
         <a class="locationNavItem"   href="/sf">San Francisco</a>
         <a class="locationNavItem float-right"   href="/about">About</a>
-          
+
         <h2>Sea Level Rise: <span id="numMeters">0</span> Meters | <span id="numFeet">0</span> Feet</h2>
         <input id="sea_level" class="seaSlider" type="range" min="0" max="80" step="1" value="0" />
-        
+
 
         <button
           id="hideButton"
@@ -84,8 +84,8 @@
         </br>
         </br>
 
-   
-        
+
+
         <div class="chartButtons">
         <button class="active" onclick="displayWidget(1)">Sea Level Scenarios</button>
         <button onclick="displayWidget(2)">Sea Level By Activity</button>
@@ -95,7 +95,7 @@
 
           <div class="bar"></div>
           <div id="chart1">
-            
+
             <select class="btn btn-danger" id="selectButton"></select>
             <div id="chart1graph"></div>
           </div>
@@ -152,7 +152,7 @@
               <input class="yslider" id="yslider7" type="range" min="0" max="20" step="1" value="1.2"/>
               <h4>Rest of the World: 15.6 gt&nbsp;&nbsp; Change = 🏭 CO2 (gt): <span id="yslider2textemission">0</span></h4>
               <input class="yslider" id="yslider2" type="range" min="0" max="20" step="1" value="15.6"/>
-                         
+
           </form>
       </div>
       <div class="spacer"></div>
@@ -201,7 +201,7 @@ var c4 = document.getElementById("chart4");
 
 $("#maskLoading").attr('aria-valuenow', 20).css('width', 20);
 
-setTimeout(function(){ 
+setTimeout(function(){
   $("#maskLoading").attr('aria-valuenow', 200).css('width', 200);
 }, 2000);
 
@@ -225,7 +225,7 @@ container: 'map', // container id
 style: 'mapbox://styles/mapbox/satellite-streets-v11',
 center: [-73.99, 40.74], // starting position [lng, lat]
 // center: [-73.905, 40.775], // starting position [lng, lat]
-zoom: 12, // starting zoom
+zoom: 11.5, // starting zoom
 pitch: 45
 });
 
@@ -252,8 +252,11 @@ coordinates = [
 // var t_lng = 0.0335; //stretches left and right
 // var t_lat = 0.032; //stretches up and down
 
-var t_lng = 0.081; //stretches left and right
-var t_lat = 0.186; //stretches up and down
+// var t_lng = 0.081; //stretches left and right
+// var t_lat = 0.186; //stretches up and down
+
+var t_lng = 0.0830; //stretches left and right
+var t_lat = 0.1990; //stretches up and down
 
 
 //translate top_left
@@ -334,19 +337,19 @@ displayWidget = function(x){
   case 2:
     c2.style.display = "block";
     document.getElementById('sea_level').value = sl2;
-    //console.log(sl2);    
+    //console.log(sl2);
     clearmasks(map);
     break;
   case 3:
     c3.style.display = "block";
     document.getElementById('sea_level').value = sl3;
-    //console.log(sl3);    
+    //console.log(sl3);
     clearmasks(map);
     break;
   case 4:
     c4.style.display = "block";
     document.getElementById('sea_level').value = sl4;
-    //console.log(sl4);    
+    //console.log(sl4);
     clearmasks(map);
     break;
   default:
@@ -383,11 +386,11 @@ map.on('load', function () {
     var progress = 480 *i/totalMasks;
     console.log(progress);
     $("#maskLoading").attr('aria-valuenow', progress).css('width', progress);
-    
+
   }
   MASKS_LOADED = true;
   $("#maskLoading").attr('aria-valuenow', 480).css('width', 480);
-  setTimeout(function(){ 
+  setTimeout(function(){
     $('#exampleModal').modal('hide');
   }, 1000);
 
@@ -410,7 +413,7 @@ map.on('load', function () {
       if (meters > 0){
         //temp fix for every 10 error
         if (meters % 10 == 0){
-          meters += 2 
+          meters += 2
         }
         meters -= 1;
         var idg = "image_"+meters.toString();
