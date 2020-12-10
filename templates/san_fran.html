@@ -83,8 +83,6 @@
 
         </br>
         </br>
-        </br>
-        </br>
 
    
         
@@ -182,9 +180,6 @@ var gprev_idg = "image_0";
 //expand or hide control panel widgets
 var hidden = true;
 
-//TODO: update all chart mask functions
-var ebutton = document.getElementById("hideButton")
-ebutton.style.display = "none";
 
 
 expandPanel = function() {
@@ -421,8 +416,8 @@ var mask_num = 80;
 //TODO: load our dataset from json
 masks = [];
 
-r = ["1", "2", "3", "4", "5", "6", "7","8","9","10"]
-c = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j"]
+var r = ["1", "2", "3", "4", "5", "6", "7","8","9","10"];
+var c = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j"];
 
 var count = 0;
 var city = "sfbay"
@@ -553,6 +548,8 @@ map.on('load', function () {
       var feet = meters * 3.281; //approximate conversion from
       numFeet.textContent = feet.toFixed(1);
 
+      console.log("Iterations", iterations);
+
       for (var i = 0; i < iterations; i += 1){
         for (var j = 0; j < iterations; j += 1){
             let prev_idg = "image"+r[i]+c[j]+"_"+prev_meter.toString();
@@ -609,10 +606,10 @@ map.on('load', function () {
 
 </script>
 
-<script type="text/javascript" src="/js/chart1.js" ></script>
-<script type="text/javascript" src="/js/chart2.js" ></script>
-<script type="text/javascript" src="/js/chart3.js" ></script>
-<script type="text/javascript" src="/js/chart4.js" ></script>
+<script type="text/javascript" src="/js/sf/chart1-sf.js" ></script>
+<script type="text/javascript" src="/js/sf/chart2-sf.js" ></script>
+<script type="text/javascript" src="/js/sf/chart3-sf.js" ></script>
+<script type="text/javascript" src="/js/sf/chart4-sf.js" ></script>
 
 </body>
 </html>
