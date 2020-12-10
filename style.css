@@ -305,8 +305,17 @@ input::-moz-focus-inner {
   -250px 0 0 40px orange,
   -300px 0 0 40px orange,
   -350px 0 0 40px orange,
-  -400px 0 0 40px orange;
-
+  -400px 0 0 40px orange,
+  -450px 0 0 40px orange,
+  -500px 0 0 40px orange,
+  -550px 0 0 40px orange,
+  -600px 0 0 40px orange,
+  -650px 0 0 40px orange,
+  -700px 0 0 40px orange,
+  -750px 0 0 40px orange,
+  -800px 0 0 40px orange,
+  -850px 0 0 40px orange;
+  
 }
 
 .yslider::-moz-range-thumb {
@@ -335,7 +344,16 @@ input::-moz-focus-inner {
   -250px 0 0 40px rgb(255, 30, 0),
   -300px 0 0 40px rgb(255, 30, 0),
   -350px 0 0 40px rgb(255, 30, 0),
-  -400px 0 0 40px rgb(255, 30, 0);
+  -400px 0 0 40px rgb(255, 30, 0),
+  -450px 0 0 40px rgb(255, 30, 0),
+  -500px 0 0 40px rgb(255, 30, 0),
+  -550px 0 0 40px rgb(255, 30, 0),
+  -600px 0 0 40px rgb(255, 30, 0),
+  -650px 0 0 40px rgb(255, 30, 0),
+  -700px 0 0 40px rgb(255, 30, 0),
+  -750px 0 0 40px rgb(255, 30, 0),
+  -800px 0 0 40px rgb(255, 30, 0),
+  -850px 0 0 40px rgb(255, 30, 0);
 
 }
 
@@ -365,8 +383,16 @@ input::-moz-focus-inner {
   -250px 0 0 40px rgb(255, 80, 0),
   -300px 0 0 40px rgb(255, 80, 0),
   -350px 0 0 40px rgb(255, 80, 0),
-  -400px 0 0 40px rgb(255, 80, 0);
-
+  -400px 0 0 40px rgb(255, 80, 0),
+  -450px 0 0 40px rgb(255, 80, 0),
+  -500px 0 0 40px rgb(255, 80, 0),
+  -550px 0 0 40px rgb(255, 80, 0),
+  -600px 0 0 40px rgb(255, 80, 0),
+  -650px 0 0 40px rgb(255, 80, 0),
+  -700px 0 0 40px rgb(255, 80, 0),
+  -750px 0 0 40px rgb(255, 80, 0),
+  -800px 0 0 40px rgb(255, 80, 0),
+  -850px 0 0 40px rgb(255, 80, 0);
 }
 
 #yslider2::-moz-range-thumb {
@@ -395,7 +421,16 @@ input::-moz-focus-inner {
   -250px 0 0 40px rgb(255, 102, 0),
   -300px 0 0 40px rgb(255, 102, 0),
   -350px 0 0 40px rgb(255, 102, 0),
-  -400px 0 0 40px rgb(255, 102, 0);
+  -400px 0 0 40px rgb(255, 102, 0),
+  -450px 0 0 40px rgb(255, 102, 0),
+  -500px 0 0 40px rgb(255, 102, 0),
+  -550px 0 0 40px rgb(255, 102, 0),
+  -600px 0 0 40px rgb(255, 102, 0),
+  -650px 0 0 40px rgb(255, 102, 0),
+  -700px 0 0 40px rgb(255, 102, 0),
+  -750px 0 0 40px rgb(255, 102, 0),
+  -800px 0 0 40px rgb(255, 102, 0),
+  -850px 0 0 40px rgb(255, 102, 0);
 
 }
 
@@ -425,7 +460,16 @@ input::-moz-focus-inner {
   -250px 0 0 40px rgb(255, 196, 0),
   -300px 0 0 40px rgb(255, 196, 0),
   -350px 0 0 40px rgb(255, 196, 0),
-  -400px 0 0 40px rgb(255, 196, 0);
+  -400px 0 0 40px rgb(255, 196, 0),
+  -450px 0 0 50px rgb(255, 196, 0),
+  -500px 0 0 40px rgb(255, 196, 0),
+  -550px 0 0 40px rgb(255, 196,0),
+  -600px 0 0 40px rgb(255, 196, 0),
+  -650px 0 0 40px rgb(255, 196, 0),
+  -700px 0 0 40px rgb(255, 196, 0),
+  -750px 0 0 40px rgb(255, 196, 0),
+  -800px 0 0 40px rgb(255, 196, 0),
+  -850px 0 0 40px rgb(255, 196, 0);
 
 }
 
@@ -455,7 +499,16 @@ input::-moz-focus-inner {
   -250px 0 0 40px rgb(255, 208, 0),
   -300px 0 0 40px rgb(255, 208, 0),
   -350px 0 0 40px rgb(255, 208, 0),
-  -400px 0 0 40px rgb(255, 208, 0);
+  -400px 0 0 40px rgb(255, 208, 0),
+  -450px 0 0 50px rgb(255, 208, 0),
+  -500px 0 0 40px rgb(255, 208, 0),
+  -550px 0 0 40px rgb(255, 208,0),
+  -600px 0 0 40px rgb(255, 208, 0),
+  -650px 0 0 40px rgb(255, 208, 0),
+  -700px 0 0 40px rgb(255, 208, 0),
+  -750px 0 0 40px rgb(255, 208, 0),
+  -800px 0 0 40px rgb(255, 208, 0),
+  -850px 0 0 40px rgb(255, 208, 0);
 
 }
 
@@ -485,7 +538,16 @@ input::-moz-focus-inner {
   -250px 0 0 40px rgb(255, 230, 0),
   -300px 0 0 40px rgb(255, 230, 0),
   -350px 0 0 40px rgb(255, 230, 0),
-  -400px 0 0 40px rgb(255, 230, 0);
+  -400px 0 0 40px rgb(255, 230, 0),
+  -450px 0 0 50px rgb(255, 230, 0),
+  -500px 0 0 40px rgb(255, 230, 0),
+  -550px 0 0 40px rgb(255, 230,0),
+  -600px 0 0 40px rgb(255, 230, 0),
+  -650px 0 0 40px rgb(255, 230, 0),
+  -700px 0 0 40px rgb(255, 230, 0),
+  -750px 0 0 40px rgb(255, 230, 0),
+  -800px 0 0 40px rgb(255, 230, 0),
+  -850px 0 0 40px rgb(255, 230, 0);
 
 }
 
@@ -496,46 +558,4 @@ input::-moz-focus-inner {
   background: rgb(255, 230, 0); /* blue background */
   cursor: pointer; /* Cursor on hover */
 }
-/* Add a black background color to the top navigation */
-.topnav {
-  /* background-color: #333; */
-  overflow: hidden;
-  background-image: url('background.png');
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-size: cover;
-  height: 100px;
-}
-
-/* Style the links inside the navigation bar */
-.topnav a {
-  float: left;
-  color: #f2f2f2;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-  font-size: 17px;
-}
-
-/* Change the color of links on hover */
-.topnav a:hover {
-  background-color: #ddd;
-  color: black;
-  
-}
-
-/* Add a color to the active/current link */
-.topnav a.active {
-  background-color: blue;
-  color: white;
-
-}
-
-#intro { 
-  margin: 30px;
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 3 em;
-  vertical-align: -webkit-baseline-middle;
-  color:darkblue;
-} 
 
