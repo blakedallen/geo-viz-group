@@ -83,8 +83,6 @@
 
         </br>
         </br>
-        </br>
-        </br>
 
    
         
@@ -182,9 +180,6 @@ var gprev_idg = "image_0";
 //expand or hide control panel widgets
 var hidden = true;
 
-//TODO: update all chart mask functions
-var ebutton = document.getElementById("hideButton")
-ebutton.style.display = "none";
 
 
 expandPanel = function() {
@@ -504,7 +499,7 @@ map.on('load', function () {
 
   //add each of our masks
   var totalMasks = 320;
-  for (var i = 0; i < masks.length; i++){
+  for (var i = 0; i < totalMasks; i++){
     var d = masks[i];
 
     //add images
@@ -609,10 +604,10 @@ map.on('load', function () {
 
 </script>
 
-<script type="text/javascript" src="/js/chart1.js" ></script>
-<script type="text/javascript" src="/js/chart2.js" ></script>
-<script type="text/javascript" src="/js/chart3.js" ></script>
-<script type="text/javascript" src="/js/chart4.js" ></script>
+<script type="text/javascript" src="/js/sf/chart1-sf.js" ></script>
+<script type="text/javascript" src="/js/sf/chart2-sf.js" ></script>
+<script type="text/javascript" src="/js/sf/chart3-sf.js" ></script>
+<script type="text/javascript" src="/js/sf/chart4-sf.js" ></script>
 
 </body>
 </html>
