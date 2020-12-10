@@ -18,35 +18,81 @@
     display: grid;
     grid-template-columns: auto auto auto auto;
     grid-gap: 20px 50px;
-    background-color: white;
-    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.3);
+    padding: 1px;
   }
   .grid-item {
-    background-color: rgba(0, 0, 0, 0.3);
-    border: 1px dotted rgba(0, 0, 0, 0.3);
+    background-color: rgba(0, 0, 0, 0.7);
+    border: 1px dotted rgba(0, 0, 0, 0);
     padding: 20px;
     font-size: 20px;
     font-family: cursive;
     text-align: center;
-    color: white
+    color: whitesmoke
   }
-  h1{color:rgba(0,0,0,0.5);
-    font-family:  sans-serif;
+  h1{color:whitesmoke;
+    font-family:'Helvetica Neue', Arial, Helvetica, sans-serif;
   padding: 10px 10px 0 20px;
-font-size: 50px}
+font-size: 45px}
+
+body{  
+    background-color: #111111;
+   background-image: url('background.jpg');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;}
+
+/* Add a black background color to the top navigation */
+.topnav {
+  background-color: #333;
+  overflow: hidden;
+  height: 40px;
+}
+
+/* Style the links inside the navigation bar */
+.topnav a {
+  float: left;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+/* Change the color of links on hover */
+.topnav a:hover {
+  background-color: #ddd;
+  color: black;
+  
+}
+
+/* Add a color to the active/current link */
+.topnav a.active {
+  background-color: blue;
+  color: white;
+
+}
+
+#intro { 
+  margin: 30px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 2.5 em;
+  vertical-align: -webkit-baseline-middle;
+  color:whitesmoke;
+} 
+
     </style>
 
 </head>
 
 <body>
     <div class="topnav">
-        <a class="active" href="About">About</a>
+        <a class="active" href="/about">About</a>
         <a href="seattle">Seattle</a>
-        <a href="newyork">New York</a>
-        <a href="sanfrancisco">San Francisco</a>
-        <a href="hawaii">Hawaii</a>
+        <a href="/ny">New York</a>
+        <a href="/sf">San Francisco</a>
+        <a href="/maui">Maui</a>
       </div>
-
       <div class="row"> 
         <div class="col-xs-12 m3"> 
           <h1>Our Project</h1>
@@ -60,12 +106,12 @@ font-size: 50px}
         </div>
         <h1>Our Team </h1>
           <div class="grid-container">
-            <div class="grid-item">Blake Allen  <div style="text-align: left; font-size: 14px; padding: 10px 0 0 80px"> CEO of GeoViz</div></div>
-            <div class="grid-item">Victor Wang<div style="text-align: left; font-size: 14px; padding: 10px 0 0 80px"> COO of GeoViz</div></div>
-            <div class="grid-item">Tsung-Chin Han <div style="text-align: left; font-size: 14px; padding: 10px 0 0 80px"> CTO of GeoViz</div> </div>
-            <div class="grid-item"><img src="../yang_jing.jpg" width= "120px" height="90px" alt=""></img><br> Yang Jing <br> <div style="text-align: left; font-size: 14px; padding: 10px 0 0 80px"> CPA & Data Sicentist Aspirant. <br> In her sparetime,<br> she enjoys hiking, baking, <br>and wine-tasting.</div><br> <a href="https://www.linkedin.com/in/yang-jing-1874271" style="color: white">Connect with Yang </a> </div>
+            <div class="grid-item">Blake Allen<div style="text-align: left; font-size: 14px; padding: 10px 0 0 40px"> Data Scientist | Data Engineer <br> <a href="https://www.linkedin.com/in/blake-allen-7b28328/" style="color: white;font-size:16px">Connect with Allen </a> </div></div>
+            <div class="grid-item">Victor Wang<div style="text-align: left; font-size: 14px; padding: 10px 0 0 40px"> Data Scientist <br> AI and Automation Engineer<br>
+              Conservation and Animal Activist <br> <a href="https://www.linkedin.com/in/victor-w-40741514/" style="color: white;font-size:16px">Connect with Victor </a> </div></div>
+              <div class="grid-item">Tsung-Chin Han<div style="text-align: left; font-size: 14px; padding: 10px 0 0 40px"> Data Scientist @ Walmart eCommerce <br> <a href="https://www.linkedin.com/in/ken-tsung-chin-han/" style="color: white;font-size:16px">Connect with Tsung-chin </a> </div></div>
+            <div class="grid-item">Yang Jing  <div style="text-align: left; font-size: 14px; padding: 10px 0 0 40px"> CPA | SVP - FP&A @ Moody's <br> Data Sicentist Aspirant<br> <a href="https://www.linkedin.com/in/yang-jing-1874271" style="color:white;font-size:16px">Connect with Yang </a> </div>
           </div>
-         
         
 </body>
 </html>
