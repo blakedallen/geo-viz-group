@@ -15,8 +15,8 @@
 
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Goldman&display=swap" rel="stylesheet">
-<link rel="stylesheet" type="text/css" href="/style.css">
-<link rel="stylesheet" type="text/css" href="slider.css">
+<link rel="stylesheet" type="text/css" href="static/css/style.css">
+<link rel="stylesheet" type="text/css" href="static/css/slider.css">
 
 
 
@@ -66,11 +66,11 @@
 <div id="control_panel" class="control_panel" >
 
         <h3>Location: <span id="current">New York</span></h3>
-        <a class="locationNavItem" href="/ny">New York</a>
-        <a class="locationNavItem"  href="/seattle">Seattle</a>
-        <a  class="locationNavItem"  href="/maui">Maui</a>
-        <a class="locationNavItem"   href="/sf">San Francisco</a>
-        <a class="locationNavItem float-right"   href="/about">About</a>
+        <a class="locationNavItem" href="ny">New York</a>
+        <a class="locationNavItem"  href="seattle">Seattle</a>
+        <a  class="locationNavItem"  href="maui">Maui</a>
+        <a class="locationNavItem"   href="sf">San Francisco</a>
+        <a class="locationNavItem float-right"   href="about">About</a>
 
         <h2>Sea Level Rise: <span id="numMeters">0</span> Meters | <span id="numFeet">0</span> Feet</h2>
         <input id="sea_level" class="seaSlider" type="range" min="0" max="80" step="1" value="0" />
@@ -298,7 +298,7 @@ for (var i = 0; i < 80; i += 1){
   var d = {
     source:"source_"+istr,
     id:"image_"+istr,
-    url:"/masks/ny_"+istr+".png",
+    url:"static/masks/ny_"+istr+".png",
     coordinates: coordinates,
   }
   masks.push(d);
@@ -454,10 +454,10 @@ map.on('load', function () {
 
 </script>
 
-<script type="text/javascript" src="/js/chart1.js" ></script>
-<script type="text/javascript" src="/js/chart2.js" ></script>
-<script type="text/javascript" src="/js/chart3.js" ></script>
-<script type="text/javascript" src="/js/chart4.js" ></script>
+<script type="text/javascript" src="static/js/chart1.js" ></script>
+<script type="text/javascript" src="static/js/chart2.js" ></script>
+<script type="text/javascript" src="static/js/chart3.js" ></script>
+<script type="text/javascript" src="static/js/chart4.js" ></script>
 
 </body>
 </html>

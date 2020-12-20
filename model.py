@@ -12,9 +12,10 @@ from sklearn.linear_model import LinearRegression
 def linear_model():
     '''This function generates a linear model to predict change in sea level rise in cm (global mean) given historical co2 emissions in gt'''
     # Read in training data 
-    df= pd.read_excel("./slr_data.xlsx",sheet_name="data")
+    df= pd.read_csv("slr_data.csv")
+    df.columns = ["year","sea_level_cm","co2_gt","co2_ppm"]
     #add a variable for change in sea level
-    sl_chg =np.diff(df["sea_level (cm)"].to_numpy())
+    sl_chg =np.diff(df["sea_level_cm"].to_numpy())
     #get the x variable without final year
     ppm_chg = np.diff(df["co2_ppm"].to_numpy())
     #create a new df for co2 emission(x) and change in sea level (y)
@@ -42,10 +43,10 @@ def linear_model():
     dev_df2 = df.drop(training_df2.index)
 
     train_data2 = training_df2["co2_ppm"].to_numpy().reshape(-1,1)
-    train_label2 = training_df2["sea_level (cm)"].to_numpy()
+    train_label2 = training_df2["sea_level_cm"].to_numpy()
 
     dev_data2 = dev_df2["co2_ppm"].to_numpy().reshape(-1,1)
-    dev_label2 = dev_df2["sea_level (cm)"].to_numpy()
+    dev_label2 = dev_df2["sea_level_cm"].to_numpy()
     
     #fit a linear model2
     model2 = LinearRegression()
@@ -66,7 +67,7 @@ def linear_model():
     model3.fit(train_data3,train_label3)
 
 
-    pct_sl_chg = (df["sea_level (cm)"].iloc[-1]/df["sea_level (cm)"].iloc[0])**(1/len(df))
+    pct_sl_chg = (df["sea_level_cm"].iloc[-1]/df["sea_level_cm"].iloc[0])**(1/len(df))
 #     #score the model
     print("R2 for annual co2 change and sea level change model: ", model1.score(dev_data1,dev_label1))
     print("R2 for cumulative co2 and sea level model: ", model2.score(dev_data2,dev_label2))

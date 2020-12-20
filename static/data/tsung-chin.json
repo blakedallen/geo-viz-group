@@ -1,0 +1,541 @@
+{
+    "0":{
+        "amount":"102812",
+        "data":[
+            {
+                "label":"Agriculture",
+                "value":"12"
+            },
+            {
+                "label":"Bunker Fuels",
+                "value":"3"
+            },
+            {
+                "label":"Industry",
+                "value":"6"
+            },
+            {
+                "label":"Land-Use Change and Forestry",
+                "value":"6"
+            },
+            {
+                "label":"Waste",
+                "value":"3"
+            },
+            {
+                "label":"Buildings",
+                "value":"6"
+            },
+            {
+                "label":"Electricity & Heat",
+                "value":"30"
+            },
+            {
+                "label":"Energy production",
+                "value":"6"
+            },
+            {
+                "label":"Manufacturing\/Construction energy",
+                "value":"12"
+            },
+            {
+                "label":"Other Fuel Combustion",
+                "value":"3"
+            },
+            {
+                "label":"Transport",
+                "value":"15"
+            }
+        ]
+    },
+    "1":{
+        "amount":"71897",
+        "data":[
+            {
+                "label":"Agriculture",
+                "value":"17"
+            },
+            {
+                "label":"Bunker Fuels",
+                "value":"4"
+            },
+            {
+                "label":"Industry",
+                "value":"8"
+            },
+            {
+                "label":"Land-Use Change and Forestry",
+                "value":"8"
+            },
+            {
+                "label":"Waste",
+                "value":"4"
+            },
+            {
+                "label":"Buildings",
+                "value":"8"
+            },
+            {
+                "label":"Electricity & Heat",
+                "value":"0"
+            },
+            {
+                "label":"Energy production",
+                "value":"8"
+            },
+            {
+                "label":"Manufacturing\/Construction energy",
+                "value":"17"
+            },
+            {
+                "label":"Other Fuel Combustion",
+                "value":"4"
+            },
+            {
+                "label":"Transport",
+                "value":"21"
+            }
+        ]
+    },
+    "2":{
+        "amount":"56698",
+        "data":[
+            {
+                "label":"Agriculture",
+                "value":"21"
+            },
+            {
+                "label":"Bunker Fuels",
+                "value":"5"
+            },
+            {
+                "label":"Industry",
+                "value":"10"
+            },
+            {
+                "label":"Land-Use Change and Forestry",
+                "value":"11"
+            },
+            {
+                "label":"Waste",
+                "value":"6"
+            },
+            {
+                "label":"Buildings",
+                "value":"10"
+            },
+            {
+                "label":"Electricity & Heat",
+                "value":"0"
+            },
+            {
+                "label":"Energy production",
+                "value":"10"
+            },
+            {
+                "label":"Manufacturing\/Construction energy",
+                "value":"22"
+            },
+            {
+                "label":"Other Fuel Combustion",
+                "value":"5"
+            },
+            {
+                "label":"Transport",
+                "value":"0"
+            }
+        ]
+    },
+    "3":{
+        "amount":"44189",
+        "data":[
+            {
+                "label":"Agriculture",
+                "value":"27"
+            },
+            {
+                "label":"Bunker Fuels",
+                "value":"6"
+            },
+            {
+                "label":"Industry",
+                "value":"13"
+            },
+            {
+                "label":"Land-Use Change and Forestry",
+                "value":"14"
+            },
+            {
+                "label":"Waste",
+                "value":"7"
+            },
+            {
+                "label":"Buildings",
+                "value":"13"
+            },
+            {
+                "label":"Electricity & Heat",
+                "value":"0"
+            },
+            {
+                "label":"Energy production",
+                "value":"13"
+            },
+            {
+                "label":"Manufacturing\/Construction energy",
+                "value":"0"
+            },
+            {
+                "label":"Other Fuel Combustion",
+                "value":"7"
+            },
+            {
+                "label":"Transport",
+                "value":"0"
+            }
+        ]
+    },
+    "4":{
+        "amount":"32210",
+        "data":[
+            {
+                "label":"Agriculture",
+                "value":"0"
+            },
+            {
+                "label":"Bunker Fuels",
+                "value":"8"
+            },
+            {
+                "label":"Industry",
+                "value":"18"
+            },
+            {
+                "label":"Land-Use Change and Forestry",
+                "value":"19"
+            },
+            {
+                "label":"Waste",
+                "value":"10"
+            },
+            {
+                "label":"Buildings",
+                "value":"18"
+            },
+            {
+                "label":"Electricity & Heat",
+                "value":"0"
+            },
+            {
+                "label":"Energy production",
+                "value":"18"
+            },
+            {
+                "label":"Manufacturing\/Construction energy",
+                "value":"0"
+            },
+            {
+                "label":"Other Fuel Combustion",
+                "value":"9"
+            },
+            {
+                "label":"Transport",
+                "value":"0"
+            }
+        ]
+    },
+    "5":{
+        "amount":"26210",
+        "data":[
+            {
+                "label":"Agriculture",
+                "value":"0"
+            },
+            {
+                "label":"Bunker Fuels",
+                "value":"10"
+            },
+            {
+                "label":"Industry",
+                "value":"22"
+            },
+            {
+                "label":"Land-Use Change and Forestry",
+                "value":"0"
+            },
+            {
+                "label":"Waste",
+                "value":"12"
+            },
+            {
+                "label":"Buildings",
+                "value":"22"
+            },
+            {
+                "label":"Electricity & Heat",
+                "value":"0"
+            },
+            {
+                "label":"Energy production",
+                "value":"22"
+            },
+            {
+                "label":"Manufacturing\/Construction energy",
+                "value":"0"
+            },
+            {
+                "label":"Other Fuel Combustion",
+                "value":"11"
+            },
+            {
+                "label":"Transport",
+                "value":"0"
+            }
+        ]
+    },
+    "6":{
+        "amount":"20322",
+        "data":[
+            {
+                "label":"Agriculture",
+                "value":"0"
+            },
+            {
+                "label":"Bunker Fuels",
+                "value":"13"
+            },
+            {
+                "label":"Industry",
+                "value":"28"
+            },
+            {
+                "label":"Land-Use Change and Forestry",
+                "value":"0"
+            },
+            {
+                "label":"Waste",
+                "value":"16"
+            },
+            {
+                "label":"Buildings",
+                "value":"0"
+            },
+            {
+                "label":"Electricity & Heat",
+                "value":"0"
+            },
+            {
+                "label":"Energy production",
+                "value":"29"
+            },
+            {
+                "label":"Manufacturing\/Construction energy",
+                "value":"0"
+            },
+            {
+                "label":"Other Fuel Combustion",
+                "value":"15"
+            },
+            {
+                "label":"Transport",
+                "value":"0"
+            }
+        ]
+    },
+    "7":{
+        "amount":"14638",
+        "data":[
+            {
+                "label":"Agriculture",
+                "value":"0"
+            },
+            {
+                "label":"Bunker Fuels",
+                "value":"18"
+            },
+            {
+                "label":"Industry",
+                "value":"0"
+            },
+            {
+                "label":"Land-Use Change and Forestry",
+                "value":"0"
+            },
+            {
+                "label":"Waste",
+                "value":"22"
+            },
+            {
+                "label":"Buildings",
+                "value":"0"
+            },
+            {
+                "label":"Electricity & Heat",
+                "value":"0"
+            },
+            {
+                "label":"Energy production",
+                "value":"40"
+            },
+            {
+                "label":"Manufacturing\/Construction energy",
+                "value":"0"
+            },
+            {
+                "label":"Other Fuel Combustion",
+                "value":"20"
+            },
+            {
+                "label":"Transport",
+                "value":"0"
+            }
+        ]
+    },
+    "8":{
+        "amount":"8825",
+        "data":[
+            {
+                "label":"Agriculture",
+                "value":"0"
+            },
+            {
+                "label":"Bunker Fuels",
+                "value":"30"
+            },
+            {
+                "label":"Industry",
+                "value":"0"
+            },
+            {
+                "label":"Land-Use Change and Forestry",
+                "value":"0"
+            },
+            {
+                "label":"Waste",
+                "value":"37"
+            },
+            {
+                "label":"Buildings",
+                "value":"0"
+            },
+            {
+                "label":"Electricity & Heat",
+                "value":"0"
+            },
+            {
+                "label":"Energy production",
+                "value":"0"
+            },
+            {
+                "label":"Manufacturing\/Construction energy",
+                "value":"0"
+            },
+            {
+                "label":"Other Fuel Combustion",
+                "value":"34"
+            },
+            {
+                "label":"Transport",
+                "value":"0"
+            }
+        ]
+    },
+    "9":{
+        "amount":"5595",
+        "data":[
+            {
+                "label":"Agriculture",
+                "value":"0"
+            },
+            {
+                "label":"Bunker Fuels",
+                "value":"47"
+            },
+            {
+                "label":"Industry",
+                "value":"0"
+            },
+            {
+                "label":"Land-Use Change and Forestry",
+                "value":"0"
+            },
+            {
+                "label":"Waste",
+                "value":"0"
+            },
+            {
+                "label":"Buildings",
+                "value":"0"
+            },
+            {
+                "label":"Electricity & Heat",
+                "value":"0"
+            },
+            {
+                "label":"Energy production",
+                "value":"0"
+            },
+            {
+                "label":"Manufacturing\/Construction energy",
+                "value":"0"
+            },
+            {
+                "label":"Other Fuel Combustion",
+                "value":"53"
+            },
+            {
+                "label":"Transport",
+                "value":"0"
+            }
+        ]
+    },
+    "10":{
+        "amount":"2635",
+        "data":[
+            {
+                "label":"Agriculture",
+                "value":"0"
+            },
+            {
+                "label":"Bunker Fuels",
+                "value":"100"
+            },
+            {
+                "label":"Industry",
+                "value":"0"
+            },
+            {
+                "label":"Land-Use Change and Forestry",
+                "value":"0"
+            },
+            {
+                "label":"Waste",
+                "value":"0"
+            },
+            {
+                "label":"Buildings",
+                "value":"0"
+            },
+            {
+                "label":"Electricity & Heat",
+                "value":"0"
+            },
+            {
+                "label":"Energy production",
+                "value":"0"
+            },
+            {
+                "label":"Manufacturing\/Construction energy",
+                "value":"0"
+            },
+            {
+                "label":"Other Fuel Combustion",
+                "value":"0"
+            },
+            {
+                "label":"Transport",
+                "value":"0"
+            }
+        ]
+    }
+}
