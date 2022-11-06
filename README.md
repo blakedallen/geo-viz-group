@@ -1,6 +1,11 @@
 # geo-viz-group 🌍📈📉🌡🌞💊📊
 repository for the w209 geo visualization group
 
+## NOTE: 11.6.22
+
+This project has been shut down (due to costs of keeping servers up)
+But there is an archive of the elastic beanstalk appilication, and additionally the config in .ebconfig remains (at least locally) and this project has been zipped and saved to S3.
+
 ## Running Local Server
 
 ```bash
